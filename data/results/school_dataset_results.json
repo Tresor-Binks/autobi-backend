@@ -1,0 +1,1466 @@
+{
+  "dataset_id": "school_dataset",
+  "metadata": {
+    "row_count": 300,
+    "column_count": 15,
+    "columns": [
+      "Student_ID",
+      "Name",
+      "Gender",
+      "Age",
+      "Class",
+      "Section",
+      "Math_Score",
+      "English_Score",
+      "Science_Score",
+      "Attendance",
+      "Enrollment_Date",
+      "City",
+      "Parent_Income",
+      "Scholarship",
+      "Average_Score"
+    ],
+    "column_types": {
+      "Student_ID": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Name": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Gender": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Age": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Class": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Section": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Math_Score": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "English_Score": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Science_Score": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Attendance": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Enrollment_Date": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "City": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Parent_Income": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Scholarship": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Average_Score": {
+        "pandas_type": "float64",
+        "semantic_type": "float",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      }
+    },
+    "numeric_columns": [
+      "Age",
+      "Math_Score",
+      "English_Score",
+      "Science_Score",
+      "Attendance",
+      "Parent_Income",
+      "Average_Score"
+    ],
+    "date_columns": [],
+    "categorical_columns": [],
+    "text_columns": [
+      "Student_ID",
+      "Name",
+      "Gender",
+      "Class",
+      "Section",
+      "Enrollment_Date",
+      "City",
+      "Scholarship"
+    ],
+    "statistics": {
+      "Student_ID": {
+        "type": "text",
+        "count": 300,
+        "null_count": 0,
+        "unique_count": 300,
+        "mode": "STU-1000",
+        "top_values": [
+          {
+            "value": "STU-1000",
+            "count": 1,
+            "pct": 0.3
+          },
+          {
+            "value": "STU-1001",
+            "count": 1,
+            "pct": 0.3
+          },
+          {
+            "value": "STU-1002",
+            "count": 1,
+            "pct": 0.3
+          },
+          {
+            "value": "STU-1003",
+            "count": 1,
+            "pct": 0.3
+          },
+          {
+            "value": "STU-1004",
+            "count": 1,
+            "pct": 0.3
+          },
+          {
+            "value": "STU-1005",
+            "count": 1,
+            "pct": 0.3
+          },
+          {
+            "value": "STU-1006",
+            "count": 1,
+            "pct": 0.3
+          },
+          {
+            "value": "STU-1007",
+            "count": 1,
+            "pct": 0.3
+          },
+          {
+            "value": "STU-1008",
+            "count": 1,
+            "pct": 0.3
+          },
+          {
+            "value": "STU-1009",
+            "count": 1,
+            "pct": 0.3
+          }
+        ]
+      },
+      "Name": {
+        "type": "text",
+        "count": 300,
+        "null_count": 0,
+        "unique_count": 10,
+        "mode": "John",
+        "top_values": [
+          {
+            "value": "John",
+            "count": 37,
+            "pct": 12.3
+          },
+          {
+            "value": "Daniel",
+            "count": 35,
+            "pct": 11.7
+          },
+          {
+            "value": "David",
+            "count": 34,
+            "pct": 11.3
+          },
+          {
+            "value": "Michael",
+            "count": 34,
+            "pct": 11.3
+          },
+          {
+            "value": "James",
+            "count": 33,
+            "pct": 11.0
+          },
+          {
+            "value": "Alice",
+            "count": 32,
+            "pct": 10.7
+          },
+          {
+            "value": "Sophia",
+            "count": 27,
+            "pct": 9.0
+          },
+          {
+            "value": "Sarah",
+            "count": 26,
+            "pct": 8.7
+          },
+          {
+            "value": "Olivia",
+            "count": 26,
+            "pct": 8.7
+          },
+          {
+            "value": "Emma",
+            "count": 16,
+            "pct": 5.3
+          }
+        ]
+      },
+      "Gender": {
+        "type": "text",
+        "count": 300,
+        "null_count": 0,
+        "unique_count": 2,
+        "mode": "Female",
+        "top_values": [
+          {
+            "value": "Female",
+            "count": 154,
+            "pct": 51.3
+          },
+          {
+            "value": "Male",
+            "count": 146,
+            "pct": 48.7
+          }
+        ]
+      },
+      "Age": {
+        "type": "integer",
+        "count": 300,
+        "null_count": 0,
+        "mean": 14.5167,
+        "median": 15.0,
+        "mode": 15.0,
+        "std": 2.276,
+        "min": 11.0,
+        "max": 18.0,
+        "sum": 4355.0,
+        "q25": 12.0,
+        "q75": 16.0,
+        "iqr": 4.0
+      },
+      "Class": {
+        "type": "text",
+        "count": 300,
+        "null_count": 0,
+        "unique_count": 5,
+        "mode": "6th",
+        "top_values": [
+          {
+            "value": "6th",
+            "count": 72,
+            "pct": 24.0
+          },
+          {
+            "value": "10th",
+            "count": 65,
+            "pct": 21.7
+          },
+          {
+            "value": "7th",
+            "count": 56,
+            "pct": 18.7
+          },
+          {
+            "value": "8th",
+            "count": 54,
+            "pct": 18.0
+          },
+          {
+            "value": "9th",
+            "count": 53,
+            "pct": 17.7
+          }
+        ]
+      },
+      "Section": {
+        "type": "text",
+        "count": 300,
+        "null_count": 0,
+        "unique_count": 3,
+        "mode": "C",
+        "top_values": [
+          {
+            "value": "C",
+            "count": 121,
+            "pct": 40.3
+          },
+          {
+            "value": "B",
+            "count": 90,
+            "pct": 30.0
+          },
+          {
+            "value": "A",
+            "count": 89,
+            "pct": 29.7
+          }
+        ]
+      },
+      "Math_Score": {
+        "type": "integer",
+        "count": 300,
+        "null_count": 0,
+        "mean": 69.2267,
+        "median": 68.5,
+        "mode": 44.0,
+        "std": 17.8778,
+        "min": 40.0,
+        "max": 100.0,
+        "sum": 20768.0,
+        "q25": 52.75,
+        "q75": 84.25,
+        "iqr": 31.5
+      },
+      "English_Score": {
+        "type": "integer",
+        "count": 300,
+        "null_count": 0,
+        "mean": 70.3633,
+        "median": 71.0,
+        "mode": 45.0,
+        "std": 17.7517,
+        "min": 40.0,
+        "max": 100.0,
+        "sum": 21109.0,
+        "q25": 55.75,
+        "q75": 85.0,
+        "iqr": 29.25
+      },
+      "Science_Score": {
+        "type": "integer",
+        "count": 300,
+        "null_count": 0,
+        "mean": 68.15,
+        "median": 67.0,
+        "mode": 49.0,
+        "std": 18.4377,
+        "min": 40.0,
+        "max": 100.0,
+        "sum": 20445.0,
+        "q25": 51.0,
+        "q75": 84.25,
+        "iqr": 33.25
+      },
+      "Attendance": {
+        "type": "integer",
+        "count": 300,
+        "null_count": 0,
+        "mean": 84.3267,
+        "median": 84.0,
+        "mode": 78.0,
+        "std": 8.9983,
+        "min": 70.0,
+        "max": 100.0,
+        "sum": 25298.0,
+        "q25": 77.0,
+        "q75": 92.0,
+        "iqr": 15.0
+      },
+      "Enrollment_Date": {
+        "type": "text",
+        "count": 300,
+        "null_count": 0,
+        "unique_count": 259,
+        "mode": "2024-08-22",
+        "top_values": [
+          {
+            "value": "2024-08-22",
+            "count": 3,
+            "pct": 1.0
+          },
+          {
+            "value": "2022-07-27",
+            "count": 2,
+            "pct": 0.7
+          },
+          {
+            "value": "2022-09-11",
+            "count": 2,
+            "pct": 0.7
+          },
+          {
+            "value": "2022-02-08",
+            "count": 2,
+            "pct": 0.7
+          },
+          {
+            "value": "2023-04-06",
+            "count": 2,
+            "pct": 0.7
+          },
+          {
+            "value": "2023-05-17",
+            "count": 2,
+            "pct": 0.7
+          },
+          {
+            "value": "2023-05-18",
+            "count": 2,
+            "pct": 0.7
+          },
+          {
+            "value": "2022-01-28",
+            "count": 2,
+            "pct": 0.7
+          },
+          {
+            "value": "2022-10-25",
+            "count": 2,
+            "pct": 0.7
+          },
+          {
+            "value": "2022-11-01",
+            "count": 2,
+            "pct": 0.7
+          }
+        ]
+      },
+      "City": {
+        "type": "text",
+        "count": 300,
+        "null_count": 0,
+        "unique_count": 5,
+        "mode": "Berlin",
+        "top_values": [
+          {
+            "value": "Berlin",
+            "count": 65,
+            "pct": 21.7
+          },
+          {
+            "value": "Madrid",
+            "count": 65,
+            "pct": 21.7
+          },
+          {
+            "value": "Paris",
+            "count": 64,
+            "pct": 21.3
+          },
+          {
+            "value": "Rome",
+            "count": 55,
+            "pct": 18.3
+          },
+          {
+            "value": "London",
+            "count": 51,
+            "pct": 17.0
+          }
+        ]
+      },
+      "Parent_Income": {
+        "type": "integer",
+        "count": 300,
+        "null_count": 0,
+        "mean": 1050.1033,
+        "median": 1001.0,
+        "mode": 241.0,
+        "std": 508.6678,
+        "min": 202.0,
+        "max": 1979.0,
+        "sum": 315031.0,
+        "q25": 665.0,
+        "q75": 1483.25,
+        "iqr": 818.25
+      },
+      "Scholarship": {
+        "type": "text",
+        "count": 300,
+        "null_count": 0,
+        "unique_count": 2,
+        "mode": "No",
+        "top_values": [
+          {
+            "value": "No",
+            "count": 151,
+            "pct": 50.3
+          },
+          {
+            "value": "Yes",
+            "count": 149,
+            "pct": 49.7
+          }
+        ]
+      },
+      "Average_Score": {
+        "type": "float",
+        "count": 300,
+        "null_count": 0,
+        "mean": 69.2465,
+        "median": 68.67,
+        "mode": 67.33,
+        "std": 10.1603,
+        "min": 45.33,
+        "max": 97.0,
+        "sum": 20773.96,
+        "q25": 62.9175,
+        "q75": 76.0,
+        "iqr": 13.0825
+      }
+    },
+    "missing_values": 0
+  },
+  "charts": [
+    {
+      "type": "scatter",
+      "title": "Age vs Math_Score",
+      "x_label": "Age",
+      "y_label": "Math_Score",
+      "description": "Corrélation entre Age et Math_Score.",
+      "data": {
+        "datasets": [
+          {
+            "label": "Age vs Math_Score",
+            "data": [
+              {
+                "x": 17.0,
+                "y": 49.0
+              },
+              {
+                "x": 12.0,
+                "y": 84.0
+              },
+              {
+                "x": 16.0,
+                "y": 78.0
+              },
+              {
+                "x": 18.0,
+                "y": 40.0
+              },
+              {
+                "x": 16.0,
+                "y": 53.0
+              },
+              {
+                "x": 17.0,
+                "y": 93.0
+              },
+              {
+                "x": 11.0,
+                "y": 47.0
+              },
+              {
+                "x": 12.0,
+                "y": 71.0
+              },
+              {
+                "x": 11.0,
+                "y": 62.0
+              },
+              {
+                "x": 18.0,
+                "y": 100.0
+              },
+              {
+                "x": 18.0,
+                "y": 59.0
+              },
+              {
+                "x": 15.0,
+                "y": 70.0
+              },
+              {
+                "x": 14.0,
+                "y": 84.0
+              },
+              {
+                "x": 15.0,
+                "y": 44.0
+              },
+              {
+                "x": 13.0,
+                "y": 62.0
+              },
+              {
+                "x": 18.0,
+                "y": 66.0
+              },
+              {
+                "x": 11.0,
+                "y": 88.0
+              },
+              {
+                "x": 13.0,
+                "y": 66.0
+              },
+              {
+                "x": 13.0,
+                "y": 48.0
+              },
+              {
+                "x": 13.0,
+                "y": 59.0
+              },
+              {
+                "x": 11.0,
+                "y": 62.0
+              },
+              {
+                "x": 14.0,
+                "y": 51.0
+              },
+              {
+                "x": 18.0,
+                "y": 61.0
+              },
+              {
+                "x": 17.0,
+                "y": 85.0
+              },
+              {
+                "x": 12.0,
+                "y": 89.0
+              },
+              {
+                "x": 14.0,
+                "y": 66.0
+              },
+              {
+                "x": 12.0,
+                "y": 73.0
+              },
+              {
+                "x": 14.0,
+                "y": 80.0
+              },
+              {
+                "x": 15.0,
+                "y": 62.0
+              },
+              {
+                "x": 13.0,
+                "y": 82.0
+              },
+              {
+                "x": 18.0,
+                "y": 78.0
+              },
+              {
+                "x": 17.0,
+                "y": 68.0
+              },
+              {
+                "x": 15.0,
+                "y": 69.0
+              },
+              {
+                "x": 11.0,
+                "y": 43.0
+              },
+              {
+                "x": 18.0,
+                "y": 77.0
+              },
+              {
+                "x": 15.0,
+                "y": 72.0
+              },
+              {
+                "x": 14.0,
+                "y": 56.0
+              },
+              {
+                "x": 17.0,
+                "y": 69.0
+              },
+              {
+                "x": 16.0,
+                "y": 54.0
+              },
+              {
+                "x": 12.0,
+                "y": 98.0
+              },
+              {
+                "x": 18.0,
+                "y": 94.0
+              },
+              {
+                "x": 15.0,
+                "y": 76.0
+              },
+              {
+                "x": 12.0,
+                "y": 76.0
+              },
+              {
+                "x": 11.0,
+                "y": 52.0
+              },
+              {
+                "x": 18.0,
+                "y": 45.0
+              },
+              {
+                "x": 12.0,
+                "y": 49.0
+              },
+              {
+                "x": 16.0,
+                "y": 99.0
+              },
+              {
+                "x": 18.0,
+                "y": 74.0
+              },
+              {
+                "x": 12.0,
+                "y": 67.0
+              },
+              {
+                "x": 18.0,
+                "y": 77.0
+              },
+              {
+                "x": 17.0,
+                "y": 62.0
+              },
+              {
+                "x": 11.0,
+                "y": 67.0
+              },
+              {
+                "x": 15.0,
+                "y": 45.0
+              },
+              {
+                "x": 15.0,
+                "y": 46.0
+              },
+              {
+                "x": 16.0,
+                "y": 80.0
+              },
+              {
+                "x": 16.0,
+                "y": 83.0
+              },
+              {
+                "x": 11.0,
+                "y": 87.0
+              },
+              {
+                "x": 18.0,
+                "y": 85.0
+              },
+              {
+                "x": 18.0,
+                "y": 84.0
+              },
+              {
+                "x": 14.0,
+                "y": 89.0
+              },
+              {
+                "x": 15.0,
+                "y": 69.0
+              },
+              {
+                "x": 15.0,
+                "y": 81.0
+              },
+              {
+                "x": 13.0,
+                "y": 85.0
+              },
+              {
+                "x": 15.0,
+                "y": 94.0
+              },
+              {
+                "x": 16.0,
+                "y": 75.0
+              },
+              {
+                "x": 15.0,
+                "y": 99.0
+              },
+              {
+                "x": 15.0,
+                "y": 72.0
+              },
+              {
+                "x": 18.0,
+                "y": 53.0
+              },
+              {
+                "x": 12.0,
+                "y": 61.0
+              },
+              {
+                "x": 16.0,
+                "y": 68.0
+              },
+              {
+                "x": 14.0,
+                "y": 48.0
+              },
+              {
+                "x": 12.0,
+                "y": 90.0
+              },
+              {
+                "x": 15.0,
+                "y": 63.0
+              },
+              {
+                "x": 12.0,
+                "y": 78.0
+              },
+              {
+                "x": 15.0,
+                "y": 84.0
+              },
+              {
+                "x": 17.0,
+                "y": 55.0
+              },
+              {
+                "x": 11.0,
+                "y": 53.0
+              },
+              {
+                "x": 12.0,
+                "y": 90.0
+              },
+              {
+                "x": 17.0,
+                "y": 98.0
+              },
+              {
+                "x": 17.0,
+                "y": 89.0
+              },
+              {
+                "x": 15.0,
+                "y": 82.0
+              },
+              {
+                "x": 11.0,
+                "y": 45.0
+              },
+              {
+                "x": 18.0,
+                "y": 79.0
+              },
+              {
+                "x": 15.0,
+                "y": 94.0
+              },
+              {
+                "x": 13.0,
+                "y": 61.0
+              },
+              {
+                "x": 15.0,
+                "y": 97.0
+              },
+              {
+                "x": 15.0,
+                "y": 86.0
+              },
+              {
+                "x": 14.0,
+                "y": 86.0
+              },
+              {
+                "x": 16.0,
+                "y": 75.0
+              },
+              {
+                "x": 14.0,
+                "y": 57.0
+              },
+              {
+                "x": 13.0,
+                "y": 42.0
+              },
+              {
+                "x": 18.0,
+                "y": 63.0
+              },
+              {
+                "x": 16.0,
+                "y": 76.0
+              },
+              {
+                "x": 17.0,
+                "y": 81.0
+              },
+              {
+                "x": 17.0,
+                "y": 63.0
+              },
+              {
+                "x": 15.0,
+                "y": 74.0
+              },
+              {
+                "x": 14.0,
+                "y": 40.0
+              },
+              {
+                "x": 12.0,
+                "y": 58.0
+              },
+              {
+                "x": 14.0,
+                "y": 73.0
+              },
+              {
+                "x": 18.0,
+                "y": 94.0
+              },
+              {
+                "x": 16.0,
+                "y": 95.0
+              },
+              {
+                "x": 11.0,
+                "y": 41.0
+              },
+              {
+                "x": 14.0,
+                "y": 89.0
+              },
+              {
+                "x": 14.0,
+                "y": 41.0
+              },
+              {
+                "x": 16.0,
+                "y": 73.0
+              },
+              {
+                "x": 13.0,
+                "y": 67.0
+              },
+              {
+                "x": 14.0,
+                "y": 84.0
+              },
+              {
+                "x": 18.0,
+                "y": 89.0
+              },
+              {
+                "x": 11.0,
+                "y": 41.0
+              },
+              {
+                "x": 17.0,
+                "y": 43.0
+              },
+              {
+                "x": 13.0,
+                "y": 68.0
+              },
+              {
+                "x": 15.0,
+                "y": 93.0
+              },
+              {
+                "x": 11.0,
+                "y": 79.0
+              },
+              {
+                "x": 16.0,
+                "y": 40.0
+              },
+              {
+                "x": 13.0,
+                "y": 80.0
+              },
+              {
+                "x": 14.0,
+                "y": 87.0
+              },
+              {
+                "x": 12.0,
+                "y": 47.0
+              },
+              {
+                "x": 17.0,
+                "y": 66.0
+              },
+              {
+                "x": 12.0,
+                "y": 88.0
+              },
+              {
+                "x": 14.0,
+                "y": 87.0
+              },
+              {
+                "x": 12.0,
+                "y": 68.0
+              },
+              {
+                "x": 12.0,
+                "y": 52.0
+              },
+              {
+                "x": 18.0,
+                "y": 44.0
+              },
+              {
+                "x": 16.0,
+                "y": 58.0
+              },
+              {
+                "x": 12.0,
+                "y": 96.0
+              },
+              {
+                "x": 15.0,
+                "y": 77.0
+              },
+              {
+                "x": 12.0,
+                "y": 41.0
+              },
+              {
+                "x": 12.0,
+                "y": 98.0
+              },
+              {
+                "x": 12.0,
+                "y": 95.0
+              },
+              {
+                "x": 15.0,
+                "y": 93.0
+              },
+              {
+                "x": 14.0,
+                "y": 76.0
+              },
+              {
+                "x": 18.0,
+                "y": 40.0
+              },
+              {
+                "x": 11.0,
+                "y": 43.0
+              },
+              {
+                "x": 16.0,
+                "y": 67.0
+              },
+              {
+                "x": 13.0,
+                "y": 50.0
+              },
+              {
+                "x": 18.0,
+                "y": 99.0
+              },
+              {
+                "x": 13.0,
+                "y": 61.0
+              },
+              {
+                "x": 16.0,
+                "y": 100.0
+              },
+              {
+                "x": 15.0,
+                "y": 91.0
+              },
+              {
+                "x": 12.0,
+                "y": 85.0
+              },
+              {
+                "x": 18.0,
+                "y": 42.0
+              },
+              {
+                "x": 13.0,
+                "y": 96.0
+              },
+              {
+                "x": 18.0,
+                "y": 72.0
+              },
+              {
+                "x": 12.0,
+                "y": 51.0
+              },
+              {
+                "x": 13.0,
+                "y": 91.0
+              },
+              {
+                "x": 15.0,
+                "y": 40.0
+              },
+              {
+                "x": 12.0,
+                "y": 55.0
+              },
+              {
+                "x": 15.0,
+                "y": 84.0
+              },
+              {
+                "x": 12.0,
+                "y": 87.0
+              },
+              {
+                "x": 12.0,
+                "y": 68.0
+              },
+              {
+                "x": 11.0,
+                "y": 68.0
+              },
+              {
+                "x": 18.0,
+                "y": 52.0
+              },
+              {
+                "x": 15.0,
+                "y": 63.0
+              },
+              {
+                "x": 16.0,
+                "y": 70.0
+              },
+              {
+                "x": 18.0,
+                "y": 64.0
+              },
+              {
+                "x": 11.0,
+                "y": 73.0
+              },
+              {
+                "x": 13.0,
+                "y": 60.0
+              },
+              {
+                "x": 17.0,
+                "y": 61.0
+              },
+              {
+                "x": 11.0,
+                "y": 79.0
+              },
+              {
+                "x": 17.0,
+                "y": 50.0
+              },
+              {
+                "x": 15.0,
+                "y": 100.0
+              },
+              {
+                "x": 15.0,
+                "y": 70.0
+              },
+              {
+                "x": 11.0,
+                "y": 41.0
+              },
+              {
+                "x": 15.0,
+                "y": 80.0
+              },
+              {
+                "x": 16.0,
+                "y": 66.0
+              },
+              {
+                "x": 11.0,
+                "y": 96.0
+              },
+              {
+                "x": 13.0,
+                "y": 70.0
+              },
+              {
+                "x": 17.0,
+                "y": 63.0
+              },
+              {
+                "x": 12.0,
+                "y": 58.0
+              },
+              {
+                "x": 11.0,
+                "y": 88.0
+              },
+              {
+                "x": 14.0,
+                "y": 89.0
+              },
+              {
+                "x": 18.0,
+                "y": 92.0
+              },
+              {
+                "x": 12.0,
+                "y": 58.0
+              },
+              {
+                "x": 18.0,
+                "y": 59.0
+              },
+              {
+                "x": 18.0,
+                "y": 90.0
+              },
+              {
+                "x": 16.0,
+                "y": 62.0
+              },
+              {
+                "x": 12.0,
+                "y": 78.0
+              },
+              {
+                "x": 17.0,
+                "y": 58.0
+              },
+              {
+                "x": 13.0,
+                "y": 53.0
+              },
+              {
+                "x": 12.0,
+                "y": 63.0
+              },
+              {
+                "x": 13.0,
+                "y": 93.0
+              },
+              {
+                "x": 13.0,
+                "y": 50.0
+              },
+              {
+                "x": 12.0,
+                "y": 54.0
+              },
+              {
+                "x": 12.0,
+                "y": 77.0
+              },
+              {
+                "x": 15.0,
+                "y": 99.0
+              },
+              {
+                "x": 14.0,
+                "y": 100.0
+              },
+              {
+                "x": 15.0,
+                "y": 43.0
+              },
+              {
+                "x": 13.0,
+                "y": 79.0
+              },
+              {
+                "x": 12.0,
+                "y": 66.0
+              },
+              {
+                "x": 16.0,
+                "y": 42.0
+              },
+              {
+                "x": 15.0,
+                "y": 89.0
+              },
+              {
+                "x": 15.0,
+                "y": 51.0
+              },
+              {
+                "x": 18.0,
+                "y": 72.0
+              },
+              {
+                "x": 17.0,
+                "y": 53.0
+              },
+              {
+                "x": 18.0,
+                "y": 60.0
+              },
+              {
+                "x": 15.0,
+                "y": 42.0
+              },
+              {
+                "x": 13.0,
+                "y": 64.0
+              },
+              {
+                "x": 11.0,
+                "y": 80.0
+              },
+              {
+                "x": 16.0,
+                "y": 67.0
+              },
+              {
+                "x": 11.0,
+                "y": 77.0
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "insights": [
+    {
+      "type": "stats",
+      "column": "Parent_Income",
+      "title": "Résumé — Parent_Income",
+      "value": "Moyenne : 1 050.10 | Médiane : 1 001 | Min : 202 | Max : 1 979",
+      "data": {
+        "mean": 1050.1033,
+        "median": 1001.0,
+        "min": 202.0,
+        "max": 1979.0,
+        "sum": 315031.0
+      }
+    },
+    {
+      "type": "top_values",
+      "column": "Name",
+      "title": "Répartition — Name",
+      "value": "Valeur dominante : \"John\" (12.3% des entrées). 10 valeurs distinctes.",
+      "data": {
+        "John": 37,
+        "Daniel": 35,
+        "David": 34,
+        "Michael": 34,
+        "James": 33,
+        "Alice": 32
+      }
+    },
+    {
+      "type": "stats",
+      "column": "Science_Score",
+      "title": "Résumé — Science_Score",
+      "value": "Moyenne : 68.15 | Min : 40 | Max : 100",
+      "data": {
+        "mean": 68.15,
+        "min": 40.0,
+        "max": 100.0
+      }
+    }
+  ],
+  "explanations": [
+    "Le dataset contient 300 lignes et 15 colonnes (7 numériques  0 catégorielles)."
+  ],
+  "ai_instructions": {
+    "insights": [
+      {
+        "id": "insight_3",
+        "title": "Distribution de Age",
+        "description": "Répartition statistique des valeurs de Age.",
+        "type": "distribution",
+        "feasibility": "high",
+        "required_columns": [
+          "Age"
+        ]
+      },
+      {
+        "id": "insight_4",
+        "title": "Corrélation Age / Math_Score",
+        "description": "Relation entre Age et Math_Score.",
+        "type": "comparison",
+        "feasibility": "medium",
+        "required_columns": [
+          "Age",
+          "Math_Score"
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "chart_3",
+        "type": "scatter",
+        "title": "Age vs Math_Score",
+        "x": "Age",
+        "y": "Math_Score",
+        "aggregation": "none",
+        "description": "Corrélation entre Age et Math_Score."
+      }
+    ],
+    "analyses": [],
+    "summary": "Analyse automatique générée (OpenAI indisponible : OPENAI_API_KEY manquante dans les variables d'environnement). Dataset de 300 lignes et 15 colonnes."
+  }
+}
