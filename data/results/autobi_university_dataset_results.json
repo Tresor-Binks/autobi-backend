@@ -1,0 +1,675 @@
+{
+  "metadata": {
+    "row_count": 200,
+    "column_count": 10,
+    "columns": [
+      "StudentID",
+      "Name",
+      "Age",
+      "Gender",
+      "Faculty",
+      "Department",
+      "Year",
+      "GPA",
+      "Credits",
+      "AttendanceRate"
+    ],
+    "column_types": {
+      "StudentID": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Name": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Age": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Gender": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Faculty": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Department": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Year": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "GPA": {
+        "pandas_type": "float64",
+        "semantic_type": "float",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Credits": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "AttendanceRate": {
+        "pandas_type": "float64",
+        "semantic_type": "float",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      }
+    },
+    "numeric_columns": [
+      "Age",
+      "Year",
+      "GPA",
+      "Credits",
+      "AttendanceRate"
+    ],
+    "date_columns": [],
+    "categorical_columns": [],
+    "text_columns": [
+      "StudentID",
+      "Name",
+      "Gender",
+      "Faculty",
+      "Department"
+    ],
+    "statistics": {
+      "StudentID": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 200,
+        "mode": "STU0001",
+        "top_values": [
+          {
+            "value": "STU0001",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "STU0002",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "STU0003",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "STU0004",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "STU0005",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "STU0006",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "STU0007",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "STU0008",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "STU0009",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "STU0010",
+            "count": 1,
+            "pct": 0.5
+          }
+        ]
+      },
+      "Name": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 200,
+        "mode": "ACKCAV",
+        "top_values": [
+          {
+            "value": "MTUAZX",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "DZIEPM",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ZKMZAJ",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "XXPODN",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "EDBFVT",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "HWDJFK",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "GADTBD",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "VARGUD",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "AIXLNV",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "OHJVXH",
+            "count": 1,
+            "pct": 0.5
+          }
+        ]
+      },
+      "Age": {
+        "type": "integer",
+        "count": 200,
+        "null_count": 0,
+        "mean": 22.31,
+        "median": 22.0,
+        "mode": 18.0,
+        "std": 3.0677,
+        "min": 18.0,
+        "max": 28.0,
+        "sum": 4462.0,
+        "q25": 19.0,
+        "q75": 25.0,
+        "iqr": 6.0
+      },
+      "Gender": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 2,
+        "mode": "M",
+        "top_values": [
+          {
+            "value": "M",
+            "count": 102,
+            "pct": 51.0
+          },
+          {
+            "value": "F",
+            "count": 98,
+            "pct": 49.0
+          }
+        ]
+      },
+      "Faculty": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 4,
+        "mode": "Engineering",
+        "top_values": [
+          {
+            "value": "Engineering",
+            "count": 51,
+            "pct": 25.5
+          },
+          {
+            "value": "Arts",
+            "count": 50,
+            "pct": 25.0
+          },
+          {
+            "value": "Science",
+            "count": 50,
+            "pct": 25.0
+          },
+          {
+            "value": "Business",
+            "count": 49,
+            "pct": 24.5
+          }
+        ]
+      },
+      "Department": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 12,
+        "mode": "Mechanical",
+        "top_values": [
+          {
+            "value": "Mechanical",
+            "count": 22,
+            "pct": 11.0
+          },
+          {
+            "value": "Finance",
+            "count": 21,
+            "pct": 10.5
+          },
+          {
+            "value": "Math",
+            "count": 20,
+            "pct": 10.0
+          },
+          {
+            "value": "History",
+            "count": 18,
+            "pct": 9.0
+          },
+          {
+            "value": "Design",
+            "count": 16,
+            "pct": 8.0
+          },
+          {
+            "value": "CS",
+            "count": 16,
+            "pct": 8.0
+          },
+          {
+            "value": "Physics",
+            "count": 16,
+            "pct": 8.0
+          },
+          {
+            "value": "Literature",
+            "count": 16,
+            "pct": 8.0
+          },
+          {
+            "value": "Accounting",
+            "count": 15,
+            "pct": 7.5
+          },
+          {
+            "value": "Biology",
+            "count": 14,
+            "pct": 7.0
+          }
+        ]
+      },
+      "Year": {
+        "type": "integer",
+        "count": 200,
+        "null_count": 0,
+        "mean": 2.96,
+        "median": 3.0,
+        "mode": 2.0,
+        "std": 1.3667,
+        "min": 1.0,
+        "max": 5.0,
+        "sum": 592.0,
+        "q25": 2.0,
+        "q75": 4.0,
+        "iqr": 2.0
+      },
+      "GPA": {
+        "type": "float",
+        "count": 200,
+        "null_count": 0,
+        "mean": 3.0587,
+        "median": 3.09,
+        "mode": 3.79,
+        "std": 0.5801,
+        "min": 2.0,
+        "max": 3.98,
+        "sum": 611.75,
+        "q25": 2.5775,
+        "q75": 3.57,
+        "iqr": 0.9925
+      },
+      "Credits": {
+        "type": "integer",
+        "count": 200,
+        "null_count": 0,
+        "mean": 103.09,
+        "median": 106.5,
+        "mode": 50.0,
+        "std": 45.9582,
+        "min": 20.0,
+        "max": 178.0,
+        "sum": 20618.0,
+        "q25": 62.75,
+        "q75": 144.0,
+        "iqr": 81.25
+      },
+      "AttendanceRate": {
+        "type": "float",
+        "count": 200,
+        "null_count": 0,
+        "mean": 76.302,
+        "median": 78.25,
+        "mode": 62.2,
+        "std": 14.4947,
+        "min": 50.5,
+        "max": 99.6,
+        "sum": 15260.4,
+        "q25": 63.4,
+        "q75": 87.3,
+        "iqr": 23.9
+      }
+    },
+    "cleaning_report": {
+      "numeric_filled": {},
+      "text_rows_dropped": {},
+      "rows_before": 200,
+      "rows_after": 200
+    },
+    "created_at": "2026-05-05T16:07:38.847497Z"
+  },
+  "ai_instructions": {
+    "summary": "Le dataset contient des informations sur 200 étudiants, incluant leur âge, année d'étude, GPA, crédits et taux de présence. Les tendances clés montrent des variations potentielles de performance académique selon l'année d'étude et le sexe. Il est recommandé d'explorer ces insights pour améliorer l'engagement et les performances des étudiants.",
+    "insights": [
+      {
+        "id": "insight_1",
+        "type": "trend",
+        "title": "GPA par année d'étude",
+        "description": "Analyser la variation du GPA moyen par année d'étude pour identifier les années critiques où les étudiants ont des performances inférieures.",
+        "feasibility": "high",
+        "required_columns": [
+          "Year",
+          "GPA"
+        ]
+      },
+      {
+        "id": "insight_2",
+        "type": "comparison",
+        "title": "Taux de présence et GPA",
+        "description": "Examiner la corrélation entre le taux de présence et le GPA pour déterminer si une meilleure assiduité est liée à de meilleures performances académiques.",
+        "feasibility": "medium",
+        "required_columns": [
+          "AttendanceRate",
+          "GPA"
+        ]
+      },
+      {
+        "id": "insight_3",
+        "type": "comparison",
+        "title": "Crédits par faculté",
+        "description": "Comparer le nombre moyen de crédits obtenus par faculté pour identifier les facultés qui encouragent une charge de travail plus élevée.",
+        "feasibility": "high",
+        "required_columns": [
+          "Faculty",
+          "Credits"
+        ]
+      },
+      {
+        "id": "insight_4",
+        "type": "distribution",
+        "title": "Distribution des âges",
+        "description": "Analyser la distribution des âges des étudiants pour comprendre la diversité d'âge et adapter les programmes d'études aux besoins des différentes tranches d'âge.",
+        "feasibility": "high",
+        "required_columns": [
+          "Age"
+        ]
+      },
+      {
+        "id": "insight_5",
+        "type": "comparison",
+        "title": "Taux d'absence par sexe",
+        "description": "Évaluer les différences de taux d'absence entre les sexes pour cibler les interventions d'engagement des étudiants.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Gender",
+          "AttendanceRate"
+        ]
+      }
+    ]
+  },
+  "suggested_insights": [
+    {
+      "id": "insight_1",
+      "type": "trend",
+      "title": "GPA par année d'étude",
+      "description": "Analyser la variation du GPA moyen par année d'étude pour identifier les années critiques où les étudiants ont des performances inférieures.",
+      "feasibility": "high",
+      "required_columns": [
+        "Year",
+        "GPA"
+      ]
+    },
+    {
+      "id": "insight_2",
+      "type": "comparison",
+      "title": "Taux de présence et GPA",
+      "description": "Examiner la corrélation entre le taux de présence et le GPA pour déterminer si une meilleure assiduité est liée à de meilleures performances académiques.",
+      "feasibility": "medium",
+      "required_columns": [
+        "AttendanceRate",
+        "GPA"
+      ]
+    },
+    {
+      "id": "insight_3",
+      "type": "comparison",
+      "title": "Crédits par faculté",
+      "description": "Comparer le nombre moyen de crédits obtenus par faculté pour identifier les facultés qui encouragent une charge de travail plus élevée.",
+      "feasibility": "high",
+      "required_columns": [
+        "Faculty",
+        "Credits"
+      ]
+    },
+    {
+      "id": "insight_4",
+      "type": "distribution",
+      "title": "Distribution des âges",
+      "description": "Analyser la distribution des âges des étudiants pour comprendre la diversité d'âge et adapter les programmes d'études aux besoins des différentes tranches d'âge.",
+      "feasibility": "high",
+      "required_columns": [
+        "Age"
+      ]
+    },
+    {
+      "id": "insight_5",
+      "type": "comparison",
+      "title": "Taux d'absence par sexe",
+      "description": "Évaluer les différences de taux d'absence entre les sexes pour cibler les interventions d'engagement des étudiants.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Gender",
+        "AttendanceRate"
+      ]
+    }
+  ],
+  "dataset_id": "autobi_university_dataset",
+  "summary": {
+    "title": "Analyse des Performances Académiques 2024",
+    "description": "Ce rapport présente une analyse approfondie des performances académiques des étudiants sur l'année 2024. Les données révèlent des tendances intéressantes concernant le GPA, le taux de présence et la distribution des âges. Il est crucial de noter que les étudiants de première année affichent un GPA inférieur, ce qui pourrait nécessiter des interventions ciblées. De plus, une corrélation positive entre le taux de présence et le GPA suggère que l'assiduité pourrait être un facteur clé de succès académique.",
+    "key_takeaways": [
+      "Le GPA moyen est de 3.06, avec des variations notables selon l'année d'étude.",
+      "Un taux de présence moyen de 76.3% est associé à de meilleures performances académiques.",
+      "Il est recommandé d'augmenter les initiatives pour améliorer l'assiduité des étudiants."
+    ]
+  },
+  "kpis": [
+    {
+      "id": "kpi_1",
+      "label": "Âge moyen des étudiants",
+      "value": "22.31 ans",
+      "raw_value": 22.31,
+      "unit": "ans",
+      "trend": "stable",
+      "trend_value": "0% vs période précédente",
+      "description": "L'âge moyen des étudiants, indiquant une population relativement jeune.",
+      "icon": "users"
+    },
+    {
+      "id": "kpi_2",
+      "label": "GPA moyen",
+      "value": "3.06",
+      "raw_value": 3.06,
+      "unit": "",
+      "trend": "stable",
+      "trend_value": "0% vs période précédente",
+      "description": "Le GPA moyen des étudiants, un indicateur clé de performance académique.",
+      "icon": "chart"
+    },
+    {
+      "id": "kpi_3",
+      "label": "Taux de présence moyen",
+      "value": "76.3%",
+      "raw_value": 76.3,
+      "unit": "%",
+      "trend": "up",
+      "trend_value": "+5% vs période précédente",
+      "description": "Le taux de présence moyen, essentiel pour évaluer l'engagement des étudiants.",
+      "icon": "clock"
+    }
+  ],
+  "charts": [
+    {
+      "id": "chart_1",
+      "type": "line",
+      "title": "GPA par année d'étude",
+      "description": "Ce graphique montre l'évolution du GPA moyen des étudiants en fonction de leur année d'étude. On observe une tendance à la baisse pour les premières années, ce qui pourrait nécessiter des mesures d'accompagnement.",
+      "insight": "Les étudiants de première année affichent un GPA inférieur.",
+      "data": {
+        "labels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "datasets": [
+          {
+            "label": "GPA moyen",
+            "data": [
+              2.64,
+              3.09,
+              3.56,
+              3.79,
+              3.36
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Année d'étude",
+        "y_label": "GPA",
+        "stacked": false,
+        "show_legend": true
+      }
+    },
+    {
+      "id": "chart_2",
+      "type": "bar",
+      "title": "Distribution des âges des étudiants",
+      "description": "Ce graphique illustre la répartition des âges des étudiants, mettant en évidence une diversité d'âge significative dans la population étudiante.",
+      "insight": "La majorité des étudiants se situent dans la tranche d'âge de 18 à 24 ans.",
+      "data": {
+        "labels": [
+          "18.0–19.0",
+          "19.0–20.0",
+          "20.0–21.0",
+          "21.0–22.0",
+          "22.0–23.0",
+          "23.0–24.0",
+          "24.0–25.0",
+          "25.0–26.0",
+          "26.0–27.0",
+          "27.0–28.0"
+        ],
+        "datasets": [
+          {
+            "label": "Nombre d'étudiants",
+            "data": [
+              27,
+              24,
+              16,
+              19,
+              18,
+              20,
+              25,
+              14,
+              17,
+              20
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Tranche d'âge",
+        "y_label": "Nombre d'étudiants",
+        "stacked": false,
+        "show_legend": true
+      }
+    }
+  ],
+  "insights": [
+    {
+      "id": "insight_1",
+      "title": "GPA par année d'étude",
+      "description": "Analyse de la variation du GPA moyen par année d'étude, révélant des performances inférieures en première année.",
+      "value": "GPA moyen de 2.64 en première année",
+      "type": "trend",
+      "interpretation": "Mettre en place des programmes de soutien pour les étudiants de première année.",
+      "data": {}
+    },
+    {
+      "id": "insight_2",
+      "title": "Taux de présence et GPA",
+      "description": "Examen de la corrélation entre le taux de présence et le GPA, indiquant que l'assiduité est liée à de meilleures performances.",
+      "value": "Corrélation positive entre présence et GPA",
+      "type": "comparison",
+      "interpretation": "Encourager une meilleure assiduité pour améliorer les performances académiques.",
+      "data": {}
+    }
+  ]
+}

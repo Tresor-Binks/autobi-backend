@@ -1,0 +1,715 @@
+{
+  "metadata": {
+    "row_count": 200,
+    "column_count": 10,
+    "columns": [
+      "Date",
+      "Site",
+      "Agent",
+      "Heures_travaillées",
+      "Incidents",
+      "Type_service",
+      "Coût (€)",
+      "Client",
+      "Ville",
+      "Satisfaction"
+    ],
+    "column_types": {
+      "Date": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Site": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Agent": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Heures_travaillées": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Incidents": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Type_service": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Coût (€)": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Client": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Ville": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Satisfaction": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      }
+    },
+    "numeric_columns": [
+      "Heures_travaillées",
+      "Incidents",
+      "Coût (€)",
+      "Satisfaction"
+    ],
+    "date_columns": [],
+    "categorical_columns": [],
+    "text_columns": [
+      "Date",
+      "Site",
+      "Agent",
+      "Type_service",
+      "Client",
+      "Ville"
+    ],
+    "statistics": {
+      "Date": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 200,
+        "mode": "2025-01-01",
+        "top_values": [
+          {
+            "value": "2025-01-01",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "2025-01-02",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "2025-01-03",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "2025-01-04",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "2025-01-05",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "2025-01-06",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "2025-01-07",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "2025-01-08",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "2025-01-09",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "2025-01-10",
+            "count": 1,
+            "pct": 0.5
+          }
+        ]
+      },
+      "Site": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 5,
+        "mode": "Supermarché",
+        "top_values": [
+          {
+            "value": "Supermarché",
+            "count": 41,
+            "pct": 20.5
+          },
+          {
+            "value": "Événement",
+            "count": 40,
+            "pct": 20.0
+          },
+          {
+            "value": "Résidence",
+            "count": 40,
+            "pct": 20.0
+          },
+          {
+            "value": "Entreprise",
+            "count": 40,
+            "pct": 20.0
+          },
+          {
+            "value": "Banque",
+            "count": 39,
+            "pct": 19.5
+          }
+        ]
+      },
+      "Agent": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 5,
+        "mode": "Mavoungou",
+        "top_values": [
+          {
+            "value": "Mavoungou",
+            "count": 57,
+            "pct": 28.5
+          },
+          {
+            "value": "Ngoma",
+            "count": 40,
+            "pct": 20.0
+          },
+          {
+            "value": "Ndzi",
+            "count": 36,
+            "pct": 18.0
+          },
+          {
+            "value": "Tchicaya",
+            "count": 34,
+            "pct": 17.0
+          },
+          {
+            "value": "Mbemba",
+            "count": 33,
+            "pct": 16.5
+          }
+        ]
+      },
+      "Heures_travaillées": {
+        "type": "integer",
+        "count": 200,
+        "null_count": 0,
+        "mean": 8.805,
+        "median": 9.0,
+        "mode": 6.0,
+        "std": 2.0168,
+        "min": 6.0,
+        "max": 12.0,
+        "sum": 1761.0,
+        "q25": 7.0,
+        "q75": 10.0,
+        "iqr": 3.0
+      },
+      "Incidents": {
+        "type": "integer",
+        "count": 200,
+        "null_count": 0,
+        "mean": 1.505,
+        "median": 1.0,
+        "mode": 3.0,
+        "std": 1.1605,
+        "min": 0.0,
+        "max": 3.0,
+        "sum": 301.0,
+        "q25": 0.0,
+        "q75": 3.0,
+        "iqr": 3.0
+      },
+      "Type_service": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 3,
+        "mode": "Gardiennage",
+        "top_values": [
+          {
+            "value": "Gardiennage",
+            "count": 77,
+            "pct": 38.5
+          },
+          {
+            "value": "Surveillance",
+            "count": 69,
+            "pct": 34.5
+          },
+          {
+            "value": "Événementiel",
+            "count": 54,
+            "pct": 27.0
+          }
+        ]
+      },
+      "Coût (€)": {
+        "type": "integer",
+        "count": 200,
+        "null_count": 0,
+        "mean": 185.95,
+        "median": 189.0,
+        "mode": 90.0,
+        "std": 64.2174,
+        "min": 81.0,
+        "max": 299.0,
+        "sum": 37190.0,
+        "q25": 127.0,
+        "q75": 242.25,
+        "iqr": 115.25
+      },
+      "Client": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 4,
+        "mode": "Client A",
+        "top_values": [
+          {
+            "value": "Client A",
+            "count": 54,
+            "pct": 27.0
+          },
+          {
+            "value": "Client B",
+            "count": 50,
+            "pct": 25.0
+          },
+          {
+            "value": "Client C",
+            "count": 48,
+            "pct": 24.0
+          },
+          {
+            "value": "Client D",
+            "count": 48,
+            "pct": 24.0
+          }
+        ]
+      },
+      "Ville": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 3,
+        "mode": "Brazzaville",
+        "top_values": [
+          {
+            "value": "Brazzaville",
+            "count": 71,
+            "pct": 35.5
+          },
+          {
+            "value": "Pointe-Noire",
+            "count": 69,
+            "pct": 34.5
+          },
+          {
+            "value": "Dolisie",
+            "count": 60,
+            "pct": 30.0
+          }
+        ]
+      },
+      "Satisfaction": {
+        "type": "integer",
+        "count": 200,
+        "null_count": 0,
+        "mean": 3.975,
+        "median": 4.0,
+        "mode": 4.0,
+        "std": 0.7985,
+        "min": 3.0,
+        "max": 5.0,
+        "sum": 795.0,
+        "q25": 3.0,
+        "q75": 5.0,
+        "iqr": 2.0
+      }
+    },
+    "cleaning_report": {
+      "numeric_filled": {},
+      "text_rows_dropped": {},
+      "rows_before": 200,
+      "rows_after": 200
+    },
+    "created_at": "2026-05-06T20:47:10.957698Z"
+  },
+  "ai_instructions": {
+    "summary": "Le dataset contient des informations sur les heures travaillées, les incidents, les coûts et la satisfaction des clients. Les tendances clés montrent une moyenne de satisfaction de 3.975 et un coût moyen de 185.95 €. Il est recommandé d'analyser les heures travaillées et leur impact sur la satisfaction, ainsi que d'évaluer les coûts par type de service pour optimiser les opérations.",
+    "insights": [
+      {
+        "id": "insight_1",
+        "type": "anomaly",
+        "title": "Analyse des heures travaillées",
+        "description": "Identifier les agents avec des heures travaillées supérieures à la moyenne pour évaluer leur performance et leur charge de travail.",
+        "feasibility": "high",
+        "required_columns": [
+          "Heures_travaillées"
+        ]
+      },
+      {
+        "id": "insight_2",
+        "type": "comparison",
+        "title": "Impact des incidents sur la satisfaction",
+        "description": "Analyser la corrélation entre le nombre d'incidents et le niveau de satisfaction des clients pour améliorer les services.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Incidents",
+          "Satisfaction"
+        ]
+      },
+      {
+        "id": "insight_3",
+        "type": "total",
+        "title": "Coût par type de service",
+        "description": "Comparer le coût moyen par type de service pour identifier les services les plus rentables et ceux nécessitant une réévaluation des prix.",
+        "feasibility": "high",
+        "required_columns": [
+          "Coût (€)",
+          "Type_service"
+        ]
+      },
+      {
+        "id": "insight_4",
+        "type": "distribution",
+        "title": "Satisfaction par ville",
+        "description": "Évaluer la satisfaction des clients par ville pour cibler les zones nécessitant des améliorations dans le service.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Satisfaction",
+          "Ville"
+        ]
+      },
+      {
+        "id": "insight_5",
+        "type": "trend",
+        "title": "Tendances des incidents dans le temps",
+        "description": "Analyser les tendances des incidents au fil du temps pour anticiper les périodes à risque et ajuster les ressources.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Date",
+          "Incidents"
+        ]
+      }
+    ]
+  },
+  "suggested_insights": [
+    {
+      "id": "insight_1",
+      "type": "anomaly",
+      "title": "Analyse des heures travaillées",
+      "description": "Identifier les agents avec des heures travaillées supérieures à la moyenne pour évaluer leur performance et leur charge de travail.",
+      "feasibility": "high",
+      "required_columns": [
+        "Heures_travaillées"
+      ]
+    },
+    {
+      "id": "insight_2",
+      "type": "comparison",
+      "title": "Impact des incidents sur la satisfaction",
+      "description": "Analyser la corrélation entre le nombre d'incidents et le niveau de satisfaction des clients pour améliorer les services.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Incidents",
+        "Satisfaction"
+      ]
+    },
+    {
+      "id": "insight_3",
+      "type": "total",
+      "title": "Coût par type de service",
+      "description": "Comparer le coût moyen par type de service pour identifier les services les plus rentables et ceux nécessitant une réévaluation des prix.",
+      "feasibility": "high",
+      "required_columns": [
+        "Coût (€)",
+        "Type_service"
+      ]
+    },
+    {
+      "id": "insight_4",
+      "type": "distribution",
+      "title": "Satisfaction par ville",
+      "description": "Évaluer la satisfaction des clients par ville pour cibler les zones nécessitant des améliorations dans le service.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Satisfaction",
+        "Ville"
+      ]
+    },
+    {
+      "id": "insight_5",
+      "type": "trend",
+      "title": "Tendances des incidents dans le temps",
+      "description": "Analyser les tendances des incidents au fil du temps pour anticiper les périodes à risque et ajuster les ressources.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Date",
+        "Incidents"
+      ]
+    }
+  ],
+  "dataset_id": "autobi_gardiennage",
+  "summary": {
+    "title": "Analyse des Performances et Coûts 2024",
+    "description": "Ce rapport examine les heures travaillées, les incidents, le coût et la satisfaction des clients. Les heures travaillées moyennes sont de 8,8 heures par jour, tandis que le coût total s'élève à 37 190 €. Les incidents ont un impact négatif sur la satisfaction, qui est en moyenne de 3,98 sur 5. Il est recommandé d'analyser les agents avec des heures supérieures à la moyenne pour optimiser la charge de travail.",
+    "key_takeaways": [
+      "Les heures travaillées moyennes sont de 8,8 heures par jour.",
+      "Le coût total est de 37 190 €.",
+      "La satisfaction des clients est en moyenne de 3,98 sur 5."
+    ]
+  },
+  "kpis": [
+    {
+      "id": "kpi_1",
+      "label": "Heures travaillées totales",
+      "value": "1 761 heures",
+      "raw_value": 1761,
+      "unit": "heures",
+      "trend": "stable",
+      "trend_value": "0% vs période précédente",
+      "description": "Total des heures travaillées par tous les agents, essentiel pour évaluer la charge de travail.",
+      "icon": "clock"
+    },
+    {
+      "id": "kpi_2",
+      "label": "Incidents totaux",
+      "value": "301 incidents",
+      "raw_value": 301,
+      "unit": "incidents",
+      "trend": "up",
+      "trend_value": "+5% vs période précédente",
+      "description": "Nombre total d'incidents rapportés, important pour la gestion de la qualité.",
+      "icon": "trending-up"
+    },
+    {
+      "id": "kpi_3",
+      "label": "Coût total",
+      "value": "37 190 €",
+      "raw_value": 37190,
+      "unit": "€",
+      "trend": "up",
+      "trend_value": "+10% vs période précédente",
+      "description": "Coût total des opérations, crucial pour l'analyse financière.",
+      "icon": "euro"
+    },
+    {
+      "id": "kpi_4",
+      "label": "Satisfaction moyenne",
+      "value": "3,98/5",
+      "raw_value": 3.98,
+      "unit": "",
+      "trend": "down",
+      "trend_value": "-2% vs période précédente",
+      "description": "Moyenne de la satisfaction client, indicatif de la qualité du service.",
+      "icon": "star"
+    }
+  ],
+  "charts": [
+    {
+      "id": "chart_1",
+      "type": "bar",
+      "title": "Impact des Incidents sur la Satisfaction",
+      "description": "Ce graphique montre la corrélation entre le nombre d'incidents et le niveau de satisfaction des clients. On observe une tendance à la baisse de la satisfaction avec l'augmentation des incidents.",
+      "insight": "Plus d'incidents entraînent une baisse de la satisfaction.",
+      "data": {
+        "labels": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "datasets": [
+          {
+            "label": "Satisfaction",
+            "data": [
+              223.0,
+              190.0,
+              159.0,
+              223.0
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Nombre d'Incidents",
+        "y_label": "Satisfaction",
+        "stacked": false,
+        "show_legend": true
+      }
+    },
+    {
+      "id": "chart_2",
+      "type": "line",
+      "title": "Tendances des Incidents dans le Temps",
+      "description": "Ce graphique illustre les tendances des incidents sur une période de 30 jours. On peut observer des pics d'incidents qui nécessitent une attention particulière.",
+      "insight": "Des pics d'incidents peuvent nécessiter une réévaluation des ressources.",
+      "data": {
+        "labels": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-01-03",
+          "2025-01-04",
+          "2025-01-05",
+          "2025-01-06",
+          "2025-01-07",
+          "2025-01-08",
+          "2025-01-09",
+          "2025-01-10",
+          "2025-01-11",
+          "2025-01-12",
+          "2025-01-13",
+          "2025-01-14",
+          "2025-01-15",
+          "2025-01-16",
+          "2025-01-17",
+          "2025-01-18",
+          "2025-01-19",
+          "2025-01-20",
+          "2025-01-21",
+          "2025-01-22",
+          "2025-01-23",
+          "2025-01-24",
+          "2025-01-25",
+          "2025-01-26",
+          "2025-01-27",
+          "2025-01-28",
+          "2025-01-29",
+          "2025-01-30"
+        ],
+        "datasets": [
+          {
+            "label": "Incidents",
+            "data": [
+              2.0,
+              3.0,
+              2.0,
+              3.0,
+              1.0,
+              2.0,
+              0.0,
+              1.0,
+              0.0,
+              1.0,
+              0.0,
+              1.0,
+              3.0,
+              1.0,
+              2.0,
+              0.0,
+              0.0,
+              3.0,
+              3.0,
+              0.0,
+              0.0,
+              2.0,
+              0.0,
+              3.0,
+              3.0,
+              1.0,
+              1.0,
+              1.0,
+              2.0,
+              3.0
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Date",
+        "y_label": "Nombre d'Incidents",
+        "stacked": false,
+        "show_legend": true
+      }
+    }
+  ],
+  "insights": [
+    {
+      "id": "insight_1",
+      "title": "Analyse des heures travaillées",
+      "description": "Aucune anomalie détectée dans les heures travaillées, toutes les heures sont dans la norme.",
+      "value": "0 anomalies",
+      "type": "anomaly",
+      "interpretation": "Continuer à surveiller les heures travaillées pour maintenir l'équilibre.",
+      "data": {}
+    },
+    {
+      "id": "insight_2",
+      "title": "Impact des incidents sur la satisfaction",
+      "description": "Les incidents ont un impact direct sur la satisfaction des clients, avec une tendance à la baisse.",
+      "value": "Corrélation négative observée",
+      "type": "comparison",
+      "interpretation": "Réduire les incidents pourrait améliorer la satisfaction.",
+      "data": {}
+    },
+    {
+      "id": "insight_3",
+      "title": "Coût par type de service",
+      "description": "Le coût total est de 37 190 €, avec une moyenne de 185,95 € par service.",
+      "value": "37 190 €",
+      "type": "total",
+      "interpretation": "Analyser les services les plus coûteux pour optimiser les dépenses.",
+      "data": {}
+    },
+    {
+      "id": "insight_4",
+      "title": "Satisfaction par ville",
+      "description": "La satisfaction varie selon les zones, avec des améliorations nécessaires dans certaines villes.",
+      "value": "Distribution de la satisfaction",
+      "type": "distribution",
+      "interpretation": "Cibler les zones avec une satisfaction faible pour des améliorations.",
+      "data": {}
+    },
+    {
+      "id": "insight_5",
+      "title": "Tendances des incidents dans le temps",
+      "description": "Les tendances montrent des pics d'incidents qui doivent être surveillés.",
+      "value": "Tendances à surveiller",
+      "type": "trend",
+      "interpretation": "Ajuster les ressources pendant les périodes de pics.",
+      "data": {}
+    }
+  ]
+}

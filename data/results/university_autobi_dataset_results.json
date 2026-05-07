@@ -1,0 +1,712 @@
+{
+  "metadata": {
+    "row_count": 200,
+    "column_count": 10,
+    "columns": [
+      "Student_ID",
+      "Nom",
+      "Sexe",
+      "Age",
+      "Filiere",
+      "Niveau",
+      "Moyenne_Generale",
+      "Frais_Scolarite",
+      "Statut_Paiement",
+      "Ville"
+    ],
+    "column_types": {
+      "Student_ID": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Nom": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Sexe": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Age": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Filiere": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Niveau": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Moyenne_Generale": {
+        "pandas_type": "float64",
+        "semantic_type": "float",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Frais_Scolarite": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Statut_Paiement": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Ville": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      }
+    },
+    "numeric_columns": [
+      "Age",
+      "Moyenne_Generale",
+      "Frais_Scolarite"
+    ],
+    "date_columns": [],
+    "categorical_columns": [],
+    "text_columns": [
+      "Student_ID",
+      "Nom",
+      "Sexe",
+      "Filiere",
+      "Niveau",
+      "Statut_Paiement",
+      "Ville"
+    ],
+    "statistics": {
+      "Student_ID": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 200,
+        "mode": "ST001",
+        "top_values": [
+          {
+            "value": "ST001",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ST002",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ST003",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ST004",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ST005",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ST006",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ST007",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ST008",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ST009",
+            "count": 1,
+            "pct": 0.5
+          },
+          {
+            "value": "ST010",
+            "count": 1,
+            "pct": 0.5
+          }
+        ]
+      },
+      "Nom": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 20,
+        "mode": "Mpouele",
+        "top_values": [
+          {
+            "value": "Mpouele",
+            "count": 15,
+            "pct": 7.5
+          },
+          {
+            "value": "Ondongo",
+            "count": 14,
+            "pct": 7.0
+          },
+          {
+            "value": "Mpassi",
+            "count": 13,
+            "pct": 6.5
+          },
+          {
+            "value": "Nzola",
+            "count": 12,
+            "pct": 6.0
+          },
+          {
+            "value": "Nkodia",
+            "count": 12,
+            "pct": 6.0
+          },
+          {
+            "value": "Samba",
+            "count": 11,
+            "pct": 5.5
+          },
+          {
+            "value": "Okemba",
+            "count": 11,
+            "pct": 5.5
+          },
+          {
+            "value": "Ngoma",
+            "count": 10,
+            "pct": 5.0
+          },
+          {
+            "value": "Mavoungou",
+            "count": 10,
+            "pct": 5.0
+          },
+          {
+            "value": "Mpika",
+            "count": 10,
+            "pct": 5.0
+          }
+        ]
+      },
+      "Sexe": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 2,
+        "mode": "F",
+        "top_values": [
+          {
+            "value": "F",
+            "count": 106,
+            "pct": 53.0
+          },
+          {
+            "value": "M",
+            "count": 94,
+            "pct": 47.0
+          }
+        ]
+      },
+      "Age": {
+        "type": "integer",
+        "count": 200,
+        "null_count": 0,
+        "mean": 22.105,
+        "median": 22.0,
+        "mode": 25.0,
+        "std": 2.7112,
+        "min": 18.0,
+        "max": 26.0,
+        "sum": 4421.0,
+        "q25": 20.0,
+        "q75": 25.0,
+        "iqr": 5.0
+      },
+      "Filiere": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 5,
+        "mode": "Gestion",
+        "top_values": [
+          {
+            "value": "Gestion",
+            "count": 46,
+            "pct": 23.0
+          },
+          {
+            "value": "Comptabilite",
+            "count": 42,
+            "pct": 21.0
+          },
+          {
+            "value": "Droit",
+            "count": 39,
+            "pct": 19.5
+          },
+          {
+            "value": "Informatique",
+            "count": 37,
+            "pct": 18.5
+          },
+          {
+            "value": "Marketing",
+            "count": 36,
+            "pct": 18.0
+          }
+        ]
+      },
+      "Niveau": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 5,
+        "mode": "L1",
+        "top_values": [
+          {
+            "value": "L1",
+            "count": 44,
+            "pct": 22.0
+          },
+          {
+            "value": "M1",
+            "count": 44,
+            "pct": 22.0
+          },
+          {
+            "value": "L3",
+            "count": 38,
+            "pct": 19.0
+          },
+          {
+            "value": "M2",
+            "count": 38,
+            "pct": 19.0
+          },
+          {
+            "value": "L2",
+            "count": 36,
+            "pct": 18.0
+          }
+        ]
+      },
+      "Moyenne_Generale": {
+        "type": "float",
+        "count": 200,
+        "null_count": 0,
+        "mean": 12.3535,
+        "median": 12.3,
+        "mode": 10.8,
+        "std": 2.5715,
+        "min": 8.1,
+        "max": 17.0,
+        "sum": 2470.7,
+        "q25": 10.175,
+        "q75": 14.5,
+        "iqr": 4.325
+      },
+      "Frais_Scolarite": {
+        "type": "integer",
+        "count": 200,
+        "null_count": 0,
+        "mean": 146650.0,
+        "median": 150000.0,
+        "mode": 150000.0,
+        "std": 16420.281,
+        "min": 120000.0,
+        "max": 170000.0,
+        "sum": 29330000.0,
+        "q25": 130000.0,
+        "q75": 160000.0,
+        "iqr": 30000.0
+      },
+      "Statut_Paiement": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 3,
+        "mode": "Paye",
+        "top_values": [
+          {
+            "value": "Paye",
+            "count": 73,
+            "pct": 36.5
+          },
+          {
+            "value": "Non Paye",
+            "count": 71,
+            "pct": 35.5
+          },
+          {
+            "value": "Partiel",
+            "count": 56,
+            "pct": 28.0
+          }
+        ]
+      },
+      "Ville": {
+        "type": "text",
+        "count": 200,
+        "null_count": 0,
+        "unique_count": 3,
+        "mode": "Pointe-Noire",
+        "top_values": [
+          {
+            "value": "Pointe-Noire",
+            "count": 71,
+            "pct": 35.5
+          },
+          {
+            "value": "Dolisie",
+            "count": 67,
+            "pct": 33.5
+          },
+          {
+            "value": "Brazzaville",
+            "count": 62,
+            "pct": 31.0
+          }
+        ]
+      }
+    },
+    "cleaning_report": {
+      "numeric_filled": {},
+      "text_rows_dropped": {},
+      "rows_before": 200,
+      "rows_after": 200
+    },
+    "created_at": "2026-05-05T10:26:25.075405Z"
+  },
+  "ai_instructions": {
+    "summary": "Le dataset contient des informations sur 200 étudiants, incluant leur âge, moyenne générale, frais de scolarité, et statut de paiement. Les tendances clés montrent une variation des performances académiques selon le statut de paiement et la filière. Il est recommandé d'analyser ces dimensions pour optimiser les politiques académiques et financières.",
+    "insights": [
+      {
+        "id": "insight_1",
+        "type": "comparison",
+        "title": "Analyse des Statuts de Paiement",
+        "description": "Évaluer la répartition des statuts de paiement par rapport à la moyenne générale pour identifier les étudiants à risque de non-paiement.",
+        "feasibility": "high",
+        "required_columns": [
+          "Statut_Paiement",
+          "Moyenne_Generale"
+        ]
+      },
+      {
+        "id": "insight_2",
+        "type": "trend",
+        "title": "Impact de l'Âge sur la Moyenne",
+        "description": "Analyser la corrélation entre l'âge des étudiants et leur moyenne générale pour déterminer si l'âge influence les performances académiques.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Age",
+          "Moyenne_Generale"
+        ]
+      },
+      {
+        "id": "insight_3",
+        "type": "comparison",
+        "title": "Frais de Scolarité et Performance",
+        "description": "Examiner la relation entre les frais de scolarité et la moyenne générale pour ajuster les politiques de tarification en fonction des performances.",
+        "feasibility": "high",
+        "required_columns": [
+          "Frais_Scolarite",
+          "Moyenne_Generale"
+        ]
+      },
+      {
+        "id": "insight_4",
+        "type": "distribution",
+        "title": "Répartition par Filière",
+        "description": "Analyser la distribution des moyennes générales par filière pour identifier les filières nécessitant un soutien académique supplémentaire.",
+        "feasibility": "high",
+        "required_columns": [
+          "Filiere",
+          "Moyenne_Generale"
+        ]
+      },
+      {
+        "id": "insight_5",
+        "type": "comparison",
+        "title": "Analyse par Ville",
+        "description": "Comparer les moyennes générales des étudiants selon leur ville pour cibler les initiatives d'amélioration des performances académiques.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Ville",
+          "Moyenne_Generale"
+        ]
+      }
+    ]
+  },
+  "suggested_insights": [
+    {
+      "id": "insight_1",
+      "type": "comparison",
+      "title": "Analyse des Statuts de Paiement",
+      "description": "Évaluer la répartition des statuts de paiement par rapport à la moyenne générale pour identifier les étudiants à risque de non-paiement.",
+      "feasibility": "high",
+      "required_columns": [
+        "Statut_Paiement",
+        "Moyenne_Generale"
+      ]
+    },
+    {
+      "id": "insight_2",
+      "type": "trend",
+      "title": "Impact de l'Âge sur la Moyenne",
+      "description": "Analyser la corrélation entre l'âge des étudiants et leur moyenne générale pour déterminer si l'âge influence les performances académiques.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Age",
+        "Moyenne_Generale"
+      ]
+    },
+    {
+      "id": "insight_3",
+      "type": "comparison",
+      "title": "Frais de Scolarité et Performance",
+      "description": "Examiner la relation entre les frais de scolarité et la moyenne générale pour ajuster les politiques de tarification en fonction des performances.",
+      "feasibility": "high",
+      "required_columns": [
+        "Frais_Scolarite",
+        "Moyenne_Generale"
+      ]
+    },
+    {
+      "id": "insight_4",
+      "type": "distribution",
+      "title": "Répartition par Filière",
+      "description": "Analyser la distribution des moyennes générales par filière pour identifier les filières nécessitant un soutien académique supplémentaire.",
+      "feasibility": "high",
+      "required_columns": [
+        "Filiere",
+        "Moyenne_Generale"
+      ]
+    },
+    {
+      "id": "insight_5",
+      "type": "comparison",
+      "title": "Analyse par Ville",
+      "description": "Comparer les moyennes générales des étudiants selon leur ville pour cibler les initiatives d'amélioration des performances académiques.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Ville",
+        "Moyenne_Generale"
+      ]
+    }
+  ],
+  "dataset_id": "university_autobi_dataset",
+  "summary": {
+    "title": "Analyse des Performances Académiques 2024",
+    "description": "Ce rapport examine les performances académiques des étudiants en fonction de leur âge et des frais de scolarité. Les données montrent une moyenne générale de 12.35, avec des frais de scolarité moyens de 146650€. Une légère corrélation a été observée entre l'âge et la moyenne générale, indiquant que l'âge n'est pas un facteur déterminant. Les étudiants ayant payé leurs frais de scolarité affichent de meilleures performances. Il est recommandé d'explorer des politiques de soutien pour les étudiants à risque.",
+    "key_takeaways": [
+      "Moyenne générale des étudiants : 12.35",
+      "Frais de scolarité moyens : 146650€",
+      "Les étudiants payants ont une moyenne supérieure de 55.2 points"
+    ]
+  },
+  "kpis": [
+    {
+      "id": "kpi_1",
+      "label": "Moyenne Générale",
+      "value": "12.35",
+      "raw_value": 12.35,
+      "unit": "",
+      "trend": "stable",
+      "trend_value": "0% vs période précédente",
+      "description": "La moyenne générale des étudiants, indiquant leur performance académique.",
+      "icon": "chart"
+    },
+    {
+      "id": "kpi_2",
+      "label": "Frais de Scolarité Moyens",
+      "value": "146 650 €",
+      "raw_value": 146650,
+      "unit": "€",
+      "trend": "up",
+      "trend_value": "+5% vs période précédente",
+      "description": "Les frais de scolarité moyens, représentant le coût d'éducation par étudiant.",
+      "icon": "euro"
+    },
+    {
+      "id": "kpi_3",
+      "label": "Âge Moyen des Étudiants",
+      "value": "22.11 ans",
+      "raw_value": 22.11,
+      "unit": "ans",
+      "trend": "stable",
+      "trend_value": "0% vs période précédente",
+      "description": "L'âge moyen des étudiants, reflétant la démographie de la population étudiante.",
+      "icon": "users"
+    }
+  ],
+  "charts": [
+    {
+      "id": "chart_1",
+      "type": "bar",
+      "title": "Analyse des Statuts de Paiement",
+      "description": "Ce graphique montre la répartition des moyennes générales selon les statuts de paiement. Les étudiants ayant payé leurs frais affichent une moyenne significativement plus élevée.",
+      "insight": "Les étudiants payants ont une moyenne supérieure.",
+      "data": {
+        "labels": [
+          "Paye",
+          "Non Paye",
+          "Partiel"
+        ],
+        "datasets": [
+          {
+            "label": "Moyenne Générale",
+            "data": [
+              897.0,
+              841.8,
+              731.9
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Statut de Paiement",
+        "y_label": "Moyenne Générale",
+        "stacked": false,
+        "show_legend": true
+      }
+    },
+    {
+      "id": "chart_2",
+      "type": "line",
+      "title": "Impact de l'Âge sur la Moyenne Générale",
+      "description": "Ce graphique illustre la tendance de la moyenne générale en fonction de l'âge des étudiants. On observe que les étudiants plus âgés tendent à avoir de meilleures performances.",
+      "insight": "Les performances augmentent légèrement avec l'âge.",
+      "data": {
+        "labels": [
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26"
+        ],
+        "datasets": [
+          {
+            "label": "Moyenne Générale",
+            "data": [
+              314.3,
+              239.7,
+              218.8,
+              328.6,
+              270.1,
+              180.6,
+              232.0,
+              336.6,
+              350.0
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Âge",
+        "y_label": "Moyenne Générale",
+        "stacked": false,
+        "show_legend": true
+      }
+    },
+    {
+      "id": "chart_3",
+      "type": "pie",
+      "title": "Frais de Scolarité et Performance",
+      "description": "Répartition des moyennes générales en fonction des frais de scolarité. Les étudiants avec des frais plus élevés montrent des performances variées.",
+      "insight": "Les frais de scolarité influencent légèrement les performances.",
+      "data": {
+        "labels": [
+          "150000",
+          "170000",
+          "140000",
+          "160000",
+          "120000",
+          "130000"
+        ],
+        "datasets": [
+          {
+            "label": "Moyenne Générale",
+            "data": [
+              523.5,
+              460.9,
+              453.8,
+              378.0,
+              346.2,
+              308.3
+            ]
+          }
+        ]
+      },
+      "options": {
+        "show_legend": true,
+        "stacked": false
+      }
+    }
+  ],
+  "insights": [
+    {
+      "id": "insight_1",
+      "title": "Analyse des Statuts de Paiement",
+      "description": "Les étudiants ayant payé leurs frais de scolarité affichent une moyenne générale supérieure, indiquant un lien entre le paiement et la performance académique.",
+      "value": "897.0 (Paye) vs 731.9 (Partiel)",
+      "type": "comparison",
+      "interpretation": "Il est recommandé de renforcer le suivi des étudiants en situation de non-paiement.",
+      "data": {}
+    },
+    {
+      "id": "insight_2",
+      "title": "Impact de l'Âge sur la Moyenne",
+      "description": "L'analyse montre une légère tendance à l'augmentation de la moyenne générale avec l'âge, bien que la corrélation soit faible.",
+      "value": "Corrélation de 0.038",
+      "type": "trend",
+      "interpretation": "Encourager les étudiants plus âgés à partager leurs expériences pourrait bénéficier aux plus jeunes.",
+      "data": {}
+    },
+    {
+      "id": "insight_3",
+      "title": "Frais de Scolarité et Performance",
+      "description": "Les frais de scolarité semblent avoir un impact sur les performances, mais les résultats varient considérablement.",
+      "value": "523.5 (150000) vs 308.3 (130000)",
+      "type": "comparison",
+      "interpretation": "Réévaluer les politiques de tarification pourrait aider à améliorer les performances académiques.",
+      "data": {}
+    }
+  ]
+}

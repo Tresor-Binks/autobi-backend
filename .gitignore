@@ -1,0 +1,50 @@
+# Environnement
+.env
+.env.*
+venv/
+env/
+.venv/
+
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Base de données locale
+*.db
+*.sqlite3
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Caches
+.cache/
+pytest_cache/
+
+# Upload fichiers (si ton app stocke les Excel)
+uploads/
+temp/
+tmp/
+
+# Secrets
+secrets.json
+config/secrets.yaml
