@@ -1,0 +1,673 @@
+{
+  "metadata": {
+    "row_count": 6,
+    "column_count": 10,
+    "columns": [
+      "Hôpital",
+      "Type d'Établissement",
+      "District Sanitaire",
+      "Coordonnées Géographiques",
+      "Distance indicative du centre (km)",
+      "Superficie de Pointe-Noire (km²)",
+      "Population Estimée de Pointe-Noire",
+      "Taux de Mortalité Maternelle (pour 100k NV)",
+      "Taux de Mortalité Néonatale (pour 1000 NV)",
+      "Taux de Mortalité Infanto-Juvénile (pour 1000 NV)"
+    ],
+    "column_types": {
+      "Hôpital": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Type d'Établissement": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "District Sanitaire": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Coordonnées Géographiques": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Distance indicative du centre (km)": {
+        "pandas_type": "object",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Superficie de Pointe-Noire (km²)": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Population Estimée de Pointe-Noire": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Taux de Mortalité Maternelle (pour 100k NV)": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Taux de Mortalité Néonatale (pour 1000 NV)": {
+        "pandas_type": "datetime64[us]",
+        "semantic_type": "date",
+        "is_numeric": false,
+        "is_date": true,
+        "is_categorical": false
+      },
+      "Taux de Mortalité Infanto-Juvénile (pour 1000 NV)": {
+        "pandas_type": "float64",
+        "semantic_type": "float",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      }
+    },
+    "numeric_columns": [
+      "Superficie de Pointe-Noire (km²)",
+      "Population Estimée de Pointe-Noire",
+      "Taux de Mortalité Maternelle (pour 100k NV)",
+      "Taux de Mortalité Infanto-Juvénile (pour 1000 NV)"
+    ],
+    "date_columns": [
+      "Taux de Mortalité Néonatale (pour 1000 NV)"
+    ],
+    "categorical_columns": [],
+    "text_columns": [
+      "Hôpital",
+      "Type d'Établissement",
+      "District Sanitaire",
+      "Coordonnées Géographiques",
+      "Distance indicative du centre (km)"
+    ],
+    "statistics": {
+      "Hôpital": {
+        "type": "text",
+        "count": 6,
+        "null_count": 0,
+        "unique_count": 6,
+        "mode": "Centre de Santé Intégré (CSI) Mvou-Mvou",
+        "top_values": [
+          {
+            "value": "Hôpital Général de Loandjili",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "Hôpital de Base de Tié-Tié",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "Hôpital de Base de l'Hôpital Adolphe Sicé",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "Centre de Santé Intégré (CSI) Mvou-Mvou",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "Centre de Santé Intégré (CSI) Siafoumou",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "Hôpital Général de Patra (Projet/Récent)",
+            "count": 1,
+            "pct": 16.7
+          }
+        ]
+      },
+      "Type d'Établissement": {
+        "type": "text",
+        "count": 6,
+        "null_count": 0,
+        "unique_count": 4,
+        "mode": "Centre de Santé Intégré",
+        "top_values": [
+          {
+            "value": "Hôpital Général",
+            "count": 2,
+            "pct": 33.3
+          },
+          {
+            "value": "Centre de Santé Intégré",
+            "count": 2,
+            "pct": 33.3
+          },
+          {
+            "value": "Hôpital de Base",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "Hôpital de Référence / Base",
+            "count": 1,
+            "pct": 16.7
+          }
+        ]
+      },
+      "District Sanitaire": {
+        "type": "text",
+        "count": 6,
+        "null_count": 0,
+        "unique_count": 5,
+        "mode": "Loandjili",
+        "top_values": [
+          {
+            "value": "Loandjili",
+            "count": 2,
+            "pct": 33.3
+          },
+          {
+            "value": "Tié-Tié",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "Lumumba",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "Mvou-Mvou",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "Ngoyo",
+            "count": 1,
+            "pct": 16.7
+          }
+        ]
+      },
+      "Coordonnées Géographiques": {
+        "type": "text",
+        "count": 6,
+        "null_count": 0,
+        "unique_count": 6,
+        "mode": "4°44'20\"S 11°53'10\"E",
+        "top_values": [
+          {
+            "value": "4°46'14\"S 11°52'21\"E",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "4°48'30\"S 11°53'15\"E",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "4°47'45\"S 11°51'10\"E",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "4°46'55\"S 11°51'40\"E",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "4°44'20\"S 11°53'10\"E",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "4°51'12\"S 11°54'30\"E",
+            "count": 1,
+            "pct": 16.7
+          }
+        ]
+      },
+      "Distance indicative du centre (km)": {
+        "type": "text",
+        "count": 6,
+        "null_count": 0,
+        "unique_count": 6,
+        "mode": "2026-02-03 00:00:00",
+        "top_values": [
+          {
+            "value": "2026-05-04 00:00:00",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "2026-02-03 00:00:00",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "1.0",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "2026-08-02 00:00:00",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "2026-05-07 00:00:00",
+            "count": 1,
+            "pct": 16.7
+          },
+          {
+            "value": "2026-02-08 00:00:00",
+            "count": 1,
+            "pct": 16.7
+          }
+        ]
+      },
+      "Superficie de Pointe-Noire (km²)": {
+        "type": "integer",
+        "count": 6,
+        "null_count": 0,
+        "mean": 1144.0,
+        "median": 1144.0,
+        "mode": 1144.0,
+        "std": 0.0,
+        "min": 1144.0,
+        "max": 1144.0,
+        "sum": 6864.0,
+        "q25": 1144.0,
+        "q75": 1144.0,
+        "iqr": 0.0
+      },
+      "Population Estimée de Pointe-Noire": {
+        "type": "integer",
+        "count": 6,
+        "null_count": 0,
+        "mean": 1150000.0,
+        "median": 1150000.0,
+        "mode": 1150000.0,
+        "std": 0.0,
+        "min": 1150000.0,
+        "max": 1150000.0,
+        "sum": 6900000.0,
+        "q25": 1150000.0,
+        "q75": 1150000.0,
+        "iqr": 0.0
+      },
+      "Taux de Mortalité Maternelle (pour 100k NV)": {
+        "type": "integer",
+        "count": 6,
+        "null_count": 0,
+        "mean": 647.0,
+        "median": 647.0,
+        "mode": 647.0,
+        "std": 0.0,
+        "min": 647.0,
+        "max": 647.0,
+        "sum": 3882.0,
+        "q25": 647.0,
+        "q75": 647.0,
+        "iqr": 0.0
+      },
+      "Taux de Mortalité Néonatale (pour 1000 NV)": {
+        "type": "date",
+        "count": 6,
+        "null_count": 0,
+        "min_date": "2026-05-25T00:00:00",
+        "max_date": "2026-05-25T00:00:00",
+        "range_days": 0
+      },
+      "Taux de Mortalité Infanto-Juvénile (pour 1000 NV)": {
+        "type": "float",
+        "count": 6,
+        "null_count": 0,
+        "mean": 50.4,
+        "median": 50.4,
+        "mode": 50.4,
+        "std": 0.0,
+        "min": 50.4,
+        "max": 50.4,
+        "sum": 302.4,
+        "q25": 50.4,
+        "q75": 50.4,
+        "iqr": 0.0
+      }
+    },
+    "cleaning_report": {
+      "numeric_filled": {},
+      "text_rows_dropped": {},
+      "rows_before": 6,
+      "rows_after": 6
+    },
+    "created_at": "2026-06-13T20:32:32.709245Z"
+  },
+  "ai_instructions": {
+    "summary": "Le dataset présente des informations sur les hôpitaux de Pointe-Noire, incluant des taux de mortalité et des données démographiques. Les taux de mortalité sont uniformes, ce qui soulève des questions sur l'efficacité des soins. Il est recommandé d'explorer les distances d'accès aux hôpitaux et d'évaluer l'impact de la superficie des établissements sur les services. Une analyse des types d'établissements pourrait également révéler des opportunités d'amélioration.",
+    "insights": [
+      {
+        "id": "insight_1",
+        "type": "comparison",
+        "title": "Analyse des taux de mortalité",
+        "description": "Les taux de mortalité maternelle, néonatale et infanto-juvénile sont constants dans tous les hôpitaux, indiquant un besoin d'intervention ciblée.",
+        "feasibility": "high",
+        "required_columns": [
+          "Taux de Mortalité Maternelle (pour 100k NV)",
+          "Taux de Mortalité Infanto-Juvénile (pour 1000 NV)"
+        ]
+      },
+      {
+        "id": "insight_2",
+        "type": "distribution",
+        "title": "Évaluation de la population par hôpital",
+        "description": "La population estimée de Pointe-Noire est uniforme, mais il est crucial d'analyser la répartition des services de santé par rapport à cette population.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Population Estimée de Pointe-Noire"
+        ]
+      },
+      {
+        "id": "insight_3",
+        "type": "anomaly",
+        "title": "Distance des hôpitaux au centre",
+        "description": "Analyser la distance des hôpitaux par rapport au centre peut révéler des inégalités d'accès aux soins de santé.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Distance indicative du centre (km)"
+        ]
+      },
+      {
+        "id": "insight_4",
+        "type": "comparison",
+        "title": "Impact de la superficie sur les services",
+        "description": "Évaluer si la superficie des établissements influence la qualité ou la quantité des services offerts aux patients.",
+        "feasibility": "low",
+        "required_columns": [
+          "Superficie de Pointe-Noire (km²)"
+        ]
+      },
+      {
+        "id": "insight_5",
+        "type": "comparison",
+        "title": "Type d'établissement et mortalité",
+        "description": "Comparer les taux de mortalité selon le type d'établissement peut aider à identifier les meilleures pratiques et les besoins d'amélioration.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Type d'Établissement",
+          "Taux de Mortalité Maternelle (pour 100k NV)"
+        ]
+      }
+    ]
+  },
+  "suggested_insights": [
+    {
+      "id": "insight_1",
+      "type": "comparison",
+      "title": "Analyse des taux de mortalité",
+      "description": "Les taux de mortalité maternelle, néonatale et infanto-juvénile sont constants dans tous les hôpitaux, indiquant un besoin d'intervention ciblée.",
+      "feasibility": "high",
+      "required_columns": [
+        "Taux de Mortalité Maternelle (pour 100k NV)",
+        "Taux de Mortalité Infanto-Juvénile (pour 1000 NV)"
+      ]
+    },
+    {
+      "id": "insight_2",
+      "type": "distribution",
+      "title": "Évaluation de la population par hôpital",
+      "description": "La population estimée de Pointe-Noire est uniforme, mais il est crucial d'analyser la répartition des services de santé par rapport à cette population.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Population Estimée de Pointe-Noire"
+      ]
+    },
+    {
+      "id": "insight_3",
+      "type": "anomaly",
+      "title": "Distance des hôpitaux au centre",
+      "description": "Analyser la distance des hôpitaux par rapport au centre peut révéler des inégalités d'accès aux soins de santé.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Distance indicative du centre (km)"
+      ]
+    },
+    {
+      "id": "insight_4",
+      "type": "comparison",
+      "title": "Impact de la superficie sur les services",
+      "description": "Évaluer si la superficie des établissements influence la qualité ou la quantité des services offerts aux patients.",
+      "feasibility": "low",
+      "required_columns": [
+        "Superficie de Pointe-Noire (km²)"
+      ]
+    },
+    {
+      "id": "insight_5",
+      "type": "comparison",
+      "title": "Type d'établissement et mortalité",
+      "description": "Comparer les taux de mortalité selon le type d'établissement peut aider à identifier les meilleures pratiques et les besoins d'amélioration.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Type d'Établissement",
+        "Taux de Mortalité Maternelle (pour 100k NV)"
+      ]
+    }
+  ],
+  "dataset_id": "Analyse Données Hôpitaux et Indicateurs Sanitaires - Pointe Noire",
+  "summary": {
+    "title": "Évaluation des Services de Santé à Pointe-Noire",
+    "description": "Ce rapport analyse les services de santé à Pointe-Noire en se concentrant sur les taux de mortalité et la répartition des établissements. Les taux de mortalité maternelle et infanto-juvénile sont constants à 647.0 et 50.4 respectivement, indiquant un besoin d'intervention ciblée. La population estimée est uniformément répartie entre les hôpitaux, mais des inégalités d'accès aux soins peuvent exister en fonction de la distance au centre. Il est essentiel d'évaluer la superficie des établissements pour comprendre leur capacité à fournir des services adéquats.",
+    "key_takeaways": [
+      "Taux de mortalité maternelle constant à 647.0 pour 100k NV.",
+      "Population estimée uniforme à 1,150,000 dans tous les hôpitaux.",
+      "Nécessité d'analyser la distance des hôpitaux pour améliorer l'accès aux soins."
+    ]
+  },
+  "kpis": [
+    {
+      "id": "kpi_1",
+      "label": "Superficie moyenne de Pointe-Noire",
+      "value": "1 144.00 km²",
+      "raw_value": 1144.0,
+      "unit": "km²",
+      "trend": "stable",
+      "trend_value": null,
+      "description": "La superficie moyenne des établissements de santé à Pointe-Noire est de 1 144 km², ce qui est constant à travers tous les hôpitaux.",
+      "icon": "package"
+    },
+    {
+      "id": "kpi_2",
+      "label": "Population estimée de Pointe-Noire",
+      "value": "1 150 000",
+      "raw_value": 1150000.0,
+      "unit": "",
+      "trend": "stable",
+      "trend_value": null,
+      "description": "La population estimée de Pointe-Noire est de 1 150 000, indiquant une uniformité dans la répartition des services de santé.",
+      "icon": "users"
+    },
+    {
+      "id": "kpi_3",
+      "label": "Taux de mortalité maternelle",
+      "value": "647.00 pour 100k NV",
+      "raw_value": 647.0,
+      "unit": "pour 100k NV",
+      "trend": "stable",
+      "trend_value": null,
+      "description": "Le taux de mortalité maternelle est constant à 647 pour 100k naissances vivantes, soulignant un besoin d'intervention.",
+      "icon": "percent"
+    },
+    {
+      "id": "kpi_4",
+      "label": "Taux de mortalité infanto-juvénile",
+      "value": "50.40 pour 1000 NV",
+      "raw_value": 50.4,
+      "unit": "pour 1000 NV",
+      "trend": "stable",
+      "trend_value": null,
+      "description": "Le taux de mortalité infanto-juvénile est constant à 50.4 pour 1000 naissances vivantes, indiquant une situation préoccupante.",
+      "icon": "percent"
+    }
+  ],
+  "charts": [
+    {
+      "id": "chart_1",
+      "type": "bar",
+      "title": "Répartition des établissements de santé par type",
+      "description": "Ce graphique montre la répartition des établissements de santé à Pointe-Noire par type. Les hôpitaux généraux et les centres de santé intégrés représentent chacun 33.3% des établissements, tandis que les hôpitaux de base et de référence occupent 16.7%. Cela souligne la nécessité d'une évaluation des services fournis par chaque type d'établissement.",
+      "insight": "Les hôpitaux généraux et les centres de santé intégrés dominent la répartition des établissements de santé.",
+      "data": {
+        "labels": [
+          "Hôpital Général",
+          "Centre de Santé Intégré",
+          "Hôpital de Base",
+          "Hôpital de Référence / Base"
+        ],
+        "datasets": [
+          {
+            "label": "Pourcentage d'établissements",
+            "data": [
+              33.3,
+              33.3,
+              16.7,
+              16.7
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Type d'Établissement",
+        "y_label": "Pourcentage",
+        "stacked": false,
+        "show_legend": true
+      }
+    },
+    {
+      "id": "chart_2",
+      "type": "scatter",
+      "title": "Corrélation entre la superficie et le taux de mortalité maternelle",
+      "description": "Ce graphique montre la corrélation entre la superficie des établissements de santé et le taux de mortalité maternelle. Les points sont constants, indiquant une absence de variation significative dans les taux de mortalité en fonction de la superficie, ce qui suggère que d'autres facteurs pourraient influencer ces taux.",
+      "insight": "Il n'y a pas de corrélation significative entre la superficie des établissements et le taux de mortalité maternelle.",
+      "data": {
+        "datasets": [
+          {
+            "label": "Superficie vs Taux de Mortalité Maternelle",
+            "data": [
+              {
+                "x": 1144.0,
+                "y": 647.0
+              },
+              {
+                "x": 1144.0,
+                "y": 647.0
+              },
+              {
+                "x": 1144.0,
+                "y": 647.0
+              },
+              {
+                "x": 1144.0,
+                "y": 647.0
+              },
+              {
+                "x": 1144.0,
+                "y": 647.0
+              },
+              {
+                "x": 1144.0,
+                "y": 647.0
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Superficie de Pointe-Noire (km²)",
+        "y_label": "Taux de Mortalité Maternelle (pour 100k NV)",
+        "show_legend": true,
+        "stacked": false
+      }
+    },
+    {
+      "id": "chart_3",
+      "type": "doughnut",
+      "title": "Répartition des hôpitaux à Pointe-Noire",
+      "description": "Ce graphique en doughnut illustre la répartition des hôpitaux à Pointe-Noire. Chaque hôpital représente 16.7% de l'ensemble, ce qui montre une distribution uniforme des établissements de santé dans la région.",
+      "insight": "Tous les hôpitaux à Pointe-Noire ont une part égale de 16.7%, indiquant une répartition uniforme.",
+      "data": {
+        "labels": [
+          "Hôpital Général de Loandjili",
+          "Hôpital de Base de Tié-Tié",
+          "Hôpital de Base de l'Hôpital Adolphe Sicé",
+          "Centre de Santé Intégré (CSI) Mvou-Mvou",
+          "Centre de Santé Intégré (CSI) Siafoumou",
+          "Hôpital Général de Patra (Projet/Récent)"
+        ],
+        "datasets": [
+          {
+            "data": [
+              16.7,
+              16.7,
+              16.7,
+              16.7,
+              16.7,
+              16.7
+            ]
+          }
+        ]
+      },
+      "options": {
+        "show_legend": true,
+        "stacked": false
+      }
+    }
+  ],
+  "insights": [
+    {
+      "id": "insight_1",
+      "title": "Analyse des taux de mortalité",
+      "description": "Les taux de mortalité maternelle et infanto-juvénile sont constants à 647.0 et 50.4 respectivement, ce qui indique un besoin d'intervention ciblée pour améliorer la santé des mères et des enfants.",
+      "value": "Taux de mortalité maternelle à 647.0 pour 100k NV et infanto-juvénile à 50.4 pour 1000 NV.",
+      "type": "comparison",
+      "interpretation": "Il est crucial de mettre en place des programmes de santé ciblés pour réduire ces taux.",
+      "data": {}
+    },
+    {
+      "id": "insight_2",
+      "title": "Évaluation de la population par hôpital",
+      "description": "La population estimée de Pointe-Noire est uniformément répartie entre les hôpitaux, avec 1 150 000 habitants au total. Cela souligne l'importance d'une évaluation des services de santé fournis par chaque hôpital.",
+      "value": "Population estimée uniforme à 1 150 000.",
+      "type": "distribution",
+      "interpretation": "Analyser la répartition des services de santé par rapport à cette population est essentiel.",
+      "data": {}
+    },
+    {
+      "id": "insight_3",
+      "title": "Impact de la superficie sur les services",
+      "description": "La superficie des établissements de santé est constante à 1 144 km², ce qui soulève des questions sur la capacité de ces établissements à fournir des services adéquats.",
+      "value": "Superficie constante à 1 144 km².",
+      "type": "comparison",
+      "interpretation": "Il est nécessaire d'évaluer si la superficie influence la qualité des services offerts.",
+      "data": {}
+    }
+  ]
+}

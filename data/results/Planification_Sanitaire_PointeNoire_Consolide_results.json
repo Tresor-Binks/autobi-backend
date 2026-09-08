@@ -1,0 +1,834 @@
+{
+  "metadata": {
+    "row_count": 54,
+    "column_count": 12,
+    "columns": [
+      "ID Code",
+      "Nom de l'Établissement",
+      "Type Structure",
+      "District Sanitaire",
+      "Statut / Planification",
+      "Distance Centre (km)",
+      "Superficie Rattachée (km²)",
+      "Population Couverte",
+      "Mortalité Maternelle (/100k)",
+      "Mortalité Néonatale (/1k)",
+      "Besoin d'Extension",
+      "Priorité Intervention"
+    ],
+    "column_types": {
+      "ID Code": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Nom de l'Établissement": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Type Structure": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "District Sanitaire": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Statut / Planification": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Distance Centre (km)": {
+        "pandas_type": "float64",
+        "semantic_type": "float",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Superficie Rattachée (km²)": {
+        "pandas_type": "float64",
+        "semantic_type": "float",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Population Couverte": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Mortalité Maternelle (/100k)": {
+        "pandas_type": "int64",
+        "semantic_type": "integer",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Mortalité Néonatale (/1k)": {
+        "pandas_type": "float64",
+        "semantic_type": "float",
+        "is_numeric": true,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Besoin d'Extension": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Priorité Intervention": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      }
+    },
+    "numeric_columns": [
+      "Distance Centre (km)",
+      "Superficie Rattachée (km²)",
+      "Population Couverte",
+      "Mortalité Maternelle (/100k)",
+      "Mortalité Néonatale (/1k)"
+    ],
+    "date_columns": [],
+    "categorical_columns": [],
+    "text_columns": [
+      "ID Code",
+      "Nom de l'Établissement",
+      "Type Structure",
+      "District Sanitaire",
+      "Statut / Planification",
+      "Besoin d'Extension",
+      "Priorité Intervention"
+    ],
+    "statistics": {
+      "ID Code": {
+        "type": "text",
+        "count": 54,
+        "null_count": 0,
+        "unique_count": 54,
+        "mode": "PN-HOSP-001",
+        "top_values": [
+          {
+            "value": "PN-HOSP-001",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "PN-HOSP-002",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "PN-HOSP-003",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "PN-HOSP-004",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "PN-HOSP-005",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "PN-HOSP-006",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "PN-HOSP-007",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "PN-HOSP-008",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "PN-HOSP-009",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "PN-HOSP-010",
+            "count": 1,
+            "pct": 1.9
+          }
+        ]
+      },
+      "Nom de l'Établissement": {
+        "type": "text",
+        "count": 54,
+        "null_count": 0,
+        "unique_count": 54,
+        "mode": "CSI Centre Ville - Secteur 1",
+        "top_values": [
+          {
+            "value": "Hôpital de Référence Adolphe Sicé - Secteur 1",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "Hôpital Général de Loandjili - Secteur 1",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "Hôpital de Base de Tié-Tié - Secteur 1",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "Hôpital Général de Patra - Secteur 1",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "Hôpital de Base de Ngoyo - Secteur 1",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "CSI Centre Ville - Secteur 1",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "CSI Mvou-Mvou - Secteur 2",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "CSI Siafoumou - Secteur 2",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "CSI Mpaka - Secteur 2",
+            "count": 1,
+            "pct": 1.9
+          },
+          {
+            "value": "CSI Ngoyo - Secteur 2",
+            "count": 1,
+            "pct": 1.9
+          }
+        ]
+      },
+      "Type Structure": {
+        "type": "text",
+        "count": 54,
+        "null_count": 0,
+        "unique_count": 4,
+        "mode": "Centre de Santé Intégré",
+        "top_values": [
+          {
+            "value": "Centre de Santé Intégré",
+            "count": 25,
+            "pct": 46.3
+          },
+          {
+            "value": "Hôpital Général",
+            "count": 12,
+            "pct": 22.2
+          },
+          {
+            "value": "Hôpital de Base",
+            "count": 11,
+            "pct": 20.4
+          },
+          {
+            "value": "Hôpital de Référence",
+            "count": 6,
+            "pct": 11.1
+          }
+        ]
+      },
+      "District Sanitaire": {
+        "type": "text",
+        "count": 54,
+        "null_count": 0,
+        "unique_count": 6,
+        "mode": "Loandjili",
+        "top_values": [
+          {
+            "value": "Lumumba",
+            "count": 9,
+            "pct": 16.7
+          },
+          {
+            "value": "Tié-Tié",
+            "count": 9,
+            "pct": 16.7
+          },
+          {
+            "value": "Loandjili",
+            "count": 9,
+            "pct": 16.7
+          },
+          {
+            "value": "Mvou-Mvou",
+            "count": 9,
+            "pct": 16.7
+          },
+          {
+            "value": "Ngoyo",
+            "count": 9,
+            "pct": 16.7
+          },
+          {
+            "value": "Mongo-Mpoukou",
+            "count": 9,
+            "pct": 16.7
+          }
+        ]
+      },
+      "Statut / Planification": {
+        "type": "text",
+        "count": 54,
+        "null_count": 0,
+        "unique_count": 3,
+        "mode": "Existant",
+        "top_values": [
+          {
+            "value": "Existant",
+            "count": 43,
+            "pct": 79.6
+          },
+          {
+            "value": "En Construction",
+            "count": 6,
+            "pct": 11.1
+          },
+          {
+            "value": "Planifié",
+            "count": 5,
+            "pct": 9.3
+          }
+        ]
+      },
+      "Distance Centre (km)": {
+        "type": "float",
+        "count": 54,
+        "null_count": 0,
+        "mean": 6.2833,
+        "median": 6.2,
+        "mode": 2.2,
+        "std": 3.2292,
+        "min": 2.2,
+        "max": 11.9,
+        "sum": 339.3,
+        "q25": 3.2,
+        "q75": 8.0,
+        "iqr": 4.8
+      },
+      "Superficie Rattachée (km²)": {
+        "type": "float",
+        "count": 54,
+        "null_count": 0,
+        "mean": 1144.0,
+        "median": 1144.0,
+        "mode": 1144.0,
+        "std": 0.0,
+        "min": 1144.0,
+        "max": 1144.0,
+        "sum": 61776.0,
+        "q25": 1144.0,
+        "q75": 1144.0,
+        "iqr": 0.0
+      },
+      "Population Couverte": {
+        "type": "integer",
+        "count": 54,
+        "null_count": 0,
+        "mean": 34562.3333,
+        "median": 28749.5,
+        "mode": 19877.0,
+        "std": 13678.6415,
+        "min": 19877.0,
+        "max": 56666.0,
+        "sum": 1866366.0,
+        "q25": 24166.0,
+        "q75": 49166.0,
+        "iqr": 25000.0
+      },
+      "Mortalité Maternelle (/100k)": {
+        "type": "integer",
+        "count": 54,
+        "null_count": 0,
+        "mean": 647.0,
+        "median": 647.0,
+        "mode": 647.0,
+        "std": 0.0,
+        "min": 647.0,
+        "max": 647.0,
+        "sum": 34938.0,
+        "q25": 647.0,
+        "q75": 647.0,
+        "iqr": 0.0
+      },
+      "Mortalité Néonatale (/1k)": {
+        "type": "float",
+        "count": 54,
+        "null_count": 0,
+        "mean": 25.5,
+        "median": 25.5,
+        "mode": 25.5,
+        "std": 0.0,
+        "min": 25.5,
+        "max": 25.5,
+        "sum": 1377.0,
+        "q25": 25.5,
+        "q75": 25.5,
+        "iqr": 0.0
+      },
+      "Besoin d'Extension": {
+        "type": "text",
+        "count": 54,
+        "null_count": 0,
+        "unique_count": 2,
+        "mode": "Oui",
+        "top_values": [
+          {
+            "value": "Oui",
+            "count": 43,
+            "pct": 79.6
+          },
+          {
+            "value": "Non",
+            "count": 11,
+            "pct": 20.4
+          }
+        ]
+      },
+      "Priorité Intervention": {
+        "type": "text",
+        "count": 54,
+        "null_count": 0,
+        "unique_count": 4,
+        "mode": "Critique",
+        "top_values": [
+          {
+            "value": "Critique",
+            "count": 22,
+            "pct": 40.7
+          },
+          {
+            "value": "Basse",
+            "count": 11,
+            "pct": 20.4
+          },
+          {
+            "value": "Moyenne",
+            "count": 11,
+            "pct": 20.4
+          },
+          {
+            "value": "Haute",
+            "count": 10,
+            "pct": 18.5
+          }
+        ]
+      }
+    },
+    "cleaning_report": {
+      "numeric_filled": {
+        "Superficie Rattachée (km²)": {
+          "count": 1,
+          "fill_value": 1144.0
+        }
+      },
+      "text_rows_dropped": {
+        "Nom de l'Établissement": 1
+      },
+      "rows_before": 55,
+      "rows_after": 54
+    },
+    "created_at": "2026-05-22T10:11:48.209365Z"
+  },
+  "ai_instructions": {
+    "summary": "Le dataset contient des informations sur 54 établissements de santé, incluant des données sur la distance, la superficie, la population couverte et les taux de mortalité. Les tendances clés montrent une distance moyenne de 6.28 km et une mortalité maternelle constante à 647/100k. Il est recommandé d'analyser les corrélations entre ces variables pour optimiser les interventions et améliorer l'accès aux soins.",
+    "insights": [
+      {
+        "id": "insight_1",
+        "type": "comparison",
+        "title": "Distance des établissements et population couverte",
+        "description": "Analyser la corrélation entre la distance des établissements et la population couverte peut révéler des opportunités d'amélioration de l'accès aux soins.",
+        "feasibility": "high",
+        "required_columns": [
+          "Distance Centre (km)",
+          "Population Couverte"
+        ]
+      },
+      {
+        "id": "insight_2",
+        "type": "comparison",
+        "title": "Mortalité maternelle par type d'établissement",
+        "description": "Comparer les taux de mortalité maternelle selon le type de structure peut aider à identifier les établissements nécessitant des interventions prioritaires.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Type Structure",
+          "Mortalité Maternelle (/100k)"
+        ]
+      },
+      {
+        "id": "insight_3",
+        "type": "trend",
+        "title": "Impact de la superficie sur la mortalité néonatale",
+        "description": "Examiner si la superficie rattachée a un effet sur la mortalité néonatale pourrait orienter les décisions d'extension des établissements.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Superficie Rattachée (km²)",
+          "Mortalité Néonatale (/1k)"
+        ]
+      },
+      {
+        "id": "insight_4",
+        "type": "anomaly",
+        "title": "Établissements avec besoin d'extension",
+        "description": "Identifier les établissements ayant un besoin d'extension et une population couverte élevée pour prioriser les investissements.",
+        "feasibility": "high",
+        "required_columns": [
+          "Besoin d'Extension",
+          "Population Couverte"
+        ]
+      },
+      {
+        "id": "insight_5",
+        "type": "comparison",
+        "title": "Priorité d'intervention et mortalité",
+        "description": "Analyser la relation entre la priorité d'intervention et les taux de mortalité peut aider à prioriser les actions de santé publique.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Priorité Intervention",
+          "Mortalité Maternelle (/100k)"
+        ]
+      }
+    ]
+  },
+  "suggested_insights": [
+    {
+      "id": "insight_1",
+      "type": "comparison",
+      "title": "Distance des établissements et population couverte",
+      "description": "Analyser la corrélation entre la distance des établissements et la population couverte peut révéler des opportunités d'amélioration de l'accès aux soins.",
+      "feasibility": "high",
+      "required_columns": [
+        "Distance Centre (km)",
+        "Population Couverte"
+      ]
+    },
+    {
+      "id": "insight_2",
+      "type": "comparison",
+      "title": "Mortalité maternelle par type d'établissement",
+      "description": "Comparer les taux de mortalité maternelle selon le type de structure peut aider à identifier les établissements nécessitant des interventions prioritaires.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Type Structure",
+        "Mortalité Maternelle (/100k)"
+      ]
+    },
+    {
+      "id": "insight_3",
+      "type": "trend",
+      "title": "Impact de la superficie sur la mortalité néonatale",
+      "description": "Examiner si la superficie rattachée a un effet sur la mortalité néonatale pourrait orienter les décisions d'extension des établissements.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Superficie Rattachée (km²)",
+        "Mortalité Néonatale (/1k)"
+      ]
+    },
+    {
+      "id": "insight_4",
+      "type": "anomaly",
+      "title": "Établissements avec besoin d'extension",
+      "description": "Identifier les établissements ayant un besoin d'extension et une population couverte élevée pour prioriser les investissements.",
+      "feasibility": "high",
+      "required_columns": [
+        "Besoin d'Extension",
+        "Population Couverte"
+      ]
+    },
+    {
+      "id": "insight_5",
+      "type": "comparison",
+      "title": "Priorité d'intervention et mortalité",
+      "description": "Analyser la relation entre la priorité d'intervention et les taux de mortalité peut aider à prioriser les actions de santé publique.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Priorité Intervention",
+        "Mortalité Maternelle (/100k)"
+      ]
+    }
+  ],
+  "dataset_id": "Planification_Sanitaire_PointeNoire_Consolide",
+  "summary": {
+    "title": "Analyse des Établissements de Santé : Distance, Superficie et Mortalité",
+    "description": "Ce rapport examine les établissements de santé en mettant l'accent sur la distance des centres, la superficie rattachée et les taux de mortalité. Les données révèlent une moyenne de 6.28 km pour la distance des centres, avec une superficie constante de 1144 km². La mortalité néonatale est de 25.5 pour 1000 naissances. L'analyse des corrélations suggère une faible relation entre la superficie et la mortalité néonatale, ce qui pourrait influencer les décisions d'extension des établissements.",
+    "key_takeaways": [
+      "La distance moyenne des centres de santé est de 6.28 km.",
+      "La superficie rattachée est uniformément de 1144 km² pour tous les établissements.",
+      "La mortalité néonatale est de 25.5 pour 1000 naissances, indiquant un besoin d'intervention."
+    ]
+  },
+  "kpis": [
+    {
+      "id": "kpi_1",
+      "label": "Distance Moyenne des Centres (km)",
+      "value": "6.28",
+      "raw_value": 6.28,
+      "unit": "km",
+      "trend": "stable",
+      "trend_value": null,
+      "description": "Mesure la distance moyenne des établissements de santé, essentielle pour évaluer l'accessibilité.",
+      "icon": "clock"
+    },
+    {
+      "id": "kpi_2",
+      "label": "Superficie Rattachée (km²)",
+      "value": "1 144.00",
+      "raw_value": 1144.0,
+      "unit": "km²",
+      "trend": "stable",
+      "trend_value": null,
+      "description": "Indique la superficie moyenne des établissements, importante pour la planification des ressources.",
+      "icon": "package"
+    },
+    {
+      "id": "kpi_3",
+      "label": "Mortalité Néonatale (/1k)",
+      "value": "25.50",
+      "raw_value": 25.5,
+      "unit": "",
+      "trend": "down",
+      "trend_value": null,
+      "description": "Représente le taux de mortalité néonatale, un indicateur clé de la qualité des soins.",
+      "icon": "percent"
+    }
+  ],
+  "charts": [
+    {
+      "id": "chart_1",
+      "type": "scatter",
+      "title": "Impact de la Superficie sur la Mortalité Néonatale",
+      "description": "Ce graphique montre la relation entre la superficie rattachée et la mortalité néonatale. Les points indiquent que malgré une superficie constante, la mortalité néonatale reste à 25.5, suggérant qu'une augmentation de la superficie ne réduit pas nécessairement la mortalité.",
+      "insight": "La superficie des établissements n'influence pas la mortalité néonatale.",
+      "data": {
+        "datasets": [
+          {
+            "label": "Superficie vs Mortalité Néonatale",
+            "data": [
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              },
+              {
+                "x": 1144.0,
+                "y": 25.5
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Superficie Rattachée (km²)",
+        "y_label": "Mortalité Néonatale (/1k)",
+        "stacked": false,
+        "show_legend": true
+      }
+    }
+  ],
+  "insights": [
+    {
+      "id": "insight_1",
+      "title": "Impact de la superficie sur la mortalité néonatale",
+      "description": "L'analyse montre que la superficie des établissements de santé est constante à 1144 km², mais la mortalité néonatale reste à 25.5 pour 1000 naissances, indiquant une absence de corrélation.",
+      "value": "25.5 pour 1000 naissances avec une superficie constante de 1144 km²",
+      "type": "trend",
+      "interpretation": "Il est recommandé d'explorer d'autres facteurs influençant la mortalité néonatale au lieu de se concentrer uniquement sur la superficie.",
+      "data": {}
+    }
+  ]
+}

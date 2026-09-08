@@ -1,5 +1,4 @@
 {
-  "dataset_id": "school_dataset",
   "metadata": {
     "row_count": 300,
     "column_count": 15,
@@ -562,905 +561,432 @@
         "iqr": 13.0825
       }
     },
-    "missing_values": 0
+    "cleaning_report": {
+      "numeric_filled": {},
+      "text_rows_dropped": {},
+      "rows_before": 300,
+      "rows_after": 300
+    },
+    "created_at": "2026-09-08T01:24:22.473564Z"
   },
+  "ai_instructions": {
+    "summary": "Le dataset contient des informations sur 300 élèves, incluant leurs scores académiques, leur assiduité et le revenu parental. Les tendances clés montrent une performance académique potentiellement influencée par le revenu et l'assiduité. Il est recommandé d'explorer les disparités de performance entre genres et l'impact des bourses sur les résultats scolaires.",
+    "insights": [
+      {
+        "id": "insight_1",
+        "type": "comparison",
+        "title": "Performance par genre",
+        "description": "Comparer les scores moyens en Math, Anglais et Science entre les élèves masculins et féminins pour identifier des disparités de performance.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Gender",
+          "Math_Score",
+          "English_Score",
+          "Science_Score"
+        ]
+      },
+      {
+        "id": "insight_2",
+        "type": "trend",
+        "title": "Impact du revenu parental",
+        "description": "Analyser la corrélation entre le revenu parental et les scores moyens des élèves pour déterminer si un revenu plus élevé est associé à de meilleures performances académiques.",
+        "feasibility": "high",
+        "required_columns": [
+          "Parent_Income",
+          "Average_Score"
+        ]
+      },
+      {
+        "id": "insight_3",
+        "type": "trend",
+        "title": "Taux d'absentéisme",
+        "description": "Examiner la relation entre l'assiduité et les scores moyens pour voir si une meilleure présence en classe est liée à de meilleures performances académiques.",
+        "feasibility": "high",
+        "required_columns": [
+          "Attendance",
+          "Average_Score"
+        ]
+      },
+      {
+        "id": "insight_4",
+        "type": "distribution",
+        "title": "Distribution des âges",
+        "description": "Analyser la distribution des âges des élèves pour comprendre la répartition des âges dans chaque classe et section.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Age",
+          "Class",
+          "Section"
+        ]
+      },
+      {
+        "id": "insight_5",
+        "type": "comparison",
+        "title": "Élèves boursiers vs non-boursiers",
+        "description": "Comparer les scores moyens et l'assiduité entre les élèves bénéficiant d'une bourse et ceux qui n'en bénéficient pas pour évaluer l'impact des bourses sur la performance.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Scholarship",
+          "Average_Score",
+          "Attendance"
+        ]
+      }
+    ]
+  },
+  "suggested_insights": [
+    {
+      "id": "insight_1",
+      "type": "comparison",
+      "title": "Performance par genre",
+      "description": "Comparer les scores moyens en Math, Anglais et Science entre les élèves masculins et féminins pour identifier des disparités de performance.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Gender",
+        "Math_Score",
+        "English_Score",
+        "Science_Score"
+      ]
+    },
+    {
+      "id": "insight_2",
+      "type": "trend",
+      "title": "Impact du revenu parental",
+      "description": "Analyser la corrélation entre le revenu parental et les scores moyens des élèves pour déterminer si un revenu plus élevé est associé à de meilleures performances académiques.",
+      "feasibility": "high",
+      "required_columns": [
+        "Parent_Income",
+        "Average_Score"
+      ]
+    },
+    {
+      "id": "insight_3",
+      "type": "trend",
+      "title": "Taux d'absentéisme",
+      "description": "Examiner la relation entre l'assiduité et les scores moyens pour voir si une meilleure présence en classe est liée à de meilleures performances académiques.",
+      "feasibility": "high",
+      "required_columns": [
+        "Attendance",
+        "Average_Score"
+      ]
+    },
+    {
+      "id": "insight_4",
+      "type": "distribution",
+      "title": "Distribution des âges",
+      "description": "Analyser la distribution des âges des élèves pour comprendre la répartition des âges dans chaque classe et section.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Age",
+        "Class",
+        "Section"
+      ]
+    },
+    {
+      "id": "insight_5",
+      "type": "comparison",
+      "title": "Élèves boursiers vs non-boursiers",
+      "description": "Comparer les scores moyens et l'assiduité entre les élèves bénéficiant d'une bourse et ceux qui n'en bénéficient pas pour évaluer l'impact des bourses sur la performance.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Scholarship",
+        "Average_Score",
+        "Attendance"
+      ]
+    }
+  ],
+  "dataset_id": "school_dataset",
+  "summary": {
+    "title": "Analyse des Performances Académiques des Élèves",
+    "description": "Ce rapport explore les performances académiques des élèves en fonction de divers facteurs tels que le genre, le revenu parental et l'assiduité. Les résultats montrent que les élèves féminins obtiennent des scores légèrement inférieurs en mathématiques par rapport aux garçons, tandis que les scores en anglais sont plus élevés pour les filles. De plus, l'impact du revenu parental sur les performances académiques est faible, indiquant que d'autres facteurs peuvent également jouer un rôle. Enfin, l'assiduité a une corrélation positive avec les scores moyens, soulignant l'importance de la présence en classe.",
+    "key_takeaways": [
+      "Les garçons ont une moyenne de 70.23 en mathématiques contre 68.27 pour les filles.",
+      "Le revenu parental a une corrélation faible de -0.042 avec les scores moyens.",
+      "Une meilleure assiduité est liée à des performances académiques supérieures."
+    ]
+  },
+  "kpis": [
+    {
+      "id": "kpi_1",
+      "label": "Âge moyen des élèves",
+      "value": "14.52",
+      "raw_value": 14.52,
+      "unit": "ans",
+      "trend": "stable",
+      "trend_value": null,
+      "description": "L'âge moyen des élèves, indiquant la tranche d'âge générale dans laquelle se situent les étudiants.",
+      "icon": "clock"
+    },
+    {
+      "id": "kpi_2",
+      "label": "Score moyen en Mathématiques",
+      "value": "69.23",
+      "raw_value": 69.23,
+      "unit": "%",
+      "trend": "stable",
+      "trend_value": null,
+      "description": "Le score moyen en mathématiques, révélant la performance académique dans cette matière.",
+      "icon": "chart"
+    },
+    {
+      "id": "kpi_3",
+      "label": "Taux d'Assiduité moyen",
+      "value": "84.33",
+      "raw_value": 84.33,
+      "unit": "%",
+      "trend": "stable",
+      "trend_value": null,
+      "description": "Le taux d'assiduité moyen des élèves, essentiel pour évaluer l'engagement scolaire.",
+      "icon": "percent"
+    }
+  ],
   "charts": [
     {
+      "id": "chart_1",
+      "type": "bar",
+      "title": "Performance académique par genre",
+      "description": "Ce graphique compare les scores moyens en mathématiques, anglais et sciences entre les élèves masculins et féminins. On observe que les garçons surpassent les filles en mathématiques, tandis que les filles ont de meilleures performances en anglais.",
+      "insight": "Les garçons ont une meilleure performance en mathématiques avec un score moyen de 70.23 contre 68.27 pour les filles.",
+      "data": {
+        "labels": [
+          "Male",
+          "Female"
+        ],
+        "datasets": [
+          {
+            "label": "Math Score",
+            "data": [
+              70.23,
+              68.27
+            ]
+          },
+          {
+            "label": "English Score",
+            "data": [
+              68.46,
+              72.17
+            ]
+          },
+          {
+            "label": "Science Score",
+            "data": [
+              68.71,
+              67.62
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Genre",
+        "y_label": "Score moyen (%)",
+        "stacked": false,
+        "show_legend": true
+      }
+    },
+    {
+      "id": "chart_2",
       "type": "scatter",
-      "title": "Age vs Math_Score",
-      "x_label": "Age",
-      "y_label": "Math_Score",
-      "description": "Corrélation entre Age et Math_Score.",
+      "title": "Impact du revenu parental sur les scores moyens",
+      "description": "Ce graphique montre la corrélation entre le revenu parental et les scores moyens des élèves. Bien que l'on puisse s'attendre à une relation positive, la corrélation est faible, indiquant que d'autres facteurs influencent les performances.",
+      "insight": "La corrélation entre le revenu parental et les scores moyens est faible à -0.042, suggérant que le revenu n'est pas le seul déterminant des performances académiques.",
       "data": {
         "datasets": [
           {
-            "label": "Age vs Math_Score",
+            "label": "Revenu vs Score moyen",
             "data": [
               {
-                "x": 17.0,
-                "y": 49.0
-              },
-              {
-                "x": 12.0,
-                "y": 84.0
-              },
-              {
-                "x": 16.0,
-                "y": 78.0
-              },
-              {
-                "x": 18.0,
-                "y": 40.0
-              },
-              {
-                "x": 16.0,
+                "x": 1540.0,
                 "y": 53.0
               },
               {
-                "x": 17.0,
-                "y": 93.0
+                "x": 814.0,
+                "y": 82.33
               },
               {
-                "x": 11.0,
-                "y": 47.0
+                "x": 340.0,
+                "y": 73.33
               },
               {
-                "x": 12.0,
-                "y": 71.0
+                "x": 245.0,
+                "y": 52.33
               },
               {
-                "x": 11.0,
-                "y": 62.0
+                "x": 1694.0,
+                "y": 65.33
               },
               {
-                "x": 18.0,
-                "y": 100.0
+                "x": 1773.0,
+                "y": 83.67
               },
               {
-                "x": 18.0,
-                "y": 59.0
-              },
-              {
-                "x": 15.0,
-                "y": 70.0
-              },
-              {
-                "x": 14.0,
-                "y": 84.0
-              },
-              {
-                "x": 15.0,
-                "y": 44.0
-              },
-              {
-                "x": 13.0,
-                "y": 62.0
-              },
-              {
-                "x": 18.0,
-                "y": 66.0
-              },
-              {
-                "x": 11.0,
-                "y": 88.0
-              },
-              {
-                "x": 13.0,
-                "y": 66.0
-              },
-              {
-                "x": 13.0,
-                "y": 48.0
-              },
-              {
-                "x": 13.0,
-                "y": 59.0
-              },
-              {
-                "x": 11.0,
-                "y": 62.0
-              },
-              {
-                "x": 14.0,
-                "y": 51.0
-              },
-              {
-                "x": 18.0,
-                "y": 61.0
-              },
-              {
-                "x": 17.0,
-                "y": 85.0
-              },
-              {
-                "x": 12.0,
-                "y": 89.0
-              },
-              {
-                "x": 14.0,
-                "y": 66.0
-              },
-              {
-                "x": 12.0,
-                "y": 73.0
-              },
-              {
-                "x": 14.0,
-                "y": 80.0
-              },
-              {
-                "x": 15.0,
-                "y": 62.0
-              },
-              {
-                "x": 13.0,
-                "y": 82.0
-              },
-              {
-                "x": 18.0,
-                "y": 78.0
-              },
-              {
-                "x": 17.0,
-                "y": 68.0
-              },
-              {
-                "x": 15.0,
-                "y": 69.0
-              },
-              {
-                "x": 11.0,
-                "y": 43.0
-              },
-              {
-                "x": 18.0,
-                "y": 77.0
-              },
-              {
-                "x": 15.0,
-                "y": 72.0
-              },
-              {
-                "x": 14.0,
-                "y": 56.0
-              },
-              {
-                "x": 17.0,
-                "y": 69.0
-              },
-              {
-                "x": 16.0,
-                "y": 54.0
-              },
-              {
-                "x": 12.0,
-                "y": 98.0
-              },
-              {
-                "x": 18.0,
-                "y": 94.0
-              },
-              {
-                "x": 15.0,
-                "y": 76.0
-              },
-              {
-                "x": 12.0,
-                "y": 76.0
-              },
-              {
-                "x": 11.0,
-                "y": 52.0
-              },
-              {
-                "x": 18.0,
-                "y": 45.0
-              },
-              {
-                "x": 12.0,
-                "y": 49.0
-              },
-              {
-                "x": 16.0,
-                "y": 99.0
-              },
-              {
-                "x": 18.0,
-                "y": 74.0
-              },
-              {
-                "x": 12.0,
-                "y": 67.0
-              },
-              {
-                "x": 18.0,
-                "y": 77.0
-              },
-              {
-                "x": 17.0,
-                "y": 62.0
-              },
-              {
-                "x": 11.0,
-                "y": 67.0
-              },
-              {
-                "x": 15.0,
-                "y": 45.0
-              },
-              {
-                "x": 15.0,
-                "y": 46.0
-              },
-              {
-                "x": 16.0,
-                "y": 80.0
-              },
-              {
-                "x": 16.0,
-                "y": 83.0
-              },
-              {
-                "x": 11.0,
-                "y": 87.0
-              },
-              {
-                "x": 18.0,
-                "y": 85.0
-              },
-              {
-                "x": 18.0,
-                "y": 84.0
-              },
-              {
-                "x": 14.0,
-                "y": 89.0
-              },
-              {
-                "x": 15.0,
-                "y": 69.0
-              },
-              {
-                "x": 15.0,
-                "y": 81.0
-              },
-              {
-                "x": 13.0,
-                "y": 85.0
-              },
-              {
-                "x": 15.0,
-                "y": 94.0
-              },
-              {
-                "x": 16.0,
-                "y": 75.0
-              },
-              {
-                "x": 15.0,
-                "y": 99.0
-              },
-              {
-                "x": 15.0,
-                "y": 72.0
-              },
-              {
-                "x": 18.0,
-                "y": 53.0
-              },
-              {
-                "x": 12.0,
-                "y": 61.0
-              },
-              {
-                "x": 16.0,
-                "y": 68.0
-              },
-              {
-                "x": 14.0,
-                "y": 48.0
-              },
-              {
-                "x": 12.0,
-                "y": 90.0
-              },
-              {
-                "x": 15.0,
-                "y": 63.0
-              },
-              {
-                "x": 12.0,
-                "y": 78.0
-              },
-              {
-                "x": 15.0,
-                "y": 84.0
-              },
-              {
-                "x": 17.0,
-                "y": 55.0
-              },
-              {
-                "x": 11.0,
-                "y": 53.0
-              },
-              {
-                "x": 12.0,
-                "y": 90.0
-              },
-              {
-                "x": 17.0,
-                "y": 98.0
-              },
-              {
-                "x": 17.0,
-                "y": 89.0
-              },
-              {
-                "x": 15.0,
-                "y": 82.0
-              },
-              {
-                "x": 11.0,
-                "y": 45.0
-              },
-              {
-                "x": 18.0,
-                "y": 79.0
-              },
-              {
-                "x": 15.0,
-                "y": 94.0
-              },
-              {
-                "x": 13.0,
-                "y": 61.0
-              },
-              {
-                "x": 15.0,
-                "y": 97.0
-              },
-              {
-                "x": 15.0,
-                "y": 86.0
-              },
-              {
-                "x": 14.0,
-                "y": 86.0
-              },
-              {
-                "x": 16.0,
-                "y": 75.0
-              },
-              {
-                "x": 14.0,
-                "y": 57.0
-              },
-              {
-                "x": 13.0,
-                "y": 42.0
-              },
-              {
-                "x": 18.0,
-                "y": 63.0
-              },
-              {
-                "x": 16.0,
-                "y": 76.0
-              },
-              {
-                "x": 17.0,
-                "y": 81.0
-              },
-              {
-                "x": 17.0,
-                "y": 63.0
-              },
-              {
-                "x": 15.0,
-                "y": 74.0
-              },
-              {
-                "x": 14.0,
-                "y": 40.0
-              },
-              {
-                "x": 12.0,
-                "y": 58.0
-              },
-              {
-                "x": 14.0,
-                "y": 73.0
-              },
-              {
-                "x": 18.0,
-                "y": 94.0
-              },
-              {
-                "x": 16.0,
-                "y": 95.0
-              },
-              {
-                "x": 11.0,
-                "y": 41.0
-              },
-              {
-                "x": 14.0,
-                "y": 89.0
-              },
-              {
-                "x": 14.0,
-                "y": 41.0
-              },
-              {
-                "x": 16.0,
-                "y": 73.0
-              },
-              {
-                "x": 13.0,
-                "y": 67.0
-              },
-              {
-                "x": 14.0,
-                "y": 84.0
-              },
-              {
-                "x": 18.0,
-                "y": 89.0
-              },
-              {
-                "x": 11.0,
-                "y": 41.0
-              },
-              {
-                "x": 17.0,
-                "y": 43.0
-              },
-              {
-                "x": 13.0,
-                "y": 68.0
-              },
-              {
-                "x": 15.0,
-                "y": 93.0
-              },
-              {
-                "x": 11.0,
-                "y": 79.0
-              },
-              {
-                "x": 16.0,
-                "y": 40.0
-              },
-              {
-                "x": 13.0,
-                "y": 80.0
-              },
-              {
-                "x": 14.0,
-                "y": 87.0
-              },
-              {
-                "x": 12.0,
-                "y": 47.0
-              },
-              {
-                "x": 17.0,
-                "y": 66.0
-              },
-              {
-                "x": 12.0,
-                "y": 88.0
-              },
-              {
-                "x": 14.0,
-                "y": 87.0
-              },
-              {
-                "x": 12.0,
-                "y": 68.0
-              },
-              {
-                "x": 12.0,
-                "y": 52.0
-              },
-              {
-                "x": 18.0,
-                "y": 44.0
-              },
-              {
-                "x": 16.0,
-                "y": 58.0
-              },
-              {
-                "x": 12.0,
-                "y": 96.0
-              },
-              {
-                "x": 15.0,
-                "y": 77.0
-              },
-              {
-                "x": 12.0,
-                "y": 41.0
-              },
-              {
-                "x": 12.0,
-                "y": 98.0
-              },
-              {
-                "x": 12.0,
-                "y": 95.0
-              },
-              {
-                "x": 15.0,
-                "y": 93.0
-              },
-              {
-                "x": 14.0,
-                "y": 76.0
-              },
-              {
-                "x": 18.0,
-                "y": 40.0
-              },
-              {
-                "x": 11.0,
-                "y": 43.0
-              },
-              {
-                "x": 16.0,
-                "y": 67.0
-              },
-              {
-                "x": 13.0,
-                "y": 50.0
-              },
-              {
-                "x": 18.0,
-                "y": 99.0
-              },
-              {
-                "x": 13.0,
-                "y": 61.0
-              },
-              {
-                "x": 16.0,
-                "y": 100.0
-              },
-              {
-                "x": 15.0,
-                "y": 91.0
-              },
-              {
-                "x": 12.0,
-                "y": 85.0
-              },
-              {
-                "x": 18.0,
-                "y": 42.0
-              },
-              {
-                "x": 13.0,
-                "y": 96.0
-              },
-              {
-                "x": 18.0,
-                "y": 72.0
-              },
-              {
-                "x": 12.0,
-                "y": 51.0
-              },
-              {
-                "x": 13.0,
-                "y": 91.0
-              },
-              {
-                "x": 15.0,
-                "y": 40.0
-              },
-              {
-                "x": 12.0,
-                "y": 55.0
-              },
-              {
-                "x": 15.0,
-                "y": 84.0
-              },
-              {
-                "x": 12.0,
-                "y": 87.0
-              },
-              {
-                "x": 12.0,
-                "y": 68.0
-              },
-              {
-                "x": 11.0,
-                "y": 68.0
-              },
-              {
-                "x": 18.0,
-                "y": 52.0
-              },
-              {
-                "x": 15.0,
-                "y": 63.0
-              },
-              {
-                "x": 16.0,
-                "y": 70.0
-              },
-              {
-                "x": 18.0,
+                "x": 642.0,
                 "y": 64.0
               },
               {
-                "x": 11.0,
-                "y": 73.0
+                "x": 1765.0,
+                "y": 67.67
               },
               {
-                "x": 13.0,
-                "y": 60.0
+                "x": 1892.0,
+                "y": 68.0
               },
               {
-                "x": 17.0,
-                "y": 61.0
-              },
-              {
-                "x": 11.0,
-                "y": 79.0
-              },
-              {
-                "x": 17.0,
-                "y": 50.0
-              },
-              {
-                "x": 15.0,
-                "y": 100.0
-              },
-              {
-                "x": 15.0,
-                "y": 70.0
-              },
-              {
-                "x": 11.0,
-                "y": 41.0
-              },
-              {
-                "x": 15.0,
-                "y": 80.0
-              },
-              {
-                "x": 16.0,
-                "y": 66.0
-              },
-              {
-                "x": 11.0,
-                "y": 96.0
-              },
-              {
-                "x": 13.0,
-                "y": 70.0
-              },
-              {
-                "x": 17.0,
-                "y": 63.0
-              },
-              {
-                "x": 12.0,
-                "y": 58.0
-              },
-              {
-                "x": 11.0,
-                "y": 88.0
-              },
-              {
-                "x": 14.0,
-                "y": 89.0
-              },
-              {
-                "x": 18.0,
-                "y": 92.0
-              },
-              {
-                "x": 12.0,
-                "y": 58.0
-              },
-              {
-                "x": 18.0,
-                "y": 59.0
-              },
-              {
-                "x": 18.0,
-                "y": 90.0
-              },
-              {
-                "x": 16.0,
-                "y": 62.0
-              },
-              {
-                "x": 12.0,
-                "y": 78.0
-              },
-              {
-                "x": 17.0,
-                "y": 58.0
-              },
-              {
-                "x": 13.0,
-                "y": 53.0
-              },
-              {
-                "x": 12.0,
-                "y": 63.0
-              },
-              {
-                "x": 13.0,
-                "y": 93.0
-              },
-              {
-                "x": 13.0,
-                "y": 50.0
-              },
-              {
-                "x": 12.0,
-                "y": 54.0
-              },
-              {
-                "x": 12.0,
-                "y": 77.0
-              },
-              {
-                "x": 15.0,
-                "y": 99.0
-              },
-              {
-                "x": 14.0,
-                "y": 100.0
-              },
-              {
-                "x": 15.0,
-                "y": 43.0
-              },
-              {
-                "x": 13.0,
-                "y": 79.0
-              },
-              {
-                "x": 12.0,
-                "y": 66.0
-              },
-              {
-                "x": 16.0,
-                "y": 42.0
-              },
-              {
-                "x": 15.0,
-                "y": 89.0
-              },
-              {
-                "x": 15.0,
-                "y": 51.0
-              },
-              {
-                "x": 18.0,
-                "y": 72.0
-              },
-              {
-                "x": 17.0,
-                "y": 53.0
-              },
-              {
-                "x": 18.0,
-                "y": 60.0
-              },
-              {
-                "x": 15.0,
-                "y": 42.0
-              },
-              {
-                "x": 13.0,
-                "y": 64.0
-              },
-              {
-                "x": 11.0,
-                "y": 80.0
-              },
-              {
-                "x": 16.0,
-                "y": 67.0
-              },
-              {
-                "x": 11.0,
-                "y": 77.0
+                "x": 1950.0,
+                "y": 65.0
               }
             ]
           }
         ]
+      },
+      "options": {
+        "x_label": "Revenu parental (FCFA)",
+        "y_label": "Score moyen (%)",
+        "show_legend": false,
+        "stacked": false
+      }
+    },
+    {
+      "id": "chart_3",
+      "type": "scatter",
+      "title": "Taux d'absentéisme et performances académiques",
+      "description": "Ce graphique illustre la relation entre le taux d'assiduité et les scores moyens des élèves. Bien que la corrélation soit faible, il est important de noter que l'assiduité peut avoir un impact sur les résultats scolaires.",
+      "insight": "La corrélation entre l'assiduité et les scores moyens est de 0.004, indiquant une relation faible.",
+      "data": {
+        "datasets": [
+          {
+            "label": "Assiduité vs Score moyen",
+            "data": [
+              {
+                "x": 71.0,
+                "y": 53.0
+              },
+              {
+                "x": 87.0,
+                "y": 82.33
+              },
+              {
+                "x": 73.0,
+                "y": 73.33
+              },
+              {
+                "x": 91.0,
+                "y": 52.33
+              },
+              {
+                "x": 83.0,
+                "y": 65.33
+              },
+              {
+                "x": 89.0,
+                "y": 83.67
+              },
+              {
+                "x": 91.0,
+                "y": 64.0
+              },
+              {
+                "x": 81.0,
+                "y": 67.67
+              },
+              {
+                "x": 98.0,
+                "y": 68.0
+              },
+              {
+                "x": 98.0,
+                "y": 65.0
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Taux d'assiduité (%)",
+        "y_label": "Score moyen (%)",
+        "show_legend": false,
+        "stacked": false
+      }
+    },
+    {
+      "id": "chart_4",
+      "type": "bar",
+      "title": "Distribution des âges des élèves",
+      "description": "Ce graphique montre la répartition des âges des élèves dans différentes classes. On observe une concentration d'élèves dans les classes 6ème et 7ème, avec une diminution progressive dans les classes supérieures.",
+      "insight": "La majorité des élèves se situent dans la tranche d'âge de 14 à 15 ans, avec une forte concentration en 6ème.",
+      "data": {
+        "labels": [
+          "11.0–11.7",
+          "11.7–12.4",
+          "12.4–13.1",
+          "13.1–13.8",
+          "13.8–14.5",
+          "14.5–15.2",
+          "15.2–15.9",
+          "15.9–16.6",
+          "16.6–17.3",
+          "17.3–18.0"
+        ],
+        "datasets": [
+          {
+            "label": "Nombre d'élèves",
+            "data": [
+              35,
+              44,
+              30,
+              0,
+              31,
+              50,
+              0,
+              41,
+              30,
+              39
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": "Tranche d'âge",
+        "y_label": "Nombre d'élèves",
+        "stacked": false,
+        "show_legend": true
       }
     }
   ],
   "insights": [
     {
-      "type": "stats",
-      "column": "Parent_Income",
-      "title": "Résumé — Parent_Income",
-      "value": "Moyenne : 1 050.10 | Médiane : 1 001 | Min : 202 | Max : 1 979",
-      "data": {
-        "mean": 1050.1033,
-        "median": 1001.0,
-        "min": 202.0,
-        "max": 1979.0,
-        "sum": 315031.0
-      }
+      "id": "insight_1",
+      "title": "Performance par genre",
+      "description": "Les garçons ont une moyenne de 70.23 en mathématiques, tandis que les filles ont une moyenne de 68.27. En anglais, les filles surpassent les garçons avec un score de 72.17 contre 68.46.",
+      "value": "70.23 (Mathématiques) vs 68.27 (Filles)",
+      "type": "comparison",
+      "interpretation": "Encourager les filles à participer davantage aux cours de mathématiques pour améliorer leurs performances.",
+      "data": {}
     },
     {
-      "type": "top_values",
-      "column": "Name",
-      "title": "Répartition — Name",
-      "value": "Valeur dominante : \"John\" (12.3% des entrées). 10 valeurs distinctes.",
-      "data": {
-        "John": 37,
-        "Daniel": 35,
-        "David": 34,
-        "Michael": 34,
-        "James": 33,
-        "Alice": 32
-      }
+      "id": "insight_2",
+      "title": "Impact du revenu parental",
+      "description": "La corrélation entre le revenu parental et les scores moyens est faible à -0.042, indiquant que d'autres facteurs influencent les performances académiques.",
+      "value": "Corrélation de -0.042",
+      "type": "trend",
+      "interpretation": "Explorer d'autres facteurs qui pourraient influencer les performances académiques au-delà du revenu.",
+      "data": {}
     },
     {
-      "type": "stats",
-      "column": "Science_Score",
-      "title": "Résumé — Science_Score",
-      "value": "Moyenne : 68.15 | Min : 40 | Max : 100",
-      "data": {
-        "mean": 68.15,
-        "min": 40.0,
-        "max": 100.0
-      }
+      "id": "insight_3",
+      "title": "Taux d'absentéisme",
+      "description": "La corrélation entre l'assiduité et les scores moyens est de 0.004, indiquant une relation faible. Cela souligne l'importance de la présence en classe.",
+      "value": "Corrélation de 0.004",
+      "type": "trend",
+      "interpretation": "Mettre en place des stratégies pour améliorer l'assiduité des élèves.",
+      "data": {}
+    },
+    {
+      "id": "insight_4",
+      "title": "Distribution des âges",
+      "description": "La majorité des élèves se situent dans la tranche d'âge de 14 à 15 ans, avec une forte concentration en 6ème. Cela peut influencer les méthodes d'enseignement.",
+      "value": "Concentration d'élèves en 6ème",
+      "type": "distribution",
+      "interpretation": "Adapter les programmes d'enseignement pour mieux répondre aux besoins des élèves de cette tranche d'âge.",
+      "data": {}
     }
-  ],
-  "explanations": [
-    "Le dataset contient 300 lignes et 15 colonnes (7 numériques  0 catégorielles)."
-  ],
-  "ai_instructions": {
-    "insights": [
-      {
-        "id": "insight_3",
-        "title": "Distribution de Age",
-        "description": "Répartition statistique des valeurs de Age.",
-        "type": "distribution",
-        "feasibility": "high",
-        "required_columns": [
-          "Age"
-        ]
-      },
-      {
-        "id": "insight_4",
-        "title": "Corrélation Age / Math_Score",
-        "description": "Relation entre Age et Math_Score.",
-        "type": "comparison",
-        "feasibility": "medium",
-        "required_columns": [
-          "Age",
-          "Math_Score"
-        ]
-      }
-    ],
-    "charts": [
-      {
-        "id": "chart_3",
-        "type": "scatter",
-        "title": "Age vs Math_Score",
-        "x": "Age",
-        "y": "Math_Score",
-        "aggregation": "none",
-        "description": "Corrélation entre Age et Math_Score."
-      }
-    ],
-    "analyses": [],
-    "summary": "Analyse automatique générée (OpenAI indisponible : OPENAI_API_KEY manquante dans les variables d'environnement). Dataset de 300 lignes et 15 colonnes."
-  }
+  ]
 }

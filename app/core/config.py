@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     DEBUG: bool = True
 
     # Base de données
-    DATABASE_URL: str = "mysql+pymysql://root:root@localhost:3306/autobi"
+    DATABASE_URL: str = "mysql+pymysql://root:root@localhost:3307/autobi"
 
     # Sécurité JWT
     SECRET_KEY: str = "change-this-in-production"

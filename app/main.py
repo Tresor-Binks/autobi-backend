@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.routers import auth, analysis
+from app.routers import auth, analysis, user
 from app.database.session import engine, Base
 
 # Cette ligne crée les tables si elles n'existent pas
 Base.metadata.create_all(bind=engine)
+
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
@@ -24,7 +25,7 @@ PROD_ORIGINS = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=PROD_ORIGINS, # On utilise la liste fixe
+    allow_origins=PROD_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,8 +39,10 @@ async def root():
         "version": settings.APP_VERSION
     }
 
+# Inclusion des routeurs
 app.include_router(auth.router)
 app.include_router(analysis.router)
+app.include_router(user.router)  # Routeur Utilisateur sous /api/user
 
 @app.on_event("startup")
 async def startup_event():

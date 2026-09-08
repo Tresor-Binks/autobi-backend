@@ -56,7 +56,7 @@ async def register(
         expires_at = datetime.utcnow() + access_token_expires
 
         access_token = create_access_token(
-            data={"sub": str(user.id)},  # ✅ str
+            data={"sub": str(user.id)},
             expires_delta=access_token_expires
         )
 
@@ -97,7 +97,7 @@ async def login(
     expires_at = datetime.utcnow() + access_token_expires
 
     access_token = create_access_token(
-        data={"sub": str(user.id)},  # ✅ str
+        data={"sub": str(user.id)},
         expires_delta=access_token_expires
     )
 
@@ -109,13 +109,14 @@ async def login(
 
 
 # ============================================================================
-# ROUTE : PROFIL UTILISATEUR
+# ROUTE : PROFIL UTILISATEUR (CORRIGÉE)
 # ============================================================================
 
-@router.get("/me", response_model=UserProfile)
+@router.get("/me", response_model=UserProfile, response_model_exclude_unset=False)
 async def get_current_user_profile(
     current_user: User = Depends(get_current_user)
 ):
+    # Forcer la sérialisation explicite de l'objet ORM SQLAlchemy
     return UserProfile.model_validate(current_user)
 
 

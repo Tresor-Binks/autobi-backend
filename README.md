@@ -57,7 +57,7 @@ backend/
 ## Variables d'environnement (.env)
 
 ```env
-DATABASE_URL=mysql+pymysql://user:password@localhost:3306/autobi
+DATABASE_URL=mysql+pymysql://user:password@localhost:3307/autobi
 SECRET_KEY=votre_clé_secrète_jwt
 ACCESS_TOKEN_EXPIRE_MINUTES=1440
 OPENAI_API_KEY=sk-proj-...

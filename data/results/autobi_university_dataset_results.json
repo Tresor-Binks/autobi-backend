@@ -410,16 +410,16 @@
       "rows_before": 200,
       "rows_after": 200
     },
-    "created_at": "2026-05-05T16:07:38.847497Z"
+    "created_at": "2026-09-07T20:03:13.192036Z"
   },
   "ai_instructions": {
-    "summary": "Le dataset contient des informations sur 200 étudiants, incluant leur âge, année d'étude, GPA, crédits et taux de présence. Les tendances clés montrent des variations potentielles de performance académique selon l'année d'étude et le sexe. Il est recommandé d'explorer ces insights pour améliorer l'engagement et les performances des étudiants.",
+    "summary": "Le dataset contient des informations sur 200 étudiants, incluant leur âge, année d'étude, GPA, crédits et taux d'assiduité. Les tendances clés montrent une moyenne de GPA de 3.06 et un taux d'assiduité moyen de 76.3%. Il est recommandé d'explorer les relations entre l'assiduité et le GPA, ainsi que d'analyser les différences de performance par faculté et genre pour améliorer les stratégies académiques.",
     "insights": [
       {
         "id": "insight_1",
         "type": "trend",
         "title": "GPA par année d'étude",
-        "description": "Analyser la variation du GPA moyen par année d'étude pour identifier les années critiques où les étudiants ont des performances inférieures.",
+        "description": "Analyser la moyenne du GPA par année pour identifier les tendances de performance académique au fil des années.",
         "feasibility": "high",
         "required_columns": [
           "Year",
@@ -429,8 +429,8 @@
       {
         "id": "insight_2",
         "type": "comparison",
-        "title": "Taux de présence et GPA",
-        "description": "Examiner la corrélation entre le taux de présence et le GPA pour déterminer si une meilleure assiduité est liée à de meilleures performances académiques.",
+        "title": "Impact de l'assiduité sur le GPA",
+        "description": "Examiner la corrélation entre le taux d'assiduité et le GPA pour déterminer si une meilleure présence en cours améliore les résultats académiques.",
         "feasibility": "medium",
         "required_columns": [
           "AttendanceRate",
@@ -439,9 +439,9 @@
       },
       {
         "id": "insight_3",
-        "type": "comparison",
-        "title": "Crédits par faculté",
-        "description": "Comparer le nombre moyen de crédits obtenus par faculté pour identifier les facultés qui encouragent une charge de travail plus élevée.",
+        "type": "distribution",
+        "title": "Distribution des crédits par faculté",
+        "description": "Analyser la distribution des crédits obtenus par faculté pour comprendre les différences dans la charge de travail académique.",
         "feasibility": "high",
         "required_columns": [
           "Faculty",
@@ -450,23 +450,24 @@
       },
       {
         "id": "insight_4",
-        "type": "distribution",
-        "title": "Distribution des âges",
-        "description": "Analyser la distribution des âges des étudiants pour comprendre la diversité d'âge et adapter les programmes d'études aux besoins des différentes tranches d'âge.",
-        "feasibility": "high",
-        "required_columns": [
-          "Age"
-        ]
-      },
-      {
-        "id": "insight_5",
         "type": "comparison",
-        "title": "Taux d'absence par sexe",
-        "description": "Évaluer les différences de taux d'absence entre les sexes pour cibler les interventions d'engagement des étudiants.",
+        "title": "Taux d'assiduité par genre",
+        "description": "Comparer le taux d'assiduité moyen entre les genres pour identifier d'éventuelles disparités dans l'engagement académique.",
         "feasibility": "medium",
         "required_columns": [
           "Gender",
           "AttendanceRate"
+        ]
+      },
+      {
+        "id": "insight_5",
+        "type": "total",
+        "title": "Âge moyen par faculté",
+        "description": "Calculer l'âge moyen des étudiants par faculté pour voir si certaines facultés attirent des étudiants plus jeunes ou plus âgés.",
+        "feasibility": "high",
+        "required_columns": [
+          "Faculty",
+          "Age"
         ]
       }
     ]
@@ -476,7 +477,7 @@
       "id": "insight_1",
       "type": "trend",
       "title": "GPA par année d'étude",
-      "description": "Analyser la variation du GPA moyen par année d'étude pour identifier les années critiques où les étudiants ont des performances inférieures.",
+      "description": "Analyser la moyenne du GPA par année pour identifier les tendances de performance académique au fil des années.",
       "feasibility": "high",
       "required_columns": [
         "Year",
@@ -486,8 +487,8 @@
     {
       "id": "insight_2",
       "type": "comparison",
-      "title": "Taux de présence et GPA",
-      "description": "Examiner la corrélation entre le taux de présence et le GPA pour déterminer si une meilleure assiduité est liée à de meilleures performances académiques.",
+      "title": "Impact de l'assiduité sur le GPA",
+      "description": "Examiner la corrélation entre le taux d'assiduité et le GPA pour déterminer si une meilleure présence en cours améliore les résultats académiques.",
       "feasibility": "medium",
       "required_columns": [
         "AttendanceRate",
@@ -496,9 +497,9 @@
     },
     {
       "id": "insight_3",
-      "type": "comparison",
-      "title": "Crédits par faculté",
-      "description": "Comparer le nombre moyen de crédits obtenus par faculté pour identifier les facultés qui encouragent une charge de travail plus élevée.",
+      "type": "distribution",
+      "title": "Distribution des crédits par faculté",
+      "description": "Analyser la distribution des crédits obtenus par faculté pour comprendre les différences dans la charge de travail académique.",
       "feasibility": "high",
       "required_columns": [
         "Faculty",
@@ -507,46 +508,47 @@
     },
     {
       "id": "insight_4",
-      "type": "distribution",
-      "title": "Distribution des âges",
-      "description": "Analyser la distribution des âges des étudiants pour comprendre la diversité d'âge et adapter les programmes d'études aux besoins des différentes tranches d'âge.",
-      "feasibility": "high",
-      "required_columns": [
-        "Age"
-      ]
-    },
-    {
-      "id": "insight_5",
       "type": "comparison",
-      "title": "Taux d'absence par sexe",
-      "description": "Évaluer les différences de taux d'absence entre les sexes pour cibler les interventions d'engagement des étudiants.",
+      "title": "Taux d'assiduité par genre",
+      "description": "Comparer le taux d'assiduité moyen entre les genres pour identifier d'éventuelles disparités dans l'engagement académique.",
       "feasibility": "medium",
       "required_columns": [
         "Gender",
         "AttendanceRate"
       ]
+    },
+    {
+      "id": "insight_5",
+      "type": "total",
+      "title": "Âge moyen par faculté",
+      "description": "Calculer l'âge moyen des étudiants par faculté pour voir si certaines facultés attirent des étudiants plus jeunes ou plus âgés.",
+      "feasibility": "high",
+      "required_columns": [
+        "Faculty",
+        "Age"
+      ]
     }
   ],
   "dataset_id": "autobi_university_dataset",
   "summary": {
-    "title": "Analyse des Performances Académiques 2024",
-    "description": "Ce rapport présente une analyse approfondie des performances académiques des étudiants sur l'année 2024. Les données révèlent des tendances intéressantes concernant le GPA, le taux de présence et la distribution des âges. Il est crucial de noter que les étudiants de première année affichent un GPA inférieur, ce qui pourrait nécessiter des interventions ciblées. De plus, une corrélation positive entre le taux de présence et le GPA suggère que l'assiduité pourrait être un facteur clé de succès académique.",
+    "title": "Analyse des Performances Académiques des Étudiants",
+    "description": "Ce rapport examine les performances académiques des étudiants en fonction de divers facteurs tels que l'année d'étude, le genre et l'assiduité. Les résultats montrent une légère tendance à l'amélioration du GPA avec l'augmentation de l'année d'étude, bien que la corrélation soit faible. De plus, les étudiants de la faculté des Sciences affichent le GPA moyen le plus élevé. Il est recommandé d'encourager l'assiduité pour maximiser les résultats académiques.",
     "key_takeaways": [
-      "Le GPA moyen est de 3.06, avec des variations notables selon l'année d'étude.",
-      "Un taux de présence moyen de 76.3% est associé à de meilleures performances académiques.",
-      "Il est recommandé d'augmenter les initiatives pour améliorer l'assiduité des étudiants."
+      "Le GPA moyen est de 3.06, avec une légère amélioration observée au fil des années.",
+      "Les étudiants de la faculté des Sciences ont un GPA moyen de 3.16, le plus élevé parmi les facultés.",
+      "L'assiduité moyenne est de 76.3%, ce qui pourrait être amélioré pour augmenter les performances académiques."
     ]
   },
   "kpis": [
     {
       "id": "kpi_1",
       "label": "Âge moyen des étudiants",
-      "value": "22.31 ans",
+      "value": "22.31",
       "raw_value": 22.31,
       "unit": "ans",
       "trend": "stable",
-      "trend_value": "0% vs période précédente",
-      "description": "L'âge moyen des étudiants, indiquant une population relativement jeune.",
+      "trend_value": null,
+      "description": "L'âge moyen des étudiants, indiquant la diversité d'âge dans le corps étudiant.",
       "icon": "users"
     },
     {
@@ -555,37 +557,37 @@
       "value": "3.06",
       "raw_value": 3.06,
       "unit": "",
-      "trend": "stable",
-      "trend_value": "0% vs période précédente",
-      "description": "Le GPA moyen des étudiants, un indicateur clé de performance académique.",
-      "icon": "chart"
+      "trend": "up",
+      "trend_value": "+0.05 par rapport à l'année précédente",
+      "description": "Le GPA moyen des étudiants, reflétant leur performance académique globale.",
+      "icon": "star"
     },
     {
       "id": "kpi_3",
-      "label": "Taux de présence moyen",
+      "label": "Taux d'assiduité moyen",
       "value": "76.3%",
       "raw_value": 76.3,
       "unit": "%",
       "trend": "up",
-      "trend_value": "+5% vs période précédente",
-      "description": "Le taux de présence moyen, essentiel pour évaluer l'engagement des étudiants.",
-      "icon": "clock"
+      "trend_value": null,
+      "description": "Le taux d'assiduité moyen des étudiants, essentiel pour le succès académique.",
+      "icon": "percent"
     }
   ],
   "charts": [
     {
       "id": "chart_1",
       "type": "line",
-      "title": "GPA par année d'étude",
-      "description": "Ce graphique montre l'évolution du GPA moyen des étudiants en fonction de leur année d'étude. On observe une tendance à la baisse pour les premières années, ce qui pourrait nécessiter des mesures d'accompagnement.",
-      "insight": "Les étudiants de première année affichent un GPA inférieur.",
+      "title": "Tendance du GPA par année d'étude",
+      "description": "Ce graphique montre l'évolution du GPA moyen des étudiants en fonction de leur année d'étude. On observe une légère tendance à l'augmentation du GPA au fur et à mesure que les étudiants avancent dans leur cursus, bien que la corrélation soit faible.",
+      "insight": "Le GPA moyen augmente légèrement avec l'année d'étude, atteignant 3.78 en 4ème année.",
       "data": {
         "labels": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
+          1,
+          2,
+          3,
+          4,
+          5
         ],
         "datasets": [
           {
@@ -594,7 +596,7 @@
               2.64,
               3.09,
               3.56,
-              3.79,
+              3.78,
               3.36
             ]
           }
@@ -609,46 +611,93 @@
     },
     {
       "id": "chart_2",
-      "type": "bar",
-      "title": "Distribution des âges des étudiants",
-      "description": "Ce graphique illustre la répartition des âges des étudiants, mettant en évidence une diversité d'âge significative dans la population étudiante.",
-      "insight": "La majorité des étudiants se situent dans la tranche d'âge de 18 à 24 ans.",
+      "type": "scatter",
+      "title": "Impact de l'assiduité sur le GPA",
+      "description": "Ce graphique illustre la relation entre le taux d'assiduité et le GPA des étudiants. Bien que la corrélation soit faible, il est intéressant de noter que les étudiants avec un taux d'assiduité plus élevé tendent à avoir un GPA plus élevé.",
+      "insight": "Une assiduité accrue pourrait contribuer à améliorer le GPA des étudiants.",
       "data": {
-        "labels": [
-          "18.0–19.0",
-          "19.0–20.0",
-          "20.0–21.0",
-          "21.0–22.0",
-          "22.0–23.0",
-          "23.0–24.0",
-          "24.0–25.0",
-          "25.0–26.0",
-          "26.0–27.0",
-          "27.0–28.0"
-        ],
         "datasets": [
           {
-            "label": "Nombre d'étudiants",
+            "label": "Assiduité vs GPA",
             "data": [
-              27,
-              24,
-              16,
-              19,
-              18,
-              20,
-              25,
-              14,
-              17,
-              20
+              {
+                "x": 60.9,
+                "y": 3.78
+              },
+              {
+                "x": 76.3,
+                "y": 3.36
+              },
+              {
+                "x": 64.4,
+                "y": 2.64
+              },
+              {
+                "x": 89.5,
+                "y": 3.72
+              },
+              {
+                "x": 83.1,
+                "y": 3.79
+              },
+              {
+                "x": 67.4,
+                "y": 3.56
+              },
+              {
+                "x": 97.8,
+                "y": 3.18
+              },
+              {
+                "x": 57.1,
+                "y": 3.51
+              },
+              {
+                "x": 52.8,
+                "y": 3.53
+              },
+              {
+                "x": 96.4,
+                "y": 2.42
+              }
             ]
           }
         ]
       },
       "options": {
-        "x_label": "Tranche d'âge",
-        "y_label": "Nombre d'étudiants",
+        "x_label": "Taux d'assiduité (%)",
+        "y_label": "GPA",
         "stacked": false,
         "show_legend": true
+      }
+    },
+    {
+      "id": "chart_3",
+      "type": "doughnut",
+      "title": "Distribution des crédits par faculté",
+      "description": "Ce graphique montre la répartition des crédits obtenus par les étudiants selon leur faculté. On observe que la faculté d'Ingénierie a la plus grande part de crédits, suivie de près par les facultés des Arts et des Sciences.",
+      "insight": "La faculté d'Ingénierie représente 25.5% des crédits totaux.",
+      "data": {
+        "labels": [
+          "Engineering",
+          "Arts",
+          "Science",
+          "Business"
+        ],
+        "datasets": [
+          {
+            "data": [
+              51,
+              50,
+              50,
+              49
+            ]
+          }
+        ]
+      },
+      "options": {
+        "show_legend": true,
+        "stacked": false
       }
     }
   ],
@@ -656,19 +705,46 @@
     {
       "id": "insight_1",
       "title": "GPA par année d'étude",
-      "description": "Analyse de la variation du GPA moyen par année d'étude, révélant des performances inférieures en première année.",
-      "value": "GPA moyen de 2.64 en première année",
+      "description": "Le GPA moyen des étudiants augmente légèrement avec l'année d'étude, atteignant 3.78 en 4ème année. Cela suggère que l'expérience académique pourrait avoir un impact positif sur les performances.",
+      "value": "3.78 en 4ème année",
       "type": "trend",
-      "interpretation": "Mettre en place des programmes de soutien pour les étudiants de première année.",
+      "interpretation": "Encourager les étudiants à poursuivre leurs études pourrait améliorer leurs performances académiques.",
       "data": {}
     },
     {
       "id": "insight_2",
-      "title": "Taux de présence et GPA",
-      "description": "Examen de la corrélation entre le taux de présence et le GPA, indiquant que l'assiduité est liée à de meilleures performances.",
-      "value": "Corrélation positive entre présence et GPA",
+      "title": "Impact de l'assiduité sur le GPA",
+      "description": "Bien que la corrélation entre le taux d'assiduité et le GPA soit faible (-0.031), il est évident que les étudiants ayant une meilleure assiduité tendent à obtenir de meilleurs résultats.",
+      "value": "Corrélation de -0.031",
       "type": "comparison",
-      "interpretation": "Encourager une meilleure assiduité pour améliorer les performances académiques.",
+      "interpretation": "Mettre en place des stratégies pour améliorer l'assiduité pourrait contribuer à de meilleures performances académiques.",
+      "data": {}
+    },
+    {
+      "id": "insight_3",
+      "title": "Distribution des crédits par faculté",
+      "description": "La faculté d'Ingénierie a la plus grande part de crédits, représentant 25.5% des crédits totaux, tandis que les facultés des Arts et des Sciences suivent de près.",
+      "value": "25.5% pour Ingénierie",
+      "type": "distribution",
+      "interpretation": "Il pourrait être bénéfique d'explorer les raisons de cette répartition et d'ajuster les programmes académiques en conséquence.",
+      "data": {}
+    },
+    {
+      "id": "insight_4",
+      "title": "Taux d'assiduité par genre",
+      "description": "Le taux d'assiduité moyen est légèrement supérieur chez les hommes (76.38%) par rapport aux femmes (76.22%). Cela pourrait indiquer des différences dans l'engagement académique.",
+      "value": "76.38% pour les hommes",
+      "type": "comparison",
+      "interpretation": "Il serait pertinent d'explorer les raisons de cette disparité et de promouvoir des initiatives pour améliorer l'engagement des femmes.",
+      "data": {}
+    },
+    {
+      "id": "insight_5",
+      "title": "Âge moyen par faculté",
+      "description": "L'âge moyen des étudiants varie selon les facultés, avec la faculté des Sciences ayant l'âge moyen le plus élevé à 22.8 ans.",
+      "value": "22.8 ans pour Sciences",
+      "type": "total",
+      "interpretation": "Analyser les facteurs qui attirent des étudiants plus âgés dans certaines facultés pourrait aider à mieux cibler les programmes de recrutement.",
       "data": {}
     }
   ]

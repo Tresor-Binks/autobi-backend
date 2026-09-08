@@ -10,7 +10,8 @@ Workflow en 2 étapes :
    → Retourne métadonnées + insights au frontend
 
 2. POST /analysis/{id}/confirm
-   → Vérifie le solde, déduit les tokens
+   → Vérifie le forfait mensuel (date de fin) ou le solde Pay-As-You-Go
+   → Déduit les tokens uniquement pour le forfait Pay-As-You-Go
    → Lance le pipeline de graphiques en background (utilise les insights choisis)
 
 Autres endpoints :
@@ -25,15 +26,15 @@ Autres endpoints :
 import json
 import threading
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from math import ceil
 
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status, Request
 from sqlalchemy.orm import Session
 
 from app.dependencies.auth import get_current_user
-from app.database.models import User, Analysis, AnalysisStatus
-from app.database.session import get_db
+from app.database.models import User, Analysis, AnalysisStatus, PlanType
+from app.database.session import get_db, SessionLocal
 from app.schemas.analysis import UploadResponse, AnalysisResult, AnalysisListItem
 from app.services.analysis_service import run_analysis_pipeline
 
@@ -206,7 +207,6 @@ async def upload_file(
         try:
             ai_instructions = get_analysis_instructions(sample)
         except Exception as ai_err:
-            # Nettoyage fichier json avant de lever l'erreur
             try:
                 if json_path.exists(): json_path.unlink()
             except Exception:
@@ -227,7 +227,6 @@ async def upload_file(
             file_path=str(json_path),
             status=AnalysisStatus.PENDING,
             tokens_consumed=0,
-            # On stocke les insights suggérés + instructions pour le pipeline
             results={
                 "metadata": metadata,
                 "suggested_insights": suggested_insights,
@@ -274,9 +273,8 @@ async def upload_file(
 
 # ============================================================================
 # CONFIRM — ÉTAPE 2/2
-# L'utilisateur a choisi ses insights → on vérifie le solde, on déduit,
-# on lance le pipeline graphiques en background.
-# Pas de remboursement : si l'analyse échoue, les tokens sont consommés.
+# L'utilisateur a choisi ses insights → on vérifie le forfait (date de fin ou solde tokens),
+# déduit uniquement si nécessaire, puis lance le pipeline de graphiques en background.
 # ============================================================================
 
 @router.post("/{analysis_id}/confirm")
@@ -286,12 +284,6 @@ async def confirm_analysis(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    """
-    Confirmation du lancement après sélection des insights par l'utilisateur.
-    - selected_insights : liste des IDs d'insights choisis (max 6)
-    - Vérifie le solde et déduit les tokens
-    - Lance le pipeline de graphiques en background
-    """
     body = await request.json()
     selected_insight_ids: list = body.get("selected_insights", [])
 
@@ -309,24 +301,40 @@ async def confirm_analysis(
             detail="Cette analyse a déjà été lancée ou est terminée."
         )
 
-    token_cost = calculate_token_cost(analysis.file_size or 0)
-
     user = db.query(User).filter(User.id == current_user.id).first()
     if not user:
         raise HTTPException(status_code=404, detail="Utilisateur introuvable.")
 
-    if user.token_balance < token_cost:
-        raise HTTPException(
-            status_code=402,
-            detail=f"Solde insuffisant. Requis : {token_cost} jeton(s), disponible : {user.token_balance}."
-        )
+    # ── 1. VÉRIFICATION DU TYPE DE PLAN ──────────────────────────────────────
+    now = datetime.now(timezone.utc)
+    
+    plan_val = user.plan_type.value if hasattr(user.plan_type, "value") else str(user.plan_type or "")
+    is_monthly = "MONTHLY" in str(plan_val).upper()
 
-    # Déduction IMMÉDIATE avant lancement
-    from app.services.user_service import deduct_tokens
-    deduct_tokens(db, user, token_cost)
-    print(f"💰 {token_cost} jeton(s) déduit(s) pour user#{user.id}, analyse#{analysis.id}")
+    if is_monthly:
+        expires_at = user.plan_expires_at
+        if expires_at:
+            if expires_at.tzinfo is None:
+                expires_at = expires_at.replace(tzinfo=timezone.utc)
+            if expires_at < now:
+                raise HTTPException(
+                    status_code=403,
+                    detail="Votre abonnement mensuel a expiré. Veuillez le renouveler."
+                )
+        token_cost = 0  # AUCUN JETON DÉDUIT POUR LE FORFAIT MENSUEL
+    else:
+        token_cost = calculate_token_cost(analysis.file_size or 0)
+        if user.token_balance < token_cost:
+            raise HTTPException(
+                status_code=402,
+                detail=f"Solde insuffisant. Requis : {token_cost} jeton(s), disponible : {user.token_balance}."
+            )
+            
+        from app.services.user_service import deduct_tokens
+        deduct_tokens(db, user, token_cost)
+        print(f"💰 {token_cost} jeton(s) déduit(s) pour user#{user.id}")
 
-    # Filtrer les insights selon la sélection de l'utilisateur
+    # ── 2. PREPARATION ET MISE A JOUR ANALYSE ──────────────────────────────
     existing_results = analysis.results or {}
     ai_instructions = existing_results.get("ai_instructions", {})
     all_suggested = existing_results.get("suggested_insights", [])
@@ -337,19 +345,9 @@ async def confirm_analysis(
             if ins.get("id") in selected_insight_ids
         ]
     else:
-        # Si aucune sélection → on prend tous les insights suggérés
         selected_insights = all_suggested
 
-    # Mise à jour du statut
-    analysis.status = AnalysisStatus.PROCESSING
-    analysis.tokens_consumed = token_cost
-    # Enregistre la sélection finale
-    existing_results["selected_insights"] = selected_insights
-    analysis.results = existing_results
-    db.commit()
-    db.refresh(analysis)
-
-    # Récupération du fichier de données
+    # Vérification présence du fichier avant lancement
     json_path = Path(analysis.file_path)
     if not json_path.exists():
         analysis.status = AnalysisStatus.FAILED
@@ -363,6 +361,15 @@ async def confirm_analysis(
     sample = create_sample(df, metadata)
     dataset_id = json_path.stem
 
+    analysis.status = AnalysisStatus.PROCESSING
+    analysis.tokens_consumed = token_cost
+    existing_results["selected_insights"] = selected_insights
+    analysis.results = existing_results
+    
+    db.commit()
+    db.refresh(analysis)
+
+    # ── 3. LANCEMENT DU THREAD DE FOND ──────────────────────────────────────
     thread = threading.Thread(
         target=run_analysis_background,
         kwargs={
@@ -389,7 +396,6 @@ async def confirm_analysis(
 
 # ============================================================================
 # TÂCHE DE FOND
-# Les tokens sont déjà déduits dans /confirm.
 # En cas d'échec → statut FAILED, pas de remboursement.
 # ============================================================================
 
@@ -403,12 +409,13 @@ def run_analysis_background(
 ):
     print(f"🔄 Background #{analysis_id}")
 
-    from app.database.session import SessionLocal
+    # Création d'une session SQLAlchemy indépendante pour le thread
     db = SessionLocal()
     analysis = None
     try:
         analysis = db.query(Analysis).filter(Analysis.id == analysis_id).first()
         if not analysis:
+            print(f"❌ Background #{analysis_id}: Analyse non trouvée en BDD")
             return
 
         analysis.started_at = datetime.utcnow()
@@ -418,7 +425,7 @@ def run_analysis_background(
         print(f"📋 {len(selected_insights)} insights sélectionnés")
         print(f"🔑 ai_instructions keys: {list(ai_instructions.keys()) if ai_instructions else None}")
 
-        # Lance le pipeline avec les instructions déjà générées (pas de nouvel appel OpenAI)
+        # Executé sans re-solliciter l'API OpenAI
         results = run_analysis_pipeline(
             dataset_id=dataset_id,
             sample=sample,
@@ -427,11 +434,9 @@ def run_analysis_background(
             selected_insights=selected_insights,
         )
 
-        # Fusionne avec les données déjà stockées (suggested_insights, etc.)
         existing = dict(analysis.results or {})
         existing.update(results)
 
-        # Sauvegarde fichier résultat (optionnel, ne bloque pas si erreur)
         try:
             safe_name = Path(dataset_id).stem
             results_path = RESULTS_DIR / f"{safe_name}_results.json"
@@ -440,8 +445,6 @@ def run_analysis_background(
         except Exception as save_err:
             print(f"⚠️ Sauvegarde fichier ignorée : {save_err}")
 
-        # IMPORTANT : SQLAlchemy ne détecte pas les mutations de colonnes JSON
-        # Il faut réassigner un nouvel objet dict pour forcer le dirty-tracking
         from sqlalchemy.orm.attributes import flag_modified
         analysis.results = existing
         flag_modified(analysis, "results")

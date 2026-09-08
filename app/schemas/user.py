@@ -4,7 +4,7 @@ SCHÉMAS PYDANTIC - USER
 Validation des données utilisateur pour les requêtes et réponses API.
 """
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, ConfigDict
 from datetime import datetime
 from typing import Optional
 from app.database.models import PlanType
@@ -22,12 +22,24 @@ class UserBase(BaseModel):
 
 
 # ============================================================================
-# SCHÉMAS DE CRÉATION
+# SCHÉMAS DE CRÉATION & MISE À JOUR
 # ============================================================================
 
 class UserCreate(UserBase):
     """Schéma pour la création d'un utilisateur (inscription)"""
     password: str = Field(..., min_length=6, max_length=100)
+
+
+class UserUpdate(BaseModel):
+    """Schéma pour la mise à jour des informations de profil"""
+    first_name: Optional[str] = Field(None, min_length=1, max_length=100)
+    last_name: Optional[str] = Field(None, min_length=1, max_length=100)
+
+
+class ChangePasswordRequest(BaseModel):
+    """Schéma pour la demande de changement de mot de passe"""
+    currentPassword: str = Field(..., min_length=1)
+    newPassword: str = Field(..., min_length=6, max_length=100)
 
 
 # ============================================================================
@@ -45,9 +57,12 @@ class UserResponse(UserBase):
     token_balance: int
     created_at: datetime
     last_login: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True  # Permet la conversion depuis les modèles SQLAlchemy
+    plan_expires_at: Optional[datetime] = None
+
+    model_config = ConfigDict(
+        from_attributes=True,
+        populate_by_name=True
+    )
 
 
 class UserProfile(BaseModel):
@@ -65,6 +80,9 @@ class UserProfile(BaseModel):
     created_at: datetime
     updated_at: Optional[datetime] = None
     last_login: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True
+    plan_expires_at: Optional[datetime] = None
+
+    model_config = ConfigDict(
+        from_attributes=True,
+        populate_by_name=True
+    )

@@ -9,7 +9,7 @@ from sqlalchemy import (
     Column, Integer, String, DateTime, ForeignKey, 
     Text, Enum as SQLEnum, CheckConstraint
 )
-from sqlalchemy.dialects.mysql import JSON  # ← CHANGÉ : MySQL JSON au lieu de PostgreSQL JSONB
+from sqlalchemy.dialects.mysql import JSON
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from app.database.session import Base
@@ -60,6 +60,7 @@ class User(Base):
         default=PlanType.PAY_AS_YOU_GO
     )
     token_balance = Column(Integer, nullable=False, default=5)
+    plan_expires_at = Column(DateTime, nullable=True)
     
     # Dates
     created_at = Column(DateTime, server_default=func.now())
@@ -107,8 +108,8 @@ class Analysis(Base):
         index=True
     )
     
-    # Résultats (JSON flexible) - MySQL JSON au lieu de PostgreSQL JSONB
-    results = Column(JSON, nullable=True)  # ← CHANGÉ
+    # Résultats (JSON flexible)
+    results = Column(JSON, nullable=True)
     error_message = Column(Text, nullable=True)
     
     # Tokens
@@ -149,12 +150,12 @@ class TokenTransaction(Base):
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     
     # Type de transaction
-    transaction_type = Column(String(20), nullable=False)  # 'purchase' ou 'consumption'
+    transaction_type = Column(String(20), nullable=False)
     
     # Montant
     amount = Column(Integer, nullable=False)
     
-    # Relation avec une analyse (si consommation)
+    # Relation avec une analyse
     analysis_id = Column(Integer, ForeignKey("analyses.id", ondelete="SET NULL"), nullable=True, index=True)
     
     # Description

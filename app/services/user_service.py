@@ -11,7 +11,6 @@ from app.database.models import User, PlanType
 from app.core.security import hash_password, verify_password
 from app.core.config import settings
 
-
 # ============================================================================
 # CRÉATION D'UTILISATEUR
 # ============================================================================
@@ -148,18 +147,21 @@ def update_last_login(db: Session, user: User) -> User:
 def deduct_tokens(db: Session, user: User, amount: int) -> User:
     """
     Déduit des tokens du solde de l'utilisateur.
-    
-    Args:
-        db: Session de base de données
-        user: Utilisateur
-        amount: Nombre de tokens à déduire
-        
-    Returns:
-        Utilisateur mis à jour
-        
-    Raises:
-        ValueError: Si solde insuffisant
+    Ne déduit rien si l'utilisateur possède un forfait mensuel illimité encore valide.
     """
+    now = datetime.utcnow()
+
+    # Détermination robuste du plan mensuel
+    plan_str = str(user.plan_type.value if hasattr(user.plan_type, "value") else user.plan_type).upper()
+    is_monthly = "MONTHLY" in plan_str
+
+    if is_monthly:
+        if user.plan_expires_at and user.plan_expires_at > now:
+            # Forfait mensuel valide -> Aucun token n'est déduit
+            return user
+        else:
+            raise ValueError("Votre forfait mensuel a expiré")
+
     if user.token_balance < amount:
         raise ValueError("Solde de tokens insuffisant")
     
@@ -187,3 +189,20 @@ def add_tokens(db: Session, user: User, amount: int) -> User:
     db.refresh(user)
     
     return user
+
+def update_user_profile(db: Session, user: User, first_name: str, last_name: str) -> User:
+    """Met à jour le prénom et le nom d'un utilisateur"""
+    user.first_name = first_name
+    user.last_name = last_name
+    db.commit()
+    db.refresh(user)
+    return user
+
+def change_user_password(db: Session, user: User, current_password: str, new_password: str) -> bool:
+    """Vérifie le mot de passe actuel et le remplace par le nouveau"""
+    if not verify_password(current_password, user.password_hash):
+        return False
+    
+    user.password_hash = hash_password(new_password)
+    db.commit()
+    return True

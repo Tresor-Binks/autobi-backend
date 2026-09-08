@@ -227,7 +227,38 @@ STRUCTURE OBLIGATOIRE :
 
 TYPES DE GRAPHIQUES — rappel :
 - scatter : "data" ne contient PAS "labels". Contient uniquement : {"datasets": [{"label": "...", "data": [{"x": 1.2, "y": 3.4}, ...]}]}
-- pie/doughnut : "data" = {"labels": [...], "datasets": [{"data": [...nombres...]}]} — PAS de "label" dans le dataset"""
+- pie/doughnut : "data" = {"labels": [...], "datasets": [{"data": [...nombres...]}]} — PAS de "label" dans le dataset
+
+══════════════════════════════════════════════════════
+RÈGLE CRITIQUE N°5 — VALEURS DANS data.datasets[].data
+══════════════════════════════════════════════════════
+Les données que tu reçois contiennent TOUJOURS deux champs distincts :
+  - "mean_values" : MOYENNES par catégorie  → à utiliser pour scores/notes/taux/âge
+  - "sum_values"  : SOMMES par catégorie    → à utiliser pour montants/quantités/volumes
+
+OBLIGATION ABSOLUE pour les graphiques bar et line :
+  Le champ "data" dans "datasets" DOIT contenir les valeurs du champ approprié.
+
+EXEMPLES CORRECTS :
+  ✅ Moyenne_Generale par Statut_Paiement → "data": [12.29, 11.84, 13.07]  (mean_values)
+  ✅ Frais_Scolarite par Filiere          → "data": [156000, 142000, 138000] (sum_values)
+  ✅ Age moyen par Ville                  → "data": [21.4, 22.8, 23.1]       (mean_values)
+
+EXEMPLES INCORRECTS — INTERDITS :
+  ❌ "data": [897.0, 841.8, 731.9]  ← ce sont des SOMMES de moyennes, ça n'a AUCUN sens
+  ❌ "data": [4421, 2470, 29330000] ← ce sont des totaux, pas des moyennes
+
+RÈGLE MÉMOTECHNIQUE :
+  Si le nom de la colonne contient : moyenne, note, score, taux, rate, age, gpa, satisfaction
+  → TOUJOURS utiliser "mean_values" dans les datasets
+  → La valeur doit être du même ordre de grandeur qu'une moyenne individuelle (ex: entre 0 et 20 pour une note)
+  → Si la valeur dépasse le maximum individuel possible, tu utilises la mauvaise agrégation
+
+VÉRIFICATION OBLIGATOIRE avant de générer :
+  - Regarde le champ "global_kpis" dans les données reçues
+  - Il contient la moyenne et le max de chaque colonne
+  - Les valeurs dans tes graphiques doivent être inférieures au max individuel
+  - Si ce n'est pas le cas, tu te trompes d'agrégation"""
 
 
 def generate_final_report(aggregated_data: dict, selected_insights: list, metadata: dict) -> dict:
