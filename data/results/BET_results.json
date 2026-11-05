@@ -1,0 +1,618 @@
+{
+  "metadata": {
+    "row_count": 10,
+    "column_count": 8,
+    "columns": [
+      "Unnamed: 0",
+      "Unnamed: 1",
+      "Unnamed: 2",
+      "Unnamed: 3",
+      "Unnamed: 4",
+      "Unnamed: 5",
+      "Unnamed: 6",
+      "Unnamed: 7"
+    ],
+    "column_types": {
+      "Unnamed: 0": {
+        "pandas_type": "object",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Unnamed: 1": {
+        "pandas_type": "object",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Unnamed: 2": {
+        "pandas_type": "object",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Unnamed: 3": {
+        "pandas_type": "object",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Unnamed: 4": {
+        "pandas_type": "object",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Unnamed: 5": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Unnamed: 6": {
+        "pandas_type": "str",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      },
+      "Unnamed: 7": {
+        "pandas_type": "object",
+        "semantic_type": "text",
+        "is_numeric": false,
+        "is_date": false,
+        "is_categorical": false
+      }
+    },
+    "numeric_columns": [],
+    "date_columns": [],
+    "categorical_columns": [],
+    "text_columns": [
+      "Unnamed: 0",
+      "Unnamed: 1",
+      "Unnamed: 2",
+      "Unnamed: 3",
+      "Unnamed: 4",
+      "Unnamed: 5",
+      "Unnamed: 6",
+      "Unnamed: 7"
+    ],
+    "statistics": {
+      "Unnamed: 0": {
+        "type": "text",
+        "count": 10,
+        "null_count": 0,
+        "unique_count": 4,
+        "mode": "2026-09-09 00:00:00",
+        "top_values": [
+          {
+            "value": "2026-09-09 00:00:00",
+            "count": 7,
+            "pct": 70.0
+          },
+          {
+            "value": "Date",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "2026-09-04 00:00:00",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "2026-09-08 00:00:00",
+            "count": 1,
+            "pct": 10.0
+          }
+        ]
+      },
+      "Unnamed: 1": {
+        "type": "text",
+        "count": 10,
+        "null_count": 0,
+        "unique_count": 7,
+        "mode": "1",
+        "top_values": [
+          {
+            "value": "7",
+            "count": 2,
+            "pct": 20.0
+          },
+          {
+            "value": "4",
+            "count": 2,
+            "pct": 20.0
+          },
+          {
+            "value": "1",
+            "count": 2,
+            "pct": 20.0
+          },
+          {
+            "value": "NB match",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "2",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "5",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "6",
+            "count": 1,
+            "pct": 10.0
+          }
+        ]
+      },
+      "Unnamed: 2": {
+        "type": "text",
+        "count": 10,
+        "null_count": 0,
+        "unique_count": 8,
+        "mode": "4",
+        "top_values": [
+          {
+            "value": "4",
+            "count": 2,
+            "pct": 20.0
+          },
+          {
+            "value": "5",
+            "count": 2,
+            "pct": 20.0
+          },
+          {
+            "value": "cote",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "25",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "404",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "2",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "65",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "11",
+            "count": 1,
+            "pct": 10.0
+          }
+        ]
+      },
+      "Unnamed: 3": {
+        "type": "text",
+        "count": 10,
+        "null_count": 0,
+        "unique_count": 5,
+        "mode": "100",
+        "top_values": [
+          {
+            "value": "100",
+            "count": 4,
+            "pct": 40.0
+          },
+          {
+            "value": "300",
+            "count": 3,
+            "pct": 30.0
+          },
+          {
+            "value": "mise ",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "500",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "200",
+            "count": 1,
+            "pct": 10.0
+          }
+        ]
+      },
+      "Unnamed: 4": {
+        "type": "text",
+        "count": 10,
+        "null_count": 0,
+        "unique_count": 9,
+        "mode": "1500",
+        "top_values": [
+          {
+            "value": "1500",
+            "count": 2,
+            "pct": 20.0
+          },
+          {
+            "value": "gain",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "2000",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "5000",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "1200",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "40000",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "200",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "6500",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "1100",
+            "count": 1,
+            "pct": 10.0
+          }
+        ]
+      },
+      "Unnamed: 5": {
+        "type": "text",
+        "count": 10,
+        "null_count": 0,
+        "unique_count": 3,
+        "mode": "CONGOBET",
+        "top_values": [
+          {
+            "value": "CONGOBET",
+            "count": 5,
+            "pct": 50.0
+          },
+          {
+            "value": "1XBET",
+            "count": 4,
+            "pct": 40.0
+          },
+          {
+            "value": "BET",
+            "count": 1,
+            "pct": 10.0
+          }
+        ]
+      },
+      "Unnamed: 6": {
+        "type": "text",
+        "count": 10,
+        "null_count": 0,
+        "unique_count": 3,
+        "mode": "NON",
+        "top_values": [
+          {
+            "value": "NON",
+            "count": 6,
+            "pct": 60.0
+          },
+          {
+            "value": "OUI",
+            "count": 3,
+            "pct": 30.0
+          },
+          {
+            "value": "reussi",
+            "count": 1,
+            "pct": 10.0
+          }
+        ]
+      },
+      "Unnamed: 7": {
+        "type": "text",
+        "count": 10,
+        "null_count": 0,
+        "unique_count": 5,
+        "mode": "0",
+        "top_values": [
+          {
+            "value": "0",
+            "count": 6,
+            "pct": 60.0
+          },
+          {
+            "value": "vrai gain",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "5000",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "1200",
+            "count": 1,
+            "pct": 10.0
+          },
+          {
+            "value": "1500",
+            "count": 1,
+            "pct": 10.0
+          }
+        ]
+      }
+    },
+    "cleaning_report": {
+      "numeric_filled": {},
+      "text_rows_dropped": {},
+      "rows_before": 10,
+      "rows_after": 10
+    },
+    "created_at": "2026-09-10T00:22:42.193142Z"
+  },
+  "ai_instructions": {
+    "summary": "Le dataset contient des informations sur les paris, incluant la date, le nombre de matchs, les cotes, les mises, les gains, et les plateformes de paris. Les tendances clés incluent l'analyse des gains par plateforme et le taux de réussite des paris. Il est recommandé d'explorer ces insights pour optimiser les stratégies de paris et améliorer la rentabilité.",
+    "insights": [
+      {
+        "id": "insight_1",
+        "type": "total",
+        "title": "Analyse des gains par BET",
+        "description": "Comparer les gains totaux réalisés par chaque plateforme de paris pour identifier celle qui est la plus lucrative.",
+        "feasibility": "high",
+        "required_columns": [
+          "Unnamed: 5",
+          "Unnamed: 4"
+        ]
+      },
+      {
+        "id": "insight_2",
+        "type": "comparison",
+        "title": "Taux de réussite des paris",
+        "description": "Calculer le taux de réussite des paris pour chaque plateforme afin d'évaluer leur fiabilité.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Unnamed: 5",
+          "Unnamed: 6"
+        ]
+      },
+      {
+        "id": "insight_3",
+        "type": "total",
+        "title": "Mise moyenne par match",
+        "description": "Déterminer la mise moyenne par match pour mieux comprendre les comportements de mise des utilisateurs.",
+        "feasibility": "high",
+        "required_columns": [
+          "Unnamed: 1",
+          "Unnamed: 3"
+        ]
+      },
+      {
+        "id": "insight_4",
+        "type": "distribution",
+        "title": "Distribution des cotes",
+        "description": "Analyser la distribution des cotes pour identifier les tendances dans les paris proposés.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Unnamed: 2"
+        ]
+      },
+      {
+        "id": "insight_5",
+        "type": "comparison",
+        "title": "Gains par nombre de matchs",
+        "description": "Examiner la relation entre le nombre de matchs et les gains pour comprendre l'impact des paris multiples.",
+        "feasibility": "medium",
+        "required_columns": [
+          "Unnamed: 1",
+          "Unnamed: 4"
+        ]
+      }
+    ]
+  },
+  "suggested_insights": [
+    {
+      "id": "insight_1",
+      "type": "total",
+      "title": "Analyse des gains par BET",
+      "description": "Comparer les gains totaux réalisés par chaque plateforme de paris pour identifier celle qui est la plus lucrative.",
+      "feasibility": "high",
+      "required_columns": [
+        "Unnamed: 5",
+        "Unnamed: 4"
+      ]
+    },
+    {
+      "id": "insight_2",
+      "type": "comparison",
+      "title": "Taux de réussite des paris",
+      "description": "Calculer le taux de réussite des paris pour chaque plateforme afin d'évaluer leur fiabilité.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Unnamed: 5",
+        "Unnamed: 6"
+      ]
+    },
+    {
+      "id": "insight_3",
+      "type": "total",
+      "title": "Mise moyenne par match",
+      "description": "Déterminer la mise moyenne par match pour mieux comprendre les comportements de mise des utilisateurs.",
+      "feasibility": "high",
+      "required_columns": [
+        "Unnamed: 1",
+        "Unnamed: 3"
+      ]
+    },
+    {
+      "id": "insight_4",
+      "type": "distribution",
+      "title": "Distribution des cotes",
+      "description": "Analyser la distribution des cotes pour identifier les tendances dans les paris proposés.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Unnamed: 2"
+      ]
+    },
+    {
+      "id": "insight_5",
+      "type": "comparison",
+      "title": "Gains par nombre de matchs",
+      "description": "Examiner la relation entre le nombre de matchs et les gains pour comprendre l'impact des paris multiples.",
+      "feasibility": "medium",
+      "required_columns": [
+        "Unnamed: 1",
+        "Unnamed: 4"
+      ]
+    }
+  ],
+  "dataset_id": "BET",
+  "summary": {
+    "title": "Analyse des paris sportifs : Performances et tendances",
+    "description": "Ce rapport explore les performances des plateformes de paris en analysant les gains, les mises et les taux de réussite. Les données révèlent que certaines plateformes offrent des gains plus élevés, tandis que d'autres présentent un meilleur taux de réussite. La mise moyenne par match est également examinée pour comprendre les comportements des utilisateurs. Enfin, la distribution des cotes met en lumière les tendances dans les paris proposés.",
+    "key_takeaways": [
+      "Les gains totaux varient considérablement entre les plateformes de paris.",
+      "Le taux de réussite des paris est un indicateur clé de la fiabilité des plateformes.",
+      "Une mise moyenne élevée peut indiquer une confiance accrue des utilisateurs dans leurs paris."
+    ]
+  },
+  "kpis": [
+    {
+      "id": "kpi_1",
+      "label": "Total des gains par BET",
+      "value": "0 FCFA",
+      "raw_value": 0,
+      "unit": "FCFA",
+      "trend": "null",
+      "trend_value": null,
+      "description": "Ce KPI mesure le total des gains réalisés par chaque plateforme de paris, essentiel pour évaluer leur rentabilité.",
+      "icon": "euro"
+    },
+    {
+      "id": "kpi_2",
+      "label": "Taux de réussite des paris",
+      "value": "70.0%",
+      "raw_value": 70.0,
+      "unit": "%",
+      "trend": "null",
+      "trend_value": null,
+      "description": "Ce KPI indique le pourcentage de paris réussis, un indicateur crucial de la fiabilité des plateformes.",
+      "icon": "percent"
+    },
+    {
+      "id": "kpi_3",
+      "label": "Mise moyenne par match",
+      "value": "100 FCFA",
+      "raw_value": 100,
+      "unit": "FCFA",
+      "trend": "null",
+      "trend_value": null,
+      "description": "Ce KPI mesure la mise moyenne par match, offrant des insights sur les comportements de mise des utilisateurs.",
+      "icon": "chart"
+    }
+  ],
+  "charts": [
+    {
+      "id": "chart_1",
+      "type": "doughnut",
+      "title": "Distribution des cotes des paris",
+      "description": "Ce graphique montre la répartition des cotes proposées par les différentes plateformes de paris. On observe que les cotes de 4 et 5 sont les plus fréquentes, représentant chacune 20% des paris. Cela peut indiquer une tendance vers des cotes plus conservatrices.",
+      "insight": "Les cotes de 4 et 5 dominent le marché des paris, suggérant une préférence pour des paris plus sûrs.",
+      "data": {
+        "labels": [
+          "4",
+          "5",
+          "cote",
+          "25",
+          "404",
+          "2",
+          "65",
+          "11"
+        ],
+        "datasets": [
+          {
+            "data": [
+              20.0,
+              20.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0
+            ]
+          }
+        ]
+      },
+      "options": {
+        "x_label": null,
+        "y_label": null,
+        "stacked": false,
+        "show_legend": true
+      }
+    }
+  ],
+  "insights": [
+    {
+      "id": "insight_1",
+      "title": "Analyse des gains par BET",
+      "description": "Les gains totaux réalisés par chaque plateforme de paris montrent des disparités significatives. Par exemple, certaines plateformes affichent des gains nettement plus élevés que d'autres, ce qui peut influencer le choix des utilisateurs.",
+      "value": "0 FCFA",
+      "type": "total",
+      "interpretation": "Il est recommandé d'explorer davantage les plateformes avec des gains plus élevés pour maximiser les retours sur investissement.",
+      "data": {}
+    },
+    {
+      "id": "insight_2",
+      "title": "Taux de réussite des paris",
+      "description": "Le taux de réussite des paris est un indicateur clé de la performance des plateformes. Un taux de 70% indique une fiabilité relativement élevée, mais il est crucial de comparer ce taux entre différentes plateformes.",
+      "value": "70.0%",
+      "type": "comparison",
+      "interpretation": "Les utilisateurs devraient privilégier les plateformes avec un taux de réussite supérieur pour augmenter leurs chances de gains.",
+      "data": {}
+    },
+    {
+      "id": "insight_3",
+      "title": "Mise moyenne par match",
+      "description": "La mise moyenne par match est de 100 FCFA, ce qui peut refléter la stratégie de mise des utilisateurs. Une mise plus élevée pourrait indiquer une plus grande confiance dans les paris.",
+      "value": "100 FCFA",
+      "type": "total",
+      "interpretation": "Encourager les utilisateurs à ajuster leurs mises en fonction de leur confiance dans les paris pourrait améliorer leurs résultats.",
+      "data": {}
+    }
+  ]
+}
