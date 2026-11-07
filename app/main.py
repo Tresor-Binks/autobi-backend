@@ -18,7 +18,7 @@ app = FastAPI(
 # Liste explicite pour éviter tout problème de chargement de config
 PROD_ORIGINS = [
     "http://localhost:5173",                            # Dev Web local
-    "https://autobi-frontend-production.up.railway.app", # Prod Web (Railway)
+    "https://get.autobi.app",
     "tauri://localhost",                                # Tauri (Windows)
     "http://tauri.localhost",                          # Tauri (macOS/Linux)
 ]
