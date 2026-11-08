@@ -1,0 +1,25 @@
+name: Deploy Backend to VPS
+
+on:
+  push:
+    branches: [ main ] # ou master selon votre branche principale
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH & Restart Docker
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /root/autobi/backend
+            git pull origin main
+            cd /root/autobi
+            docker compose down
+            docker compose up --build -d
