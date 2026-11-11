@@ -2,7 +2,7 @@
 EXCEL SERVICE
 
 Responsabilités :
-- Lire les fichiers Excel/CSV
+- Lire les fichiers tabulaires (Excel, CSV, TSV, JSON, Parquet, XML)
 - Valider la structure du fichier
 - Nettoyer les données (valeurs manquantes)
 - Analyser la structure du dataset (colonnes, types, stats complètes)
@@ -28,6 +28,131 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 SAMPLE_ROWS = 30
 MAX_MISSING_PCT = 0.05  # 5% maximum de cellules vides
 
+# Source unique de vérité pour les formats acceptés (importée par analysis.py)
+SUPPORTED_EXTENSIONS = {".xlsx", ".xls", ".csv", ".tsv", ".json", ".parquet", ".xml"}
+
+
+def _unsupported_message(ext: str) -> str:
+    return f"Format non supporté : {ext}. Utilisez {', '.join(sorted(SUPPORTED_EXTENSIONS))}"
+
+
+# ============================================================================
+# LECTURE MULTI-FORMATS (cœur de l'ajout)
+# ============================================================================
+
+def _read_delimited(file_path: str, sep: Optional[str] = None) -> pd.DataFrame:
+    """CSV (séparateur détecté) ou TSV (sep='\\t') avec repli d'encodage."""
+    last_err = None
+    for enc in ("utf-8-sig", "cp1252", "latin-1"):
+        try:
+            if sep is None:
+                return pd.read_csv(file_path, sep=None, engine="python", encoding=enc)
+            return pd.read_csv(file_path, sep=sep, encoding=enc)
+        except UnicodeDecodeError as e:
+            last_err = e
+    raise ValueError(f"Encodage du fichier non reconnu : {last_err}")
+
+
+def _read_json(file_path: str) -> pd.DataFrame:
+    """
+    JSON accepté :
+    - liste d'objets            [ {...}, {...} ]
+    - objet avec clé "data"     { "data": [ {...} ] }  (inclut le format enrichi AutoBI)
+    - objet avec une seule liste d'objets
+    - objet colonnes → listes   { "col": [..], "col2": [..] }
+    - JSON Lines (un objet par ligne)
+    """
+    try:
+        with open(file_path, "r", encoding="utf-8-sig") as f:
+            content = json.load(f)
+    except json.JSONDecodeError:
+        return pd.read_json(file_path, lines=True)
+
+    if isinstance(content, dict):
+        if isinstance(content.get("data"), list):
+            content = content["data"]
+        else:
+            list_keys = [
+                k for k, v in content.items()
+                if isinstance(v, list) and v and isinstance(v[0], dict)
+            ]
+            if len(list_keys) == 1:
+                content = content[list_keys[0]]
+            else:
+                try:
+                    return pd.DataFrame(content)
+                except ValueError:
+                    raise ValueError(
+                        "Structure JSON non reconnue : attendu une liste d'objets "
+                        "(un objet par ligne du tableau)."
+                    )
+
+    if isinstance(content, list):
+        if content and all(isinstance(r, dict) for r in content):
+            return pd.json_normalize(content)  # aplatit les objets imbriqués (a.b)
+        return pd.DataFrame(content)
+
+    raise ValueError("Structure JSON non reconnue : attendu une liste d'objets.")
+
+
+def _read_xml(file_path: str) -> pd.DataFrame:
+    """XML « plat » : chaque enfant répété du nœud racine = une ligne."""
+    try:
+        return pd.read_xml(file_path)  # parser lxml
+    except ImportError:
+        return pd.read_xml(file_path, parser="etree")  # sans lxml
+
+
+def _read_parquet(file_path: str) -> pd.DataFrame:
+    try:
+        return pd.read_parquet(file_path)
+    except ImportError:
+        raise ValueError("Lecture Parquet indisponible côté serveur : installez 'pyarrow'.")
+
+
+def _normalize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """Rend le DataFrame compatible avec le reste du pipeline, quel que soit le format source."""
+    df = df.copy()
+    df.columns = [str(c) for c in df.columns]
+
+    # Parquet : un index sauvegardé est restauré par pandas → on repart d'un index propre
+    if not isinstance(df.index, pd.RangeIndex):
+        df = df.reset_index(drop=True)
+
+    # Parquet : dtype 'category' → object (sinon types non détectés correctement)
+    for c in df.select_dtypes(include="category").columns:
+        df[c] = df[c].astype(object)
+
+    # JSON/Parquet/XML : cellules liste/dict → texte (sinon nunique()/value_counts() plantent)
+    for c in df.select_dtypes(include="object").columns:
+        if df[c].map(lambda v: isinstance(v, (list, dict))).any():
+            df[c] = df[c].map(
+                lambda v: json.dumps(v, ensure_ascii=False) if isinstance(v, (list, dict)) else v
+            )
+    return df
+
+
+def _read_dataframe(file_path: str) -> pd.DataFrame:
+    """Point d'entrée unique de lecture : dispatch par extension."""
+    ext = Path(file_path).suffix.lower()
+
+    if ext in (".xlsx", ".xls"):
+        df = pd.read_excel(file_path, sheet_name=0)
+    elif ext == ".csv":
+        df = _read_delimited(file_path)
+    elif ext == ".tsv":
+        df = _read_delimited(file_path, sep="\t")
+    elif ext == ".json":
+        df = _read_json(file_path)
+    elif ext == ".parquet":
+        df = _read_parquet(file_path)
+    elif ext == ".xml":
+        df = _read_xml(file_path)
+    else:
+        raise ValueError(_unsupported_message(ext))
+
+    return _normalize_dataframe(df)
+
 
 # ============================================================================
 # VALIDATION DE LA STRUCTURE DU FICHIER
@@ -35,8 +160,8 @@ MAX_MISSING_PCT = 0.05  # 5% maximum de cellules vides
 
 def validate_file_structure(file_path: str) -> dict:
     """
-    Valide qu'un fichier Excel répond aux critères d'analyse :
-    - Une seule feuille
+    Valide qu'un fichier répond aux critères d'analyse :
+    - Une seule feuille (Excel uniquement)
     - Un seul tableau continu
     - Maximum 5% de cellules vides
     """
@@ -49,7 +174,18 @@ def validate_file_structure(file_path: str) -> dict:
     missing_pct = 0.0
 
     try:
-        if ext in [".xlsx", ".xls"]:
+        if ext not in SUPPORTED_EXTENSIONS:
+            return {
+                "valid": False,
+                "errors": [_unsupported_message(ext)],
+                "warnings": [],
+                "sheet_count": 0,
+                "row_count": 0,
+                "column_count": 0,
+                "missing_pct": 0.0
+            }
+
+        if ext in (".xlsx", ".xls"):
             xl = pd.ExcelFile(file_path)
             sheet_count = len(xl.sheet_names)
 
@@ -60,21 +196,7 @@ def validate_file_structure(file_path: str) -> dict:
                     f"Feuilles détectées : {', '.join(xl.sheet_names)}"
                 )
 
-            df = pd.read_excel(file_path, sheet_name=0)
-
-        elif ext == ".csv":
-            sheet_count = 1
-            df = pd.read_csv(file_path, sep=None, engine="python")
-        else:
-            return {
-                "valid": False,
-                "errors": [f"Format non supporté : {ext}. Utilisez .xlsx, .xls ou .csv"],
-                "warnings": [],
-                "sheet_count": 0,
-                "row_count": 0,
-                "column_count": 0,
-                "missing_pct": 0.0
-            }
+        df = _read_dataframe(file_path)
 
         row_count = len(df)
         column_count = len(df.columns)
@@ -176,15 +298,8 @@ def validate_file_structure(file_path: str) -> dict:
 # ============================================================================
 
 def read_file(file_path: str) -> pd.DataFrame:
-    """Lit un fichier Excel ou CSV et retourne un DataFrame brut."""
-    ext = Path(file_path).suffix.lower()
-
-    if ext in [".xlsx", ".xls"]:
-        df = pd.read_excel(file_path, sheet_name=0)
-    elif ext == ".csv":
-        df = pd.read_csv(file_path, sep=None, engine="python")
-    else:
-        raise ValueError(f"Format non supporté : {ext}.")
+    """Lit un fichier tabulaire (tous formats supportés) et retourne un DataFrame brut."""
+    df = _read_dataframe(file_path)
 
     # Suppression des lignes/colonnes entièrement vides
     df = df.dropna(how="all").dropna(axis=1, how="all")

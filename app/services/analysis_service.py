@@ -1,297 +1,590 @@
 """
-ANALYSIS SERVICE
+ROUTES D'ANALYSE
 
-Pipeline après /confirm :
-1. Charge le dataset complet depuis le JSON
-2. Pandas calcule les vraies agrégations — mean/sum choisis intelligemment selon le type de métrique
-3. Envoie tout à OpenAI → reçoit le JSON final (graphiques + KPIs + résumé)
+Workflow en 2 étapes :
+1. POST /analysis/upload
+   → Lit le fichier, génère les métadonnées
+   → Appelle GPT-4o-mini IMMÉDIATEMENT (timeout 3 min)
+   → Stocke les insights suggérés dans results["suggested_insights"]
+   → Crée l'analyse en PENDING
+   → Retourne métadonnées + insights au frontend
+
+2. POST /analysis/{id}/confirm
+   → Vérifie le forfait mensuel (date de fin) ou le solde Pay-As-You-Go
+   → Déduit les tokens uniquement pour le forfait Pay-As-You-Go
+   → Lance le pipeline de graphiques en background (utilise les insights choisis)
+
+Autres endpoints :
+- POST /analysis/validate          → Validation structure fichier
+- POST /analysis/validate-insight  → Validation insight via OpenAI
+- GET  /analysis/                  → Liste des analyses
+- POST /analysis/{id}/ask          → Question IA sur une analyse
+- GET  /analysis/{id}              → Résultats d'une analyse
+- DELETE /analysis/{id}            → Suppression
 """
 
-import pandas as pd
-import numpy as np
+import json
+import threading
 from pathlib import Path
-from typing import Optional
-from app.services.excel_service import load_from_json
+from datetime import datetime, timezone
+from math import ceil
+
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status, Request
+from sqlalchemy.orm import Session
+
+from app.dependencies.auth import get_current_user
+from app.database.models import User, Analysis, AnalysisStatus, PlanType
+from app.database.session import get_db, SessionLocal
+from app.schemas.analysis import UploadResponse, AnalysisResult, AnalysisListItem
+from app.services.analysis_service import run_analysis_pipeline
+
+router = APIRouter(prefix="/analysis", tags=["Analysis"])
+
+TEMP_DIR = Path("data/temp")
+UPLOAD_DIR = Path("data/uploads")
+RESULTS_DIR = Path("data/results")
+TEMP_DIR.mkdir(parents=True, exist_ok=True)
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+
+from app.services.excel_service import SUPPORTED_EXTENSIONS
+ALLOWED_EXTENSIONS = SUPPORTED_EXTENSIONS  # .xlsx .xls .csv .tsv .json .parquet .xml
+MAX_FILE_SIZE = 10 * 1024 * 1024
+
+
+def calculate_token_cost(file_size_bytes: int) -> int:
+    size_ko = file_size_bytes / 1024
+    if size_ko <= 10:
+        return 1
+    return ceil(size_ko / 10)
 
 
 # ============================================================================
-# PIPELINE PRINCIPAL
+# VALIDATE
 # ============================================================================
 
-def run_analysis_pipeline(
+@router.post("/validate")
+async def validate_file(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user),
+):
+    ext = Path(file.filename).suffix.lower()
+    if ext not in ALLOWED_EXTENSIONS:
+        return {"valid": False, "errors": [f"Format non supporté : {ext}. Formats acceptés : {', '.join(sorted(ALLOWED_EXTENSIONS))}."],
+                "warnings": [], "sheet_count": 0, "row_count": 0,
+                "column_count": 0, "file_name": file.filename, "file_size": 0}
+
+    content = await file.read()
+    if len(content) > MAX_FILE_SIZE:
+        return {"valid": False, "errors": ["Fichier trop volumineux. Maximum 10 MB."],
+                "warnings": [], "sheet_count": 0, "row_count": 0,
+                "column_count": 0, "file_name": file.filename, "file_size": len(content)}
+
+    temp_path = TEMP_DIR / f"validate_{current_user.id}_{file.filename}"
+    with open(temp_path, "wb") as f_out:
+        f_out.write(content)
+    try:
+        from app.services.excel_service import validate_file_structure
+        result = validate_file_structure(str(temp_path))
+        return {**result, "file_name": file.filename, "file_size": len(content)}
+    finally:
+        try:
+            import gc; gc.collect()
+            if temp_path.exists(): temp_path.unlink()
+        except PermissionError:
+            pass
+
+
+# ============================================================================
+# VALIDATE INSIGHT
+# ============================================================================
+
+@router.post("/validate-insight")
+async def validate_custom_insight(
+    request: Request,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    body = await request.json()
+    description = body.get("description", "").strip()
+    analysis_id = body.get("analysis_id")
+
+    if not description or len(description) < 5:
+        return {"valid": False, "reason": "Description trop courte.", "error": None}
+
+    columns, column_types = [], {}
+
+    if analysis_id:
+        a = db.query(Analysis).filter(Analysis.id == analysis_id, Analysis.user_id == current_user.id).first()
+        if a and a.results:
+            meta = a.results.get("metadata", {})
+            columns = meta.get("columns", [])
+            column_types = {c: i.get("semantic_type", "text") for c, i in meta.get("column_types", {}).items()}
+
+    if not columns:
+        latest = db.query(Analysis).filter(
+            Analysis.user_id == current_user.id,
+            Analysis.status == AnalysisStatus.COMPLETED
+        ).order_by(Analysis.created_at.desc()).first()
+        if latest and latest.results:
+            meta = latest.results.get("metadata", {})
+            columns = meta.get("columns", [])
+            column_types = {c: i.get("semantic_type", "text") for c, i in meta.get("column_types", {}).items()}
+
+    if not columns:
+        return {"valid": False, "reason": "Impossible de récupérer les colonnes.", "error": None}
+
+    from app.services.openai_service import validate_custom_insight as ai_validate
+    try:
+        return ai_validate(description, columns, column_types)
+    except Exception as e:
+        raise HTTPException(status_code=504, detail=f"Service IA indisponible : {str(e)}")
+
+
+# ============================================================================
+# LISTE DES ANALYSES
+# ============================================================================
+
+@router.get("/", response_model=list[AnalysisListItem])
+async def list_analyses(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    analyses = (
+        db.query(Analysis)
+        .filter(Analysis.user_id == current_user.id)
+        .order_by(Analysis.created_at.desc())
+        .all()
+    )
+    return [
+        AnalysisListItem(
+            id=a.id, file_name=a.file_name,
+            status=a.status.value, tokens_consumed=a.tokens_consumed,
+            created_at=a.created_at.isoformat() if a.created_at else None
+        )
+        for a in analyses
+    ]
+
+
+# ============================================================================
+# UPLOAD — ÉTAPE 1/2
+# Lit le fichier → génère métadonnées → appelle GPT-4o-mini (max 3 min)
+# → stocke les insights suggérés → crée l'analyse PENDING
+# → retourne métadonnées + insights au frontend (étape 3 prête immédiatement)
+# ============================================================================
+
+@router.post("/upload", response_model=UploadResponse, status_code=status.HTTP_201_CREATED)
+async def upload_file(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    ext = Path(file.filename).suffix.lower()
+    if ext not in ALLOWED_EXTENSIONS:
+        raise HTTPException(status_code=400, detail=f"Format non supporté : {ext}. Formats acceptés : {', '.join(sorted(ALLOWED_EXTENSIONS))}.")
+
+    content = await file.read()
+    if len(content) > MAX_FILE_SIZE:
+        raise HTTPException(status_code=400, detail="Fichier trop volumineux. Maximum 10 MB.")
+
+    original_stem = Path(file.filename).stem
+    excel_path = TEMP_DIR / file.filename
+    json_path = UPLOAD_DIR / f"{original_stem}.json"
+
+    with open(excel_path, "wb") as f_out:
+        f_out.write(content)
+
+    try:
+        from app.services.excel_service import process_uploaded_file, create_sample
+        from app.services.openai_service import get_analysis_instructions
+
+        # 1. Lecture et conversion Excel → JSON + métadonnées
+        processed = process_uploaded_file(str(excel_path), json_path)
+        metadata = processed["metadata"]
+        sample = processed.get("sample") or create_sample(processed.get("df"), metadata)
+
+        # 2. Appel OpenAI immédiat (timeout 3 min côté client OpenAI)
+        print(f"🤖 Appel GPT-4o-mini pour le fichier {file.filename}...")
+        try:
+            ai_instructions = get_analysis_instructions(sample)
+        except Exception as ai_err:
+            try:
+                if json_path.exists(): json_path.unlink()
+            except Exception:
+                pass
+            raise HTTPException(
+                status_code=504,
+                detail=f"L'IA n'a pas répondu dans les 3 minutes. Veuillez réessayer. ({str(ai_err)})"
+            )
+
+        suggested_insights = ai_instructions.get("insights", [])
+        print(f"✅ {len(suggested_insights)} insights générés par GPT-4o-mini")
+
+        # 3. Création de l'analyse PENDING avec les insights déjà stockés
+        analysis = Analysis(
+            user_id=current_user.id,
+            file_name=file.filename,
+            file_size=len(content),
+            file_path=str(json_path),
+            status=AnalysisStatus.PENDING,
+            tokens_consumed=0,
+            results={
+                "metadata": metadata,
+                "suggested_insights": suggested_insights,
+                "ai_instructions": ai_instructions,
+            }
+        )
+        db.add(analysis)
+        db.commit()
+        db.refresh(analysis)
+
+        print(f"📁 Upload #{analysis.id} prêt ({calculate_token_cost(len(content))} jeton(s) requis)")
+
+        return UploadResponse(
+            analysis_id=analysis.id,
+            dataset_id=original_stem,
+            file_name=file.filename,
+            status="pending",
+            metadata=metadata,
+            suggested_insights=suggested_insights,
+            ai_summary=ai_instructions.get("summary", ""),
+        )
+
+    except HTTPException:
+        raise
+    except ValueError as e:
+        try:
+            if json_path.exists(): json_path.unlink()
+        except Exception:
+            pass
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        try:
+            if json_path.exists(): json_path.unlink()
+        except Exception:
+            pass
+        raise HTTPException(status_code=500, detail=f"Erreur conversion : {str(e)}")
+    finally:
+        try:
+            import gc; gc.collect()
+            if excel_path.exists(): excel_path.unlink()
+        except PermissionError:
+            pass
+
+
+# ============================================================================
+# CONFIRM — ÉTAPE 2/2
+# L'utilisateur a choisi ses insights → on vérifie le forfait (date de fin ou solde tokens),
+# déduit uniquement si nécessaire, puis lance le pipeline de graphiques en background.
+# ============================================================================
+
+@router.post("/{analysis_id}/confirm")
+async def confirm_analysis(
+    analysis_id: int,
+    request: Request,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    body = await request.json()
+    selected_insight_ids: list = body.get("selected_insights", [])
+
+    analysis = db.query(Analysis).filter(
+        Analysis.id == analysis_id,
+        Analysis.user_id == current_user.id
+    ).first()
+
+    if not analysis:
+        raise HTTPException(status_code=404, detail="Analyse introuvable.")
+
+    if analysis.status != AnalysisStatus.PENDING:
+        raise HTTPException(
+            status_code=400,
+            detail="Cette analyse a déjà été lancée ou est terminée."
+        )
+
+    user = db.query(User).filter(User.id == current_user.id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="Utilisateur introuvable.")
+
+    # ── 1. VÉRIFICATION DU TYPE DE PLAN ──────────────────────────────────────
+    now = datetime.now(timezone.utc)
+    
+    plan_val = user.plan_type.value if hasattr(user.plan_type, "value") else str(user.plan_type or "")
+    is_monthly = "MONTHLY" in str(plan_val).upper()
+
+    if is_monthly:
+        expires_at = user.plan_expires_at
+        if expires_at:
+            if expires_at.tzinfo is None:
+                expires_at = expires_at.replace(tzinfo=timezone.utc)
+            if expires_at < now:
+                raise HTTPException(
+                    status_code=403,
+                    detail="Votre abonnement mensuel a expiré. Veuillez le renouveler."
+                )
+        token_cost = 0  # AUCUN JETON DÉDUIT POUR LE FORFAIT MENSUEL
+    else:
+        token_cost = calculate_token_cost(analysis.file_size or 0)
+        if user.token_balance < token_cost:
+            raise HTTPException(
+                status_code=402,
+                detail=f"Solde insuffisant. Requis : {token_cost} jeton(s), disponible : {user.token_balance}."
+            )
+            
+        from app.services.user_service import deduct_tokens
+        deduct_tokens(db, user, token_cost)
+        print(f"💰 {token_cost} jeton(s) déduit(s) pour user#{user.id}")
+
+    # ── 2. PREPARATION ET MISE A JOUR ANALYSE ──────────────────────────────
+    existing_results = analysis.results or {}
+    ai_instructions = existing_results.get("ai_instructions", {})
+    all_suggested = existing_results.get("suggested_insights", [])
+
+    if selected_insight_ids:
+        selected_insights = [
+            ins for ins in all_suggested
+            if ins.get("id") in selected_insight_ids
+        ]
+    else:
+        selected_insights = all_suggested
+
+    # Vérification présence du fichier avant lancement
+    json_path = Path(analysis.file_path)
+    if not json_path.exists():
+        analysis.status = AnalysisStatus.FAILED
+        analysis.error_message = "Fichier de données introuvable."
+        analysis.finished_at = datetime.utcnow()
+        db.commit()
+        raise HTTPException(status_code=500, detail="Fichier de données introuvable.")
+
+    from app.services.excel_service import load_from_json, create_sample
+    df, metadata = load_from_json(str(json_path))
+    sample = create_sample(df, metadata)
+    dataset_id = json_path.stem
+
+    analysis.status = AnalysisStatus.PROCESSING
+    analysis.tokens_consumed = token_cost
+    existing_results["selected_insights"] = selected_insights
+    analysis.results = existing_results
+    
+    db.commit()
+    db.refresh(analysis)
+
+    # ── 3. LANCEMENT DU THREAD DE FOND ──────────────────────────────────────
+    thread = threading.Thread(
+        target=run_analysis_background,
+        kwargs={
+            "analysis_id": analysis.id,
+            "dataset_id": dataset_id,
+            "sample": sample,
+            "metadata": metadata,
+            "ai_instructions": ai_instructions,
+            "selected_insights": selected_insights,
+        },
+        daemon=True
+    )
+    thread.start()
+    print(f"🚀 Analyse #{analysis.id} lancée — {len(selected_insights)} insight(s) sélectionné(s)")
+
+    return {
+        "analysis_id": analysis.id,
+        "status": "processing",
+        "tokens_consumed": token_cost,
+        "tokens_remaining": user.token_balance,
+        "selected_insights_count": len(selected_insights),
+    }
+
+
+# ============================================================================
+# TÂCHE DE FOND
+# En cas d'échec → statut FAILED, pas de remboursement.
+# ============================================================================
+
+def run_analysis_background(
+    analysis_id: int,
     dataset_id: str,
     sample: dict,
     metadata: dict,
     ai_instructions: dict,
     selected_insights: list,
-) -> dict:
-    from app.services.openai_service import generate_final_report
+):
+    print(f"🔄 Background #{analysis_id}")
 
-    dataset_stem = Path(dataset_id).stem if dataset_id else dataset_id
-    json_path = Path("data/uploads") / f"{dataset_stem}.json"
-    print(f"📂 Pipeline: {dataset_id!r} → {json_path}")
-    print(f"📂 exists: {json_path.exists()} | cwd: {Path.cwd()}")
-    df, _ = load_from_json(str(json_path))
-    print(f"✅ Dataset chargé: {len(df)} lignes")
+    # Création d'une session SQLAlchemy indépendante pour le thread
+    db = SessionLocal()
+    analysis = None
+    try:
+        analysis = db.query(Analysis).filter(Analysis.id == analysis_id).first()
+        if not analysis:
+            print(f"❌ Background #{analysis_id}: Analyse non trouvée en BDD")
+            return
 
-    aggregated_data = compute_aggregations(df, metadata, selected_insights)
-    report = generate_final_report(aggregated_data, selected_insights, metadata)
+        analysis.started_at = datetime.utcnow()
+        db.commit()
 
-    return {
-        "dataset_id": dataset_stem,
-        "metadata": metadata,
-        "summary": report.get("summary", {}),
-        "kpis": report.get("kpis", []),
-        "charts": report.get("charts", []),
-        "insights": report.get("insights", []),
-        "ai_instructions": ai_instructions,
-    }
+        print(f"📂 dataset_id reçu par background: {dataset_id!r}")
+        print(f"📋 {len(selected_insights)} insights sélectionnés")
+        print(f"🔑 ai_instructions keys: {list(ai_instructions.keys()) if ai_instructions else None}")
 
+        # Executé sans re-solliciter l'API OpenAI
+        results = run_analysis_pipeline(
+            dataset_id=dataset_id,
+            sample=sample,
+            metadata=metadata,
+            ai_instructions=ai_instructions,
+            selected_insights=selected_insights,
+        )
 
-# ============================================================================
-# RÈGLE FONDAMENTALE D'AGRÉGATION
-#
-# score/note/moyenne/taux/age → MEAN  (la somme n'a aucun sens métier)
-# montant/quantité/volume     → SUM   (le total est la métrique naturelle)
-# Par défaut → MEAN (plus souvent pertinent)
-# On envoie TOUJOURS mean + sum + count pour que l'IA puisse choisir
-# ============================================================================
+        existing = dict(analysis.results or {})
+        existing.update(results)
 
-def _best_aggregation(col: str) -> str:
-    c = col.lower()
-    if any(k in c for k in ["moyenne", "mean", "avg", "note", "score", "taux", "rate",
-                              "ratio", "pct", "percent", "age", "satisfaction",
-                              "evaluation", "grade", "gpa", "index", "indice"]):
-        return "mean"
-    if any(k in c for k in ["frais", "montant", "amount", "prix", "price", "cost", "cout",
-                              "revenue", "revenu", "vente", "sale", "chiffre", "total",
-                              "quantite", "quantity", "stock", "volume", "budget",
-                              "salaire", "wage", "salary", "fee", "charge"]):
-        return "sum"
-    return "mean"
-
-
-def _groupby_smart(df: pd.DataFrame, cat_col: str, num_col: str, max_items: int = 15) -> dict:
-    """
-    Calcule mean + sum + count pour chaque catégorie.
-    Précise quelle agrégation utiliser dans le graphique.
-    """
-    agg_rec = _best_aggregation(num_col)
-    grp = df.groupby(cat_col)[num_col].agg(["mean", "sum", "count"])
-    sort_by = "mean" if agg_rec == "mean" else "sum"
-    grp = grp.sort_values(sort_by, ascending=False).head(max_items)
-
-    return {
-        "labels": [str(k) for k in grp.index.tolist()],
-        "mean_values": [round(float(v), 2) for v in grp["mean"].tolist()],
-        "sum_values":  [round(float(v), 2) for v in grp["sum"].tolist()],
-        "count_values": [int(v) for v in grp["count"].tolist()],
-        "recommended_aggregation": agg_rec,
-        "x_col": cat_col,
-        "y_col": num_col,
-        "instruction": (
-            f"IMPORTANT: Pour '{num_col}' groupé par '{cat_col}', utilise les "
-            f"{'mean_values (MOYENNE par catégorie)' if agg_rec == 'mean' else 'sum_values (TOTAL par catégorie)'}. "
-            f"{'La somme des moyennes générales ne veut rien dire — affiche la moyenne.' if agg_rec == 'mean' else 'Le total est la métrique la plus parlante ici.'}"
-        ),
-    }
-
-
-# ============================================================================
-# CALCUL DES AGRÉGATIONS
-# ============================================================================
-
-def compute_aggregations(
-    df: pd.DataFrame,
-    metadata: dict,
-    selected_insights: list,
-) -> dict:
-    numeric_cols = metadata.get("numeric_columns", [])
-    date_cols    = metadata.get("date_columns", [])
-    statistics   = metadata.get("statistics", {})
-    text_cols    = metadata.get("text_columns", [])
-
-    # Colonnes catégorielles effectives (text avec 2–25 valeurs uniques, pas ID)
-    id_keywords = ["student_id", "_id", "id", "index", "nom", "name", "prenom"]
-    effective_cats = [
-        c for c in text_cols
-        if c in df.columns
-        and 2 <= df[c].nunique() <= 25
-        and not any(k in c.lower() for k in id_keywords)
-    ]
-
-    aggregated = {}
-
-    # ── 1. KPIs GLOBAUX ──────────────────────────────────────────────────────
-    global_kpis = {}
-    for col in numeric_cols[:8]:
-        if col not in df.columns:
-            continue
-        s = df[col].dropna()
-        if len(s) == 0:
-            continue
-        agg = _best_aggregation(col)
-        global_kpis[col] = {
-            "mean":   round(float(s.mean()), 2),
-            "median": round(float(s.median()), 2),
-            "sum":    round(float(s.sum()), 2),
-            "min":    round(float(s.min()), 2),
-            "max":    round(float(s.max()), 2),
-            "std":    round(float(s.std()), 2),
-            "count":  int(s.count()),
-            "recommended_kpi_value": agg,
-            "instruction": f"Affiche la {'MOYENNE (mean)' if agg == 'mean' else 'SOMME (sum)'} pour ce KPI",
-        }
-    aggregated["global_kpis"] = global_kpis
-
-    # ── 2. GROUPBY : toutes combinaisons catégorie × numérique ───────────────
-    groupby_results = {}
-    for cat_col in effective_cats[:5]:
-        for num_col in numeric_cols[:4]:
-            if num_col not in df.columns:
-                continue
-            key = f"{num_col}_par_{cat_col}"
-            groupby_results[key] = _groupby_smart(df, cat_col, num_col)
-    aggregated["groupby"] = groupby_results
-
-    # ── 3. DISTRIBUTIONS CATÉGORIELLES ───────────────────────────────────────
-    distributions = {}
-    for col in effective_cats[:6]:
-        vc = df[col].value_counts()
-        total = int(vc.sum())
-        distributions[col] = {
-            "labels":      [str(k) for k in vc.index.tolist()],
-            "counts":      [int(v) for v in vc.values.tolist()],
-            "percentages": [round(v / total * 100, 1) for v in vc.values.tolist()],
-            "total":       total,
-            "instruction": "Utilise les 'percentages' pour pie/doughnut, les 'counts' pour bar",
-        }
-    aggregated["distributions"] = distributions
-
-    # ── 4. CORRÉLATIONS NUMÉRIQUES ────────────────────────────────────────────
-    correlations = {}
-    num_in_df = [c for c in numeric_cols if c in df.columns]
-    for i in range(min(len(num_in_df), 4)):
-        for j in range(i + 1, min(len(num_in_df), 4)):
-            c1, c2 = num_in_df[i], num_in_df[j]
-            try:
-                corr = round(float(df[c1].corr(df[c2])), 3)
-                strength = "forte" if abs(corr) > 0.7 else ("modérée" if abs(corr) > 0.4 else "faible")
-                direction = "positive" if corr > 0 else "négative"
-                pts = df[[c1, c2]].dropna().head(200)
-                correlations[f"{c1}_vs_{c2}"] = {
-                    "col1": c1, "col2": c2,
-                    "correlation": corr,
-                    "interpretation": f"Corrélation {strength} {direction} ({corr})",
-                    "scatter_points": [
-                        {"x": round(float(r[c1]), 2), "y": round(float(r[c2]), 2)}
-                        for _, r in pts.iterrows()
-                    ],
-                    "instruction": "Utilise 'scatter_points' pour un graphique scatter",
-                }
-            except Exception:
-                pass
-    aggregated["correlations"] = correlations
-
-    # ── 5. ÉVOLUTION TEMPORELLE ──────────────────────────────────────────────
-    temporal = {}
-    if date_cols:
-        date_col = date_cols[0]
-        if date_col in df.columns:
-            for num_col in numeric_cols[:3]:
-                if num_col not in df.columns:
-                    continue
-                try:
-                    tmp = df[[date_col, num_col]].copy()
-                    tmp[date_col] = pd.to_datetime(tmp[date_col], errors="coerce")
-                    tmp = tmp.dropna(subset=[date_col])
-                    n_days = (tmp[date_col].max() - tmp[date_col].min()).days
-                    freq  = "ME" if n_days > 365 else ("W" if n_days > 90 else "D")
-                    label = "mensuelle" if freq == "ME" else ("hebdomadaire" if freq == "W" else "journalière")
-                    agg = _best_aggregation(num_col)
-                    grp = tmp.set_index(date_col).resample(freq)[num_col]
-                    ts = (grp.mean() if agg == "mean" else grp.sum()).dropna().head(50)
-                    temporal[f"{num_col}_{label}"] = {
-                        "labels": [str(d.date()) for d in ts.index],
-                        "values": [round(float(v), 2) for v in ts.values],
-                        "aggregation_used": agg,
-                        "granularity": label,
-                        "x_col": date_col, "y_col": num_col,
-                    }
-                except Exception as e:
-                    print(f"⚠️ Temporel {num_col}: {e}")
-    aggregated["temporal"] = temporal
-
-    # ── 6. DONNÉES PAR INSIGHT SÉLECTIONNÉ ───────────────────────────────────
-    insights_data = {}
-    for insight in selected_insights:
-        iid   = insight.get("id", "")
-        cols  = insight.get("required_columns", [])
-        itype = insight.get("type", "comparison")
-        valid = [c for c in cols if c in df.columns]
-        if not valid:
-            continue
         try:
-            result = _compute_insight_data(df, itype, valid)
-            if result:
-                insights_data[iid] = {
-                    "title": insight.get("title", ""),
-                    "type": itype, "columns": valid, **result,
-                }
-        except Exception as e:
-            print(f"⚠️ Insight {iid}: {e}")
-    aggregated["insights_data"] = insights_data
+            safe_name = Path(dataset_id).stem
+            results_path = RESULTS_DIR / f"{safe_name}_results.json"
+            with open(results_path, "w", encoding="utf-8") as f:
+                json.dump(existing, f, ensure_ascii=False, indent=2, default=str)
+        except Exception as save_err:
+            print(f"⚠️ Sauvegarde fichier ignorée : {save_err}")
 
-    return aggregated
+        from sqlalchemy.orm.attributes import flag_modified
+        analysis.results = existing
+        flag_modified(analysis, "results")
+        analysis.status = AnalysisStatus.COMPLETED
+        analysis.finished_at = datetime.utcnow()
+        db.commit()
+        db.refresh(analysis)
+        print(f"✅ Analyse #{analysis_id} terminée — {len(existing.get('charts') or [])} graphiques, {len(existing.get('kpis') or [])} KPIs")
+
+    except Exception as e:
+        print(f"❌ Erreur #{analysis_id}: {e}")
+        import traceback; traceback.print_exc()
+
+        if analysis:
+            analysis.status = AnalysisStatus.FAILED
+            analysis.error_message = str(e)
+            analysis.finished_at = datetime.utcnow()
+            db.commit()
+    finally:
+        db.close()
 
 
-def _compute_insight_data(df: pd.DataFrame, itype: str, cols: list) -> Optional[dict]:
-    num_cols_here = [c for c in cols if c in df.select_dtypes(include="number").columns]
-    cat_cols_here = [c for c in cols if c not in num_cols_here and df[c].nunique() <= 25]
+# ============================================================================
+# QUESTION IA
+# ============================================================================
 
-    if itype in ["comparison", "trend", "total"] and cat_cols_here and num_cols_here:
-        return _groupby_smart(df, cat_cols_here[0], num_cols_here[0])
+@router.post("/{analysis_id}/ask")
+async def ask_question(
+    analysis_id: int,
+    request: Request,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    body = await request.json()
+    question = body.get("question", "").strip()
 
-    elif itype in ["comparison", "trend"] and len(num_cols_here) >= 2:
-        c1, c2 = num_cols_here[0], num_cols_here[1]
-        corr = round(float(df[c1].corr(df[c2])), 3)
-        pts = df[[c1, c2]].dropna().head(200)
-        return {
-            "correlation": corr,
-            "scatter_points": [{"x": round(float(r[c1]), 2), "y": round(float(r[c2]), 2)} for _, r in pts.iterrows()],
-            "recommended_chart": "scatter",
-        }
+    if not question:
+        raise HTTPException(status_code=400, detail="Question vide.")
 
-    elif itype == "distribution":
-        col = cols[0]
-        if col in df.select_dtypes(include="number").columns:
-            counts, edges = np.histogram(df[col].dropna(), bins=10)
-            return {
-                "labels": [f"{edges[i]:.1f}–{edges[i+1]:.1f}" for i in range(len(counts))],
-                "counts": counts.tolist(),
-                "recommended_chart": "bar",
-            }
-        vc = df[col].value_counts()
-        total = int(vc.sum())
-        return {
-            "labels": [str(k) for k in vc.index.tolist()],
-            "counts": [int(v) for v in vc.values.tolist()],
-            "percentages": [round(v / total * 100, 1) for v in vc.values.tolist()],
-            "recommended_chart": "doughnut" if vc.nunique() <= 6 else "bar",
-            "instruction": "Utilise les 'percentages' pour pie/doughnut",
-        }
+    analysis = db.query(Analysis).filter(
+        Analysis.id == analysis_id,
+        Analysis.user_id == current_user.id
+    ).first()
 
-    elif itype == "anomaly" and num_cols_here:
-        col = num_cols_here[0]
-        mean, std = df[col].mean(), df[col].std()
-        threshold = mean + 2 * std
-        anomalies = df[df[col] > threshold]
-        return {
-            "mean": round(float(mean), 2),
-            "std": round(float(std), 2),
-            "threshold_high": round(float(threshold), 2),
-            "anomaly_count": int(len(anomalies)),
-            "anomaly_pct": round(len(anomalies) / len(df) * 100, 1),
-        }
+    if not analysis:
+        raise HTTPException(status_code=404, detail="Analyse introuvable.")
+    if analysis.status != AnalysisStatus.COMPLETED:
+        raise HTTPException(status_code=400, detail="L'analyse n'est pas encore terminée.")
 
-    return None
+    results = analysis.results or {}
+    metadata = results.get("metadata", {})
+    ai_instructions = results.get("ai_instructions", {})
+    insights = results.get("insights", [])
+
+    context = f"""Tu es un assistant expert en analyse de données.
+Fichier : {analysis.file_name}
+Lignes : {metadata.get('row_count', 'N/A')} | Colonnes : {metadata.get('columns', [])}
+Numériques : {metadata.get('numeric_columns', [])} | Catégorielles : {metadata.get('categorical_columns', [])}
+Résumé : {ai_instructions.get('summary', 'Non disponible')}
+Insights : {chr(10).join([f"- {i.get('title','')}: {i.get('value','')}" for i in insights[:5]])}
+Réponds en français, de manière claire et concise."""
+
+    try:
+        from app.services.openai_service import get_openai_client
+        client = get_openai_client()
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "system", "content": context}, {"role": "user", "content": question}],
+            temperature=0.3, max_tokens=800,
+        )
+        return {"answer": response.choices[0].message.content.strip(), "service_unavailable": False}
+
+    except Exception as e:
+        msg = str(e).lower()
+        if "quota" in msg or "429" in msg:
+            detail = "Quota OpenAI épuisé."
+        elif "api_key" in msg or "authentication" in msg:
+            detail = "Service IA indisponible."
+        elif "connection" in msg:
+            detail = "Impossible de contacter le service IA."
+        else:
+            detail = "Service IA temporairement indisponible."
+        return {"answer": None, "service_unavailable": True, "detail": detail}
+
+
+# ============================================================================
+# GET ANALYSE
+# ============================================================================
+
+@router.get("/{analysis_id}", response_model=AnalysisResult)
+async def get_analysis(
+    analysis_id: int,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    analysis = db.query(Analysis).filter(Analysis.id == analysis_id).first()
+    if not analysis:
+        raise HTTPException(status_code=404, detail="Analyse introuvable")
+    if analysis.user_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Accès refusé")
+
+    results = analysis.results or {}
+    return AnalysisResult(
+        analysis_id=analysis.id,
+        dataset_id=Path(analysis.file_path).stem if analysis.file_path else "",
+        file_name=analysis.file_name,
+        status=analysis.status.value,
+        metadata=results.get("metadata"),
+        summary=results.get("summary"),
+        kpis=results.get("kpis"),
+        charts=results.get("charts"),
+        insights=results.get("insights"),
+        explanations=results.get("explanations"),
+        ai_instructions=results.get("ai_instructions"),
+        suggested_insights=results.get("suggested_insights"),
+        tokens_consumed=analysis.tokens_consumed,
+        created_at=analysis.created_at.isoformat() if analysis.created_at else None
+    )
+
+
+# ============================================================================
+# DELETE ANALYSE
+# ============================================================================
+
+@router.delete("/{analysis_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_analysis(
+    analysis_id: int,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    analysis = db.query(Analysis).filter(Analysis.id == analysis_id).first()
+    if not analysis:
+        raise HTTPException(status_code=404, detail="Analyse introuvable")
+    if analysis.user_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Accès refusé")
+
+    if analysis.file_path:
+        p = Path(analysis.file_path)
+        if p.exists(): p.unlink()
+
+    db.delete(analysis)
+    db.commit()

@@ -11,7 +11,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copier le reste du code de l'application
+# Copier le reste du code de l'application --
 COPY ./app /app/app
 
 # Exposer le port sur lequel l'application écoute
