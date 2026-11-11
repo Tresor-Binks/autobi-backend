@@ -47,7 +47,7 @@ TEMP_DIR.mkdir(parents=True, exist_ok=True)
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-ALLOWED_EXTENSIONS = {".xlsx", ".xls", ".csv"}
+ALLOWED_EXTENSIONS = {".xlsx", ".xls", ".csv", ".tsv", ".json", ".parquet", "xml"}
 MAX_FILE_SIZE = 10 * 1024 * 1024
 
 
