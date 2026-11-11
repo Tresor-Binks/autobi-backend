@@ -36,7 +36,6 @@ from app.dependencies.auth import get_current_user
 from app.database.models import User, Analysis, AnalysisStatus, PlanType
 from app.database.session import get_db, SessionLocal
 from app.schemas.analysis import UploadResponse, AnalysisResult, AnalysisListItem
-from app.services.analysis_service import run_analysis_pipeline
 
 router = APIRouter(prefix="/analysis", tags=["Analysis"])
 
